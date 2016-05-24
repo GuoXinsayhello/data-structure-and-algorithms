@@ -68,7 +68,7 @@ private static int[] selectionSort(int[] array){
     }  
   ```
   程序来自http://blog.csdn.net/protommy/article/details/5124490
-  ##希尔排序
+##希尔排序
 希尔排序的思想就是使数组中任意间隔为h的元素都是有序的,h的取法不固定,一般使用h为1,4,13,40…(h=3*h+1),从比较大的h值开始排一遍,然后h递减再排序,一直到h为1
 ```java
 public static void shellSort(int[] data) {  
@@ -313,7 +313,7 @@ public class HeapSort {
             quickSort(data, i + 1, end);  
         }  
     }  
-    ```
+```
 ##第八章 线性时间排序
 在最坏情况下，任何`比较`排序算法都要做Ω（nlgn）次比较<br>
 
