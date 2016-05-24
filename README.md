@@ -29,8 +29,157 @@
 ##第五章 
 概率分析和随机算法
 #第二部分 排序和顺序统计量
-##第六章
-堆排序
+##选择排序
+就是就是找到数组中最小的元素与第一个元素交换位置,然后从剩下元素中找到最小的,然后和第二个元素交换位置,依次类推
+```java
+private static int[] selectionSort(int[] array){  
+        //每次循环找出相对最小值，并交换到头部  
+        for(int i=0;i<array.length-1;i++){  
+            int lowIndex = i;  
+            for(int j=i;j<array.length;j++){  
+                if(array[j]<array[lowIndex])  
+                    lowIndex = j;  
+                loopcount++;  
+            }  
+            swap(array,lowIndex,i);  
+            swapcount++;  
+        }  
+        return array;  
+    }  
+    private static void swap(int[] array,int i, int j){  
+        int temp = array[i];  
+        array[i] = array[j];  
+        array[j] = temp;  
+    }  
+```
+##插入排序
+就是把一个新的元素不断插入到已经排好序的元素集合中,插入排序对于部分有序的数组十分高效
+```java
+    private static int[] insertSort(int[] array){  
+        //与前边排序好的子序列比较，向前依次比较相邻元素，将元素推到正确位置  
+        for(int i=0;i<array.length;i++){  
+            for(int j=i;j>0 && array[j]<array[j-1];j--){  
+                swap(array,j,j-1);  
+                loopcount++;  
+                swapcount++;  
+            }  
+        }  
+        return array;  
+    }  
+  ```
+  程序来自http://blog.csdn.net/protommy/article/details/5124490
+  ##希尔排序
+希尔排序的思想就是使数组中任意间隔为h的元素都是有序的,h的取法不固定,一般使用h为1,4,13,40…(h=3*h+1),从比较大的h值开始排一遍,然后h递减再排序,一直到h为1
+```java
+public static void shellSort(int[] data) {  
+        // 计算出最大的h值  
+        int h = 1;  
+        while (h <= data.length / 3) {  
+            h = h * 3 + 1;  
+        }  
+        while (h > 0) {  
+            for (int i = h; i < data.length; i += h) {  
+                if (data[i] < data[i - h]) {  
+                    int tmp = data[i];  
+                    int j = i - h;  
+                    while (j >= 0 && data[j] > tmp) {  
+                        data[j + h] = data[j];  
+                        j -= h;  
+                    }  
+                    data[j + h] = tmp;  
+                    print(data);  
+                }  
+            }  
+            // 计算出下一个h值  
+            h = (h - 1) / 3;  
+        }  
+    }  
+```
+程序来自http://blog.csdn.net/apei830/article/details/6591509<br>
+自顶向下的归并排序就是对于一个大数组不断递归调用自身,把大数组不断分小,算法所需要的时间和NlgN成正比.
+自底向上的归并排序就是首先把大数组两两排序,然后四个数排序,然后八个数,直到全部
+```java
+public class MergeSortTest {
+
+	public static void main(String[] args) {
+		int[] data = new int[] { 5, 3, 6, 2, 1, 9, 4, 8, 7 };
+		print(data);
+		mergeSort(data);
+		System.out.println("排序后的数组：");
+		print(data);
+	}
+
+	public static void mergeSort(int[] data) {
+		sort(data, 0, data.length - 1);
+	}
+
+	public static void sort(int[] data, int left, int right) {
+		if (left >= right)
+			return;
+		// 找出中间索引
+		int center = (left + right) / 2;
+		// 对左边数组进行递归
+		sort(data, left, center);
+		// 对右边数组进行递归
+		sort(data, center + 1, right);
+		// 合并
+		merge(data, left, center, right);
+		print(data);
+	}
+
+	/**
+	 * 将两个数组进行归并，归并前面2个数组已有序，归并后依然有序
+	 * 
+	 * @param data
+	 *            数组对象
+	 * @param left
+	 *            左数组的第一个元素的索引
+	 * @param center
+	 *            左数组的最后一个元素的索引，center+1是右数组第一个元素的索引
+	 * @param right
+	 *            右数组最后一个元素的索引
+	 */
+	public static void merge(int[] data, int left, int center, int right) {
+		// 临时数组
+		int[] tmpArr = new int[data.length];
+		// 右数组第一个元素索引
+		int mid = center + 1;
+		// third 记录临时数组的索引
+		int third = left;
+		// 缓存左数组第一个元素的索引
+		int tmp = left;
+		while (left <= center && mid <= right) {
+			// 从两个数组中取出最小的放入临时数组
+			if (data[left] <= data[mid]) {
+				tmpArr[third++] = data[left++];
+			} else {
+				tmpArr[third++] = data[mid++];
+			}
+		}
+		// 剩余部分依次放入临时数组（实际上两个while只会执行其中一个）
+		while (mid <= right) {
+			tmpArr[third++] = data[mid++];
+		}
+		while (left <= center) {
+			tmpArr[third++] = data[left++];
+		}
+		// 将临时数组中的内容拷贝回原数组中
+		// （原left-right范围的内容被复制回原数组）
+		while (tmp <= right) {
+			data[tmp] = tmpArr[tmp++];
+		}
+	}
+
+	public static void print(int[] data) {
+		for (int i = 0; i < data.length; i++) {
+			System.out.print(data[i] + "\t");
+		}
+		System.out.println();
+	}
+
+}
+```
+##第六章 堆排序
 （二叉）堆可以被近似看成一个完全二叉树，除了最底层外，该树是完全充满的
 时间复杂度O(nlgn),最大堆与最小堆的概念,构造一个最大堆,以及对堆进行排序,得到一个有序数组
 由sedgewick的《算法》可以知道可以用一个数组来表示堆，最顶点放在第一个位置,并且a[0]不放元素，从a[1]开始放元素，这样可以满足k的父结点为a[k/2]。具体的实现是先构一个堆，满足堆的性质，就是父结点要大于两个子结点，遍历有子结点的父结点，如果不满足堆的性质就与子结点交换，一直到构造出一个有序的堆（也就是父结点大于两个子结点），但此时并不是一个有序的数列，将顶点与尾结点交换，得到最大值，然后是次大值，依次类推，最终得到一个有序的序列。
@@ -121,11 +270,12 @@ public class HeapSort {
 只要分割的两部分比例是常数，算法的运行时间总是O（nlgn）
 可以用RANDOMIZED-QUICKSORT首先随机选择主元可以得到期望运行时间
 ##第八章 线性时间排序
-在最坏情况下，任何比较排序算法都要做Ω（nlgn）次比较
+在最坏情况下，任何`比较`排序算法都要做Ω（nlgn）次比较<br>
+
 ###8.2计数排序
 计数排序就是有多少个元素小于它就把它放在第几个位置，计数排序的重要性质就是稳定性，具有相同值的元素在输出中相对次序与输入中的相对次序相同
 ###8.3基数排序  
-基数排序是一种稳定性排序，（稳定性排序就是保留数组中重复元素的相对位置，比如数据已经按照时间顺序排好序，现在要按照地理位置排序，如果排序算法是稳定的，那么处在同一个地点的数据彼此之间还是按照时间先后排序的，如果排序算法不是稳定的，就可能出现同一地点的数据时间先后可能会混乱），是从低位到高位进行排序
+基数排序是一种稳定性排序，（稳定性排序就是保留数组中重复元素的相对位置，比如数据已经按照时间顺序排好序，现在要按照地理位置排序，如果排序算法是稳定的，那么处在同一个地点的数据彼此之间还是按照时间先后排序的，如果排序算法不是稳定的，就可能出现同一地点的数据时间先后可能会混乱。插入排序和归并排序是稳定的，选择，希尔，快排，堆排不是稳定的），是从低位到高位进行排序
 ###8.4桶排序
 桶排序 (Bucket sort)或所谓的箱排序，是一个排序算法，工作的原理是将数组分到有限数量的桶子里。每个桶子再个别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序），其期望运行时间为Θ（n）
 9.1同时得到最大值和最小值可以先把输入的一对数据进行比较，然后较小的数据与暂时的最小值比较，较大的数据与暂时的最大值比较
