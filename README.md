@@ -179,7 +179,7 @@ public class MergeSortTest {
 
 }
 ```
-![](https://github.com/GuoXinsayhello/data-structure-and-algorithms/tree/master/picture/pro.jpg)
+各种排序算法的优缺点参见右图![](https://github.com/GuoXinsayhello/data-structure-and-algorithms/tree/master/picture/pro.jpg)
 ##第六章 堆排序
 （二叉）堆可以被近似看成一个完全二叉树，除了最底层外，该树是完全充满的
 时间复杂度O(nlgn),最大堆与最小堆的概念,构造一个最大堆,以及对堆进行排序,得到一个有序数组
