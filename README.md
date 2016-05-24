@@ -270,50 +270,31 @@ public class HeapSort {
 只要分割的两部分比例是常数，算法的运行时间总是O（nlgn）
 可以用RANDOMIZED-QUICKSORT首先随机选择主元可以得到期望运行时间
 ```java
-/** 
-     * 快速排序算法 
-     *  
-     * @param data 
-     *            目标数组 
-     * @param start 
-     *            起始位 
-     * @param end 
-     *            结束位 
-     */  
-    public static void quickSort(int[] data, int start, int end) {  
-        // 设置关键数据key为要排序数组的第一个元素，  
-        // 即第一趟排序后，key右边的数全部比key大，key左边的数全部比key小  
-        int key = data[start];  
-        // 设置数组左边的索引，往右移动比key大的数  
-        int i = start;  
-        // 设置数组右边的索引，往左移动比key小的数  
-        int j = end;  
-        // 如果左边索引比右边索引小，则还有数据没有排序  
-        while (i < j) {  
-            while (data[j] > key && j > i) {  
-                j--;  
-            }  
-            data[i] = data[j];  
-  
-            while (data[i] < key && i < j) {  
-                i++;  
-            }  
-            data[j] = data[i];  
-        }  
-        // 此时 i==j  
-        data[i] = key;  
-  
-        // 递归调用  
-        if (i - 1 > start) {  
-            // 递归调用，把key前面的完成排序  
-            quickSort(data, start, i - 1);  
-        }  
-        if (i + 1 < end) {  
-            // 递归调用，把key后面的完成排序  
-            quickSort(data, i + 1, end);  
-        }  
-    }  
+ public static void quickSort(int a[], int left, int right) {
+        int i, j, temp;
+        i = left;
+        j = right;
+        if (left > right)
+            return;
+        temp = a[left];
+        while (i != j)/* 找到最终位置 */
+        {
+            while (a[j] >= temp && j > i)
+                j--;
+            if (j > i)
+                a[i++] = a[j];
+            while (a[i] <= temp && j > i)
+                i++;
+            if (j > i)
+                a[j--] = a[i];
+
+        }
+        a[i] = temp;
+        quickSort(a, left, i - 1);/* 递归左边 */
+        quickSort(a, i + 1, right);/* 递归右边 */
+    } 
 ```
+程序来自http://www.cnblogs.com/hubcarl/archive/2011/04/07/2007823.html
 ##第八章 线性时间排序
 在最坏情况下，任何`比较`排序算法都要做Ω（nlgn）次比较<br>
 
