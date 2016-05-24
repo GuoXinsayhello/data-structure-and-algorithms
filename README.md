@@ -116,5 +116,5 @@ DFS（深度优先搜索）,可以用来寻找结点的发现时间以及完成�
 后代区间的嵌套：在有向图或者无向图G的深度优先森林中，结点v是结点u的真后代当且仅当u.d<v.d<v.f<u.f成立，d为发现时间（discover），f为完成时间（finish）
 拓扑排序：利用DFS求出每个结点的finish time，结点次序与结点的完成时间恰好相反，可以在西塔（V+E）时间内完成拓扑排序
 强联通分量是一个最大结点集合，对于该集合中的任意一对结点可以相互到达，G中连接不同强连通分量的每条边都是从完成时间较晚的分量指向完成时间较早的分量，而转置图反之。强连通分量算法就是对G进行一次DFS，然后再对G的转置进行一次DFS
-
+![](https://github.com/GuoXinsayhello/data-structure-and-algorithms/tree/master/picture/graph.jpg)
 
