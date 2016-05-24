@@ -262,14 +262,58 @@ public class HeapSort {
 ```
 
 转自http://blog.csdn.net/zdp072/article/details/44227317
-##第七章
-快速排序
+##第七章 快速排序
 在排序算法中，如果输入数组中仅有常数个元素需要在排序过程中存储在数组之外，则称排序算法是
 原址的
 快速排序的期望时间复杂度是Θ（nlgn），最坏情况是Θ（n^2)
 快速排序由C. A. R. Hoare在1962年提出。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。
 只要分割的两部分比例是常数，算法的运行时间总是O（nlgn）
 可以用RANDOMIZED-QUICKSORT首先随机选择主元可以得到期望运行时间
+```java
+/** 
+     * 快速排序算法 
+     *  
+     * @param data 
+     *            目标数组 
+     * @param start 
+     *            起始位 
+     * @param end 
+     *            结束位 
+     */  
+    public static void quickSort(int[] data, int start, int end) {  
+        // 设置关键数据key为要排序数组的第一个元素，  
+        // 即第一趟排序后，key右边的数全部比key大，key左边的数全部比key小  
+        int key = data[start];  
+        // 设置数组左边的索引，往右移动比key大的数  
+        int i = start;  
+        // 设置数组右边的索引，往左移动比key小的数  
+        int j = end;  
+        // 如果左边索引比右边索引小，则还有数据没有排序  
+        while (i < j) {  
+            while (data[j] > key && j > i) {  
+                j--;  
+            }  
+            data[i] = data[j];  
+  
+            while (data[i] < key && i < j) {  
+                i++;  
+            }  
+            data[j] = data[i];  
+        }  
+        // 此时 i==j  
+        data[i] = key;  
+  
+        // 递归调用  
+        if (i - 1 > start) {  
+            // 递归调用，把key前面的完成排序  
+            quickSort(data, start, i - 1);  
+        }  
+        if (i + 1 < end) {  
+            // 递归调用，把key后面的完成排序  
+            quickSort(data, i + 1, end);  
+        }  
+    }  
+    ```
 ##第八章 线性时间排序
 在最坏情况下，任何`比较`排序算法都要做Ω（nlgn）次比较<br>
 
