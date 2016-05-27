@@ -464,3 +464,26 @@ P类问题是在多项式时间内可以解决的问题。NP类问题是指在�
 ![](https://github.com/GuoXinsayhello/data-structure-and-algorithms/tree/master/picture/tiaohenumber.jpg)
 电路可满足性问题就是给定一个由AND，OR以及NOT门组成的布尔组合电路，它是否是可满足电路（即输入一组布尔输入值，输出值为1），这个问题属于NP类，对于这个问题也有个近似算法，就是采用一种随机化的近似算法（就是以概率1/2设置每个变量为1，以1/2的概率设置每个变量为0<br>
 子集和问题：对于集合S与正整数t，是否存在S的一个子集，使得其中的数加起来恰好为t，或者加起来最大，但是不能超过t，一个指数时间的准确算法是逐个把一个新的元素加入集合，然后计算由于新的元素的加入而带来的新的和。而一个完全多项式时间的近似模式是首先把集合中相近的元素进行整理（就是相近的元素用一个元素来代替），这样就可以缩小集合的规模，然后不断把元素加进去，计算求和，最终得到的可能不是最优解，而是最优解的一个近似。
+##第八部分 《算法》对于《算法导论的补充》
+###二分法查找
+```java
+public static int search(int[] nums, int num) {  
+        int low = 0;  
+        int high = nums.length - 1;  
+  
+        while (low <= high) {  
+            int mid = (low + high) / 2;  
+              
+            //与中间值比较确定在左边还是右边区间,以调整区域  
+            if (num > nums[mid]) {  
+                low = mid + 1;  
+            } else if (num < nums[mid]) {  
+                high = mid - 1;  
+            } else {  
+                return mid;  
+            }  
+        }  
+  
+        return -1;  
+    }  
+```
