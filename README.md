@@ -334,7 +334,7 @@ private Node deleteMin(Node x)
 ####13.3插入
 把一个结点插入红黑树或者从红黑树上删除时，可能会违背红黑树的性质，所以要对红黑树重新染色以及旋转操作来满足红黑树的性质<br>
 红黑树的旋转操作用java实现还是挺简单的
-具体操作参见![](https://github.com/GuoXinsayhello/data-structure-and-algorithms/tree/master/picture/rotate.jpg)
+具体操作参见![](https://github.com/GuoXinsayhello/data-structure-and-algorithms/tree/master/picture/webwxgetmsgimg.jpg)
 ###第十四章 数据结构的扩张
 顺序统计树是在红黑树上添加存储信息，比如结点以下结点的数目总和。本章举例了扩张红黑树产生区间树
 ##第四部分  高级设计和分析技术
