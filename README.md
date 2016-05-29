@@ -315,6 +315,18 @@ public class HeapSort {
 ###第十二章  二叉搜索树
 二叉搜索树的高度为k-1，也就是根结点是第0层
 Jensen不等式  将一个凸函数f(x)应用到随机变量X上时，假定期望存在且有限，则由詹森不等式可得E[f(x)]≥f(E[X])
+####二叉查找树的delete方法实现
+基本思想用的是递归的方法，删除最小结点代码如下：
+```java
+private Node deleteMin(Node x)
+{
+ if(x.left==null)
+ return x.right;
+ x.left=deleteMin(x.left);  //递归调用
+ x.N=size(x.left)+size(x.right)+1;//更新计数器
+ return x;
+}
+```
 ###第十三章 红黑树
 13.1每个结点红色或者黑色的，根节点是黑色的，对于每个结点从该节点到所有后代叶节点(NIL)的简单路径均包含相同数目的黑色结点。
 红黑树:平衡二叉树，广泛用在C++的STL中。map和set都是用红黑树实现的，
