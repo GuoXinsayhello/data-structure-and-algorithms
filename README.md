@@ -387,7 +387,36 @@ Find-set操作通过指向父结点的指针找到树的根
 《算法》中说可以用邻接表数组来表示一个图，如果表示有连接，就在两个顶点的邻接表中添加对方
 稀疏图(边的条数|E|远远小于|V|^2的图
 BFS（广度优先搜索）的总运行时间是O（V+E），该算法的思想就是需要在发现所有距离源结点s为k的所有结点之后，才会发现距离源结点s为k+1的其他结点。具体可以使用一个FIFO的队列来保存所有已经被标记过但是邻接表还未被检查过的顶点。
+```java
+private void bfs(Grapg G,int s)
+{
+ Queue<Integer> queue=new Queue<Integer>();
+ marked[s]=true;
+ queue.enqueue(s);
+ while(!queue.isEmpty())
+ {
+  int v=queue.dequeue();
+  for(int w:G.adj(v))
+   if(!marked[w])
+   {
+    edgeTo[w]=v;
+    marked[w]=true;
+    queue.enqueue(w);
+   }
+ }
+}
+```
 DFS（深度优先搜索）,可以用来寻找结点的发现时间以及完成时间，会形成多个独立的子树，边分为后向边、前向边、树边以及横向边，总运行时间是西塔（V+E）
+```java
+private void dfs(Graph G,int v)
+{
+ maked[v]=true;
+ count++;
+ for(int w:G.adj(v)
+  if(!marked)
+   dfs(G,w);
+}
+```
 后代区间的嵌套：在有向图或者无向图G的深度优先森林中，结点v是结点u的真后代当且仅当u.d<v.d<v.f<u.f成立，d为发现时间（discover），f为完成时间（finish）
 拓扑排序：利用DFS求出每个结点的finish time，结点次序与结点的完成时间恰好相反，可以在西塔（V+E）时间内完成拓扑排序
 强联通分量是一个最大结点集合，对于该集合中的任意一对结点可以相互到达，G中连接不同强连通分量的每条边都是从完成时间较晚的分量指向完成时间较早的分量，而转置图反之。强连通分量算法就是对G进行一次DFS，然后再对G的转置进行一次DFS
