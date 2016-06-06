@@ -53,14 +53,13 @@ public class UtClass
 }
 }
 ```
-java几种关键字的作用范围：<br>
+||类内部|本包|子类|外部包|
+|---------|-----|-----|----|------|
+|public| 是|是|是|是|
+|procted|是|是|是|否|
+|default|是|是|否|否|
+|private|是|否|否|否|
+java几种关键字的作用范围如上所示
 
-|作用域       |当前类   | 同一package  | 子孙类 |    其他package |
-| --------    | -----   | ----         |        |                |
-|public       | √       |√             |  √     |  √             |
 
-protected     √       √             √           × 
 
-friendly      √       √             ×           × 
-
-private       √       ×             ×           × 
