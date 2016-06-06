@@ -54,11 +54,7 @@ public class UtClass
 }
 ```
 java几种关键字的作用范围：<br>
-| Tables        | Are           | Cool  |  
-| ------------- |-------------- | ------|  
-| col 3 is      | right-aligned | $1600 |  
-| col 2 is      | centered      |   $12 | 
-| zebra stripes | are neat      |    $1 |
+
 |作用域       |当前类   | 同一package  | 子孙类 |    其他package |
 | --------    | -----   | ----         |        |                |
 |public       | √       |√             |  √     |  √             |
