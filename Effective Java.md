@@ -118,3 +118,11 @@ class Out{
 　　String s = "I AM an Object!";
 　　boolean isObject = s instanceof Object;
 ```
+Object类中包含一个方法名叫getClass，利用这个方法就可以获得一个实例的类型类。类型类指的是代表一个类型的类，因为一切皆是对象，类型也不例外，在Java使用类型类来表示一个类型。所有的类型类都是Class类的实例。例如，有如下一段代码：
+```java
+A a = new A();
+if(a.getClass()==A.class)
+System.out.println("equal");
+else System.out.println("unequal");
+```
+结果就是打印出 “equal”。
