@@ -126,3 +126,10 @@ System.out.println("equal");
 else System.out.println("unequal");
 ```
 结果就是打印出 “equal”。
+##第8条：覆盖equals遵守通用约定
+equals方法实现了等价关系：自反性，对称性，传递性，一致性
+##第9条：覆盖equals时总要覆盖hashCode
+java中有三种移位运算符<br>
+<<:左移运算符，num << 1,相当于num乘以2<br>
+>>:右移运算符，num >> 1,相当于num除以2<br>
+>>>:无符号右移，忽略符号位，空位都以0补齐<br>
