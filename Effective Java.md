@@ -167,6 +167,7 @@ class java.io.ByteArrayInputStream
 */
 ```
 ###复制对象 or 复制引用
+来自http://blog.csdn.net/zhangjg_blog/article/details/18369201
 ```
 		
 		Person p = new Person(23, "zhang");
@@ -189,3 +190,6 @@ p和p1只是引用而已，他们都指向了一个相同的对象Person(23, "zh
 从打印结果可以看出，两个对象的地址是不同的，也就是说创建了新的对象， 而不是把原对象的地址赋给了一个新的引用变量：<br>
 com.pansoft.zhangjg.testclone.Person@2f9ee1ac<br>
 com.pansoft.zhangjg.testclone.Person@67f1fba0<br>
+###深拷贝与浅拷贝
+ 直接将源对象中的name的引用值拷贝给新对象的name字段，或者是根据原Person对象中的name指向的字符串对象创建一个新的相同的字符串对象，将这个新字符串对象的引用赋给新拷贝的Person对象的name字段。这两种拷贝方式分别叫做浅拷贝和深拷贝。<br>
+ clone是浅拷贝的
