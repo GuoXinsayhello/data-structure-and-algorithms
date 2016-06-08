@@ -84,5 +84,33 @@ java几种关键字的作用范围如上所示
 虚引用主要用来跟踪对象被垃圾回收器回收的活动。虚引用与软引用和弱引用的一个区别在于：虚引用必须和引用队列 （ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会在回收对象的内存之前，把这个虚引用加入到与之 关联的引用队列中。
 
 ##第7条：避免使用终结方法
-
+如果有资源确实需要终止，只需要提供一个显式的终止方法。终结方法链不会自动执行，如果类有终结方法，并且子类覆盖了终结方法，则子类的终结方法必须手工调用超类的终结方法。你应该在try块中终结子类，并在相应的finally块中调用超类的终结方法。<br>
+###匿名内部类的实现方法
+来自http://blog.csdn.net/cntanghai/article/details/6094481
+匿名内部类的两种实现方式：第一种，继承一个类，重写其方法；第二种，实现一个接口（可以是多个），实现其方法。
+```java
+public class TestAnonymousInterClass{   
+    public static void main(String args[]){   
+        TestAnonymousInterClass test=new TestAnonymousInterClass();   
+        test.show();   
+    }   
+    //在这个方法中构造了一个匿名内部类   
+    private void show(){   
+        Out anonyInter=new Out(){// 获取匿名内部类实例   
+               
+            void show(){//重写父类的方法   
+                System.out.println("this is Anonymous InterClass showing.");   
+            }   
+        };   
+        anonyInter.show();// 调用其方法   
+    }   
+}    
+  
+// 这是一个已经存在的类，匿名内部类通过重写其方法，将会获得另外的实现   
+class Out{   
+    void show(){   
+        System.out.println("this is Out showing.");   
+    }   
+}  
+```
 
