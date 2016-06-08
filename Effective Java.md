@@ -113,4 +113,8 @@ class Out{
     }   
 }  
 ```
-
+`instaceof`关键字它的作用是测试它左边的对象是否是它右边的类的实例，返回boolean类型的数据。举个例子：
+```java
+　　String s = "I AM an Object!";
+　　boolean isObject = s instanceof Object;
+```
