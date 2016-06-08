@@ -133,3 +133,36 @@ java中有三种移位运算符<br>
 `<<`:左移运算符，num << 1,相当于num乘以2<br>
 `>>`:右移运算符，num >> 1,相当于num除以2<br>
 `>>>`:无符号右移，忽略符号位，空位都以0补齐<br>
+##第11条：谨慎地覆盖clone
+Java 5.0添加了对协变返回类型的支持，即子类覆盖（即重写）基类方法时，返回的类型可以是基类方法返回类型的子类。协变返回类型允许返回更为具体的类型。
+```java
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
+class Base
+{
+    //子类Derive将重写此方法，将返回类型设置为InputStream的子类
+   public InputStream getInput()
+   {
+    　　return System.in;
+   }
+}
+public  class Derive extends Base
+{
+    
+    @Override
+    public ByteArrayInputStream getInput()
+    {
+        
+        return new ByteArrayInputStream(new byte[1024]);
+    }
+    public static void main(String[] args)
+    {
+        Derive d=new Derive();
+        System.out.println(d.getInput().getClass());
+    }
+}
+/*程序输出：
+class java.io.ByteArrayInputStream
+*/
+```
