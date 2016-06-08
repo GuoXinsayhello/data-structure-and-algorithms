@@ -134,7 +134,7 @@ java中有三种移位运算符<br>
 `>>`:右移运算符，num >> 1,相当于num除以2<br>
 `>>>`:无符号右移，忽略符号位，空位都以0补齐<br>
 ##第11条：谨慎地覆盖clone
-Java 5.0添加了对协变返回类型的支持，即子类覆盖（即重写）基类方法时，返回的类型可以是基类方法返回类型的子类。协变返回类型允许返回更为具体的类型。
+Java 5.0添加了对`协变返回类型`的支持，即子类覆盖（即重写）基类方法时，返回的类型可以是基类方法返回类型的子类。协变返回类型允许返回更为具体的类型。
 ```java
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -166,3 +166,26 @@ public  class Derive extends Base
 class java.io.ByteArrayInputStream
 */
 ```
+###复制对象 or 复制引用
+```
+		
+		Person p = new Person(23, "zhang");
+		Person p1 = p;
+		
+		System.out.println(p);
+		System.out.println(p1);
+```
+当Person p1 = p;执行之后， 是创建了一个新的对象吗？ 首先看打印结果：<br>
+com.pansoft.zhangjg.testclone.Person@2f9ee1ac<br>
+com.pansoft.zhangjg.testclone.Person@2f9ee1ac<br>
+p和p1只是引用而已，他们都指向了一个相同的对象Person(23, "zhang") 。 可以把这种现象叫做引用的复制
+```
+		Person p = new Person(23, "zhang");
+		Person p1 = (Person) p.clone();
+		
+		System.out.println(p);
+		System.out.println(p1);
+```
+从打印结果可以看出，两个对象的地址是不同的，也就是说创建了新的对象， 而不是把原对象的地址赋给了一个新的引用变量：<br>
+com.pansoft.zhangjg.testclone.Person@2f9ee1ac<br>
+com.pansoft.zhangjg.testclone.Person@67f1fba0<br>
