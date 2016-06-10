@@ -193,3 +193,4 @@ com.pansoft.zhangjg.testclone.Person@67f1fba0<br>
 ###深拷贝与浅拷贝
  直接将源对象中的name的引用值拷贝给新对象的name字段，或者是根据原Person对象中的name指向的字符串对象创建一个新的相同的字符串对象，将这个新字符串对象的引用赋给新拷贝的Person对象的name字段。这两种拷贝方式分别叫做浅拷贝和深拷贝。<br>
  clone是浅拷贝的
+##第13条：使类和成员的可访问性最小化
