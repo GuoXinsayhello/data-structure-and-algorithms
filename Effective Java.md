@@ -220,3 +220,5 @@ class Point
   public double y;
  }
 ```
+##第15条：使可变性最小
+Java包含许多不可变的类，有string，基本类型包装类，BigInteger，BigDecimal
