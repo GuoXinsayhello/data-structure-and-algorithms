@@ -196,3 +196,27 @@ com.pansoft.zhangjg.testclone.Person@67f1fba0<br>
 ##第13条：使类和成员的可访问性最小化
 尽可能使每个类或者成员不被外界访问，如果一个类实现了一个接口，那么接口中所有类方法在这个类中也都必须被声明为公有的，因为接口中的所有方法都隐含着公有访问级别。此外，如果方法覆盖了超类中的一个方法，子类中的访问级别就不允许低于超类中的访问级别。<br>
 实例域就是指定义类时的最外层的那两个大括号那个范围。 
+##第14条：在公有类中使用访问方法而不是公有域，比如：
+```java
+class Point{
+private double x;
+private double y;
+public Point(double x,double y)
+{
+this.x=x;
+this.y=y;
+}
+public double getX(){return x;}
+public double getY(){return y;}
+public void setX(double x){this.x=x;}
+public void setY(double y){this.y=y;}
+}
+```
+这是一种比较妥当的方式，但是下面的方式建议不要采用
+```java
+class Point
+{
+  public double x;
+  public double y;
+ }
+```
