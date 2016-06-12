@@ -223,8 +223,73 @@ class Point
 ##第15条：使可变性最小
 Java包含许多不可变的类，有string，基本类型包装类，BigInteger，BigDecimal
 ##第16条：复合优先于继承
-http://www.cnblogs.com/JohnTsai/p/5304438.html这个博客说的还行<br>
+http://www.cnblogs.com/JohnTsai/p/5304438.html 这个博客说的还行<br>
 继承打破了封装性，子类依赖于其超类中特定功能的实现细节<br>
-http://www.importnew.com/12907.html这篇文章对于这一条说的非常详细，非常好<br>
+http://www.importnew.com/12907.html 这篇文章对于这一条说的非常详细，非常好<br>
 `如果存在一种IS-A的关系（比如Bee“是一个”Insect），并且一个类需要向另一个类暴露所有的方法接口，那么更应该用继承的机制。
 `如果存在一种HAS-A的关系（比如Bee“有一个”attack功能），那么更应该运用组合。
+##第17条，要么为继承而设计，并提供文档说明，要么就禁止继承
+好的API文档应该描述一个给定的方法做了什么工作<br>
+以下来自http://blog.sina.com.cn/s/blog_6eef4a8601014jn8.html
+```java
+class Super {
+    public Super() {
+        overrideMe();
+    }
+
+    public void overrideMe() {
+        System.out.println("调用父类方法");
+    }
+}
+
+public class Sub extends Super {
+    private ArrayList list = new ArrayList();
+
+    Sub() {
+    }
+
+    @Override
+    public void overrideMe() {
+        System.out.println("调用子类方法");
+    }
+
+    public static void main(String[] args) {
+        Super s = new Sub();
+        s.overrideMe();
+    }
+}
+```
+输出结果是：
+调用子类方法
+调用子类方法
+
+因为超类中的构造器调用overrideMe方法是会调用子类中的覆盖版本，这是多态的特性<br>
+```java
+class Super {
+    public Super() {
+        overrideMe();
+    }
+
+    public void overrideMe() {
+    }
+}
+
+public class Sub extends Super {
+    private ArrayList list = new ArrayList();
+
+    Sub() {
+    }
+
+    @Override
+    public void overrideMe() {
+        System.out.println(list.size());
+    }
+
+    public static void main(String[] args) {
+        Super s = new Sub();
+        s.overrideMe();
+    }
+}
+```
+这时会抛出NullPointerException，因为子类中的overrideMe覆盖版本将会在子类实例化完成之前就被父类构造器调用，而此时list尚未被实例化，因此抛出异常。
+总结：构造器绝不能调用可以被覆盖的方法
