@@ -283,11 +283,11 @@ public class HeapSort {
             while (a[j] >= temp && j > i)
                 j--;
             if (j > i)
-                a[i++] = a[j];
+                a[i++] = a[j];//1号位置代码
             while (a[i] <= temp && j > i)
                 i++;
             if (j > i)
-                a[j--] = a[i];
+                a[j--] = a[i];//2号位置代码
 
         }
         a[i] = temp;
@@ -295,6 +295,7 @@ public class HeapSort {
         quickSort(a, i + 1, right);/* 递归右边 */
     } 
 ```
+`注意在快速排序中，1号位置代码和2号位置代码位置不能发生互换`<br>
 程序来自http://www.cnblogs.com/hubcarl/archive/2011/04/07/2007823.html
 ##第八章 线性时间排序
 在最坏情况下，任何`比较`排序算法都要做Ω（nlgn）次比较<br>
