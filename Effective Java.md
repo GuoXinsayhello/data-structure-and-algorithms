@@ -309,3 +309,8 @@ https://10kloc.wordpress.com/2012/12/03/abstract-interfaces-the-mystery-revealed
 ##第23条：请不要在新代码中使用原生态类型
 原生态类型List和参数化类型List<Object>之间的区别是前者逃避了泛型检查，后者则明确告诉编译器，它能够有任意类型的对象。<br>
 者条意思就是说尽量不要使用List 要使用List<Integer>、List<E>等等
+##第24条：消除非受检警告
+classcastexception通常是进行强制类型转换时候出的错误<br>
+如果无法消除警告，同时可以证明引起警告的代码是类型安全的，只有这时才可以用一个@SupressWarnings注释来禁止警告，应该始终在尽可能小的范围中使用supresswarnings,并且每当使用时都要添加一条注释
+##第25条：列表优先于数组
+数组是协变的，也就是如果sub是super的子类型，那么数组类型sub[]就是super[]的子类型
