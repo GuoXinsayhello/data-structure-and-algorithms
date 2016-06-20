@@ -314,3 +314,22 @@ classcastexception通常是进行强制类型转换时候出的错误<br>
 如果无法消除警告，同时可以证明引起警告的代码是类型安全的，只有这时才可以用一个@SupressWarnings注释来禁止警告，应该始终在尽可能小的范围中使用supresswarnings,并且每当使用时都要添加一条注释
 ##第25条：列表优先于数组
 数组是协变的，也就是如果sub是super的子类型，那么数组类型sub[]就是super[]的子类型。所有的包装类（Integer、Long、Byte、Double、Float、Short）都是抽象类Number的子类
+##第28条：利用有限制通配符来提升API的灵活性
+比如
+```java
+Stack<Number> numberStack=new Stack<Number>();
+Iterable<Interable> integers=...;
+numberStack.pushAll(integers);
+```
+以上代码编译会出错，所以可以用有限制的通配符类型来处理，修改pushAll方法
+```java
+public void pushAll(Iterable<? extends E> src){
+  for(E e:src)
+    push(e);
+    }
+```
+Iterable<? extends E>表示E的某个子类型<br>
+Collection<? super E>表示E的某个超类型<br>
+第5章泛型真的不懂在说些什么
+##第29条：优先考虑类型安全的异构容器
+ThreadLocal是线程的局部变量，如果一段代码被认为是Atomic，则表示这段代码在执行过程中，是不能被中断的。
