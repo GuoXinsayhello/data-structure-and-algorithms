@@ -339,7 +339,8 @@ Iterable<? extends E>表示E的某个子类型<br>
 Collection<? super E>表示E的某个超类型<br>
 第5章泛型真的不懂在说些什么
 ##第29条：优先考虑类型安全的异构容器
-ThreadLocal是线程的局部变量，如果一段代码被认为是Atomic，则表示这段代码在执行过程中，是不能被中断的。
+ThreadLocal是线程的局部变量，如果一段代码被认为是Atomic，则表示这段代码在执行过程中，是不能被中断的。<br>
+String.class属于Class<String>类型，Integer.class属于Class<Integer>类型，当一个类的字面文字被用在方法中来传达编译时和运行时的类型信息时，就被称作type token（类型令牌）
 第6章：枚举和注释
 --
 ##第30条：用enum代替int常量
@@ -353,3 +354,20 @@ switch(....)
 }
 ```
 ##第31条：用实例域代替序数
+ordinal方法返回每个枚举常量在类型中的数字位置
+##第33条：用EnumMap代替序数索引
+作者之所以说用ordinal得到序数不合适的原因是如果改变了enum枚举类型中变量的顺序，ordinal的值就会发生改变。所以最好不要用序数来索引数组，而要使用EnumMap，如果是多维的，可以用EnumMap<...,EnumMap<...>>
+##第34条：用接口模拟可伸缩的枚举
+```java
+private static <T extends Enum<T> & Operation> void test(..){...}
+```
+返回值表示是Enum<T>的子类型同时又是Operation类。<br>
+虽然无法编写可扩展的枚举类型，但是可以扩展接口，让枚举类型去实现扩展后的接口。
+##第35条：注解优先于命名模式
+JUnit 是一个回归测试框架，被开发者用于实施对应用程序的单元测试，加快程序编制速度，同时提高编码的质量。<br>
+元注解：元注解的作用就是负责注解其他注解。Java5.0定义了4个标准的meta-annotation类型，它们被用来提供对其它 annotation类型作说明。Java5.0定义的元注解：<br>
+　　　　1.@Target,<br>
+　　　　2.@Retention,<br>
+　　　　3.@Documented,<br>
+　　　　4.@Inherited<br>
+　　　　
