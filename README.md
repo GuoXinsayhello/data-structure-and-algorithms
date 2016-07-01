@@ -296,7 +296,45 @@ public class HeapSort {
     } 
 ```
 `注意在快速排序中，1号位置代码和2号位置代码位置不能发生互换`<br>
-程序来自http://www.cnblogs.com/hubcarl/archive/2011/04/07/2007823.html
+程序来自http://www.cnblogs.com/hubcarl/archive/2011/04/07/2007823.html<br>
+`三向切分快速排序`
+```java
+public class ThreeWayQuickSort {  
+  
+    public static void sort(int[] a) {  
+        sort(a, 0, a.length - 1);  
+    }  
+  
+    //在lt之前的(lo~lt-1)都小于中间值  
+    //在gt之前的(gt+1~hi)都大于中间值  
+    //在lt~i-1的都等于中间值  
+    //在i~gt的都还不确定（最终i会大于gt，即不确定的将不复存在）  
+    private static void sort(int[] a, int lo, int hi) {  
+        if (lo >= hi) {  
+            return;  
+        }  
+        int v = a[lo], lt = lo, i = lo + 1, gt = hi;  
+        while (i <= gt) {  
+            if (a[i] < v) {  
+                swap(a, i++, lt++);  
+            } else if (a[i] > v) {  
+                swap(a, i, gt--);  
+            } else {  
+                i++;  
+            }  
+        }  
+        sort(a, lo, lt - 1);  
+        sort(a, gt + 1, hi);  
+    }  
+      
+    private static void swap(int[] a, int i, int j) {  
+        int t = a[i];  
+        a[i] = a[j];  
+        a[j] = t;  
+    }  
+} 
+```
+
 ##第八章 线性时间排序
 在最坏情况下，任何`比较`排序算法都要做Ω（nlgn）次比较<br>
 
