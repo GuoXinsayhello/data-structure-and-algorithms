@@ -366,8 +366,20 @@ private static <T extends Enum<T> & Operation> void test(..){...}
 ##第35条：注解优先于命名模式
 JUnit 是一个回归测试框架，被开发者用于实施对应用程序的单元测试，加快程序编制速度，同时提高编码的质量。<br>
 元注解：元注解的作用就是负责注解其他注解。Java5.0定义了4个标准的meta-annotation类型，它们被用来提供对其它 annotation类型作说明。Java5.0定义的元注解：<br>
-　　　　1.@Target,<br>
-　　　　2.@Retention,<br>
+　　　　1.@Target,是声明在哪里使用<br>
+　　　　2.@Retention,声明什么时候运行。CLASS、RUNTIME和SOURCE这三种，分别表示注解保存在类文件、JVM运行时刻和源代码中。只有当声明为RUNTIME的时候，才能够在运行时刻通过反射API来获取到注解的信息<br>
 　　　　3.@Documented,<br>
 　　　　4.@Inherited<br>
-　　　　
+Java Package.isAnnotationPresent()方法用法实例教程。方法返回true，如果指定类型的注释存在于此元素上,否则返回false。这种方法的设计主要是为了方便访问标记注释
+##第36条：坚持使用Override注释
+覆盖（override）就是重写，要求与被覆盖的方法名，返回类型，参数列表完全相同。<br>
+这一条的意思就是如果在方法声明中使用Override注解来覆盖超类声明，编译器就可以防止大量的错误
+第7章：方法
+--
+`assert`关键字的用法<br>
+1、assert condition;<br>
+    这里condition是一个必须为真(true)的表达式。如果表达式的结果为true，那么断言为真，并且无任何行动
+如果表达式为false，则断言失败，则会抛出一个AssertionError对象。这个AssertionError继承于Error对象，
+而Error继承于Throwable，Error是和Exception并列的一个错误对象，通常用于表达系统级运行错误。
+2、asser condition:expr;<br>
+    这里condition是和上面一样的，这个冒号后跟的是一个表达式，通常用于断言失败后的提示信息，说白了，它是一个传到AssertionError构造函数的值，如果断言失败，该值被转化为它对应的字符串，并显示出来。
