@@ -408,3 +408,27 @@ public class Test {
 }
 ```
 比如上面这段程序，输出的结果是【-3，-2，-1】【-2,0,2】，因为set.remove(i)调用选择去除元素值的重载方法，而list.remove(i)选择调用去除第几个元素的重载方法，所以输出的结果会有不同。
+##第42条：慎用可变参数
+```java
+public class Test {
+	 public static void main(String[] args) { 
+		int a= sum(1,2,3);
+		System.out.println(a);
+	
+	 }
+	 private static int sum(int... args)
+	 {
+		 int sum=0;
+		 for(int arg:args)
+			 sum+=arg;
+		 return sum;
+	 }
+}
+```
+例如上面这段代码用的是可变参数，返回几个整数的和。
+```java
+int[] a={1,2,3};
+System.out.println(Arrays.toString(a));
+```
+Arrays.toString()方法可以把数组变成字符串。
+##第43条：返回零长度的数组或者集合，而不是NULL
