@@ -384,3 +384,27 @@ Java Package.isAnnotationPresent()方法用法实例教程。方法返回true，
 2、asser condition:expr;<br>
     这里condition是和上面一样的，这个冒号后跟的是一个表达式，通常用于断言失败后的提示信息，说白了，它是一个传到AssertionError构造函数的值，如果断言失败，该值被转化为它对应的字符串，并显示出来。
 2016/7/9看到159页
+##第39条：必要时进行保护性拷贝
+这一条没看懂。
+##第41条：慎用重载
+要调用哪个重载方法是在编译时做出决定的，而对于被覆盖的方法是在运行时进行的。不乱用重载机制的策略是不要导出两个具有相同参数数目的重载方法。
+```java
+public class Test {
+	 public static void main(String[] args) { 
+		 Set<Integer> set=new TreeSet<Integer>();
+		 List<Integer> list=new ArrayList<Integer>();
+		 for(int i=-3;i<3;i++)
+		 {
+			 set.add(i);
+			 list.add(i);
+		 }
+		 for(int i=0;i<3;i++)
+		 {
+			 set.remove(i);
+			 list.remove(i);
+		 }
+		 System.out.println(set+" "+list);
+	 }
+}
+```
+比如上面这段程序，输出的结果是【-3，-2，-1】【-2,0,2】，因为set.remove(i)调用选择去除元素值的重载方法，而list.remove(i)选择调用去除第几个元素的重载方法，所以输出的结果会有不同。
