@@ -439,3 +439,25 @@ Arrays.toString()方法可以把数组变成字符串。
 ##第46条：for-each循环优先于传统的for循环
 for-each循环比较简洁，而且能够有效地预防bug，并且没有性能损失
 2016/7/10看到187页
+##第48条：如果需要精确的答案，请避免使用float和double，比如
+```java
+System.out.println(1.00-9*.10);
+```
+这条代码会输出0.09999999999999998
+##第49条：基本类型优先于装箱基本类型
+对装箱基本类型运用==操作符几乎总是错误的。
+```java
+public class Test {
+	static int a;    
+	static Integer b;
+	 public static void main(String[] args) { 
+		System.out.println(b);
+		System.out.println(a);
+	 }
+}
+```
+会打印出null和0.<br>
+注意在涉及装箱类的运算的时候，装箱类可能会被频繁地被装箱和拆箱，影响性能。<br>
+不能将基本类型放在集合里面，因此必须使用装箱基本类型。
+##第51条：当心字符串连接的性能
+为连接n个字符串而重复地使用字符串连接操作符，需要n的平方级的时间，这是由于字符串不可变，当两个字符串被连接在一起时，它们的内容都要拷贝。建议使用StringBuilder的append方法。
