@@ -461,3 +461,19 @@ public class Test {
 不能将基本类型放在集合里面，因此必须使用装箱基本类型。
 ##第51条：当心字符串连接的性能
 为连接n个字符串而重复地使用字符串连接操作符，需要n的平方级的时间，这是由于字符串不可变，当两个字符串被连接在一起时，它们的内容都要拷贝。建议使用StringBuilder的append方法。
+##第52条：通过接口引用对象
+应该优先使用接口而不是类来引用对象，如果有合适的接口类型，对于参数、返回值、变量和域来说，都应该使用接口类型进行声明。比如
+```java
+List<Subscriber> subscribers=new Vector<Subscriber>();//good use——use interface as type
+```
+上面这段代码是好的使用
+```java
+Vector<Subscriber> subscribers=new Vector<Subscriber>();//bad use——user class as type
+```
+这段代码是不好的使用，因为Vector 是矢量队列，它是JDK1.0版本添加的类。继承于AbstractList，实现了List, RandomAccess, Cloneable这些接口。
+##第53条：接口优先于反射机制
+http://blog.csdn.net/ljphhj/article/details/12858767这篇文章举的例子详细叙述了java的反射机制。<br>
+  A a = (A)Class.forName("pacage.A").newInstance();这和 A a =new A();是一样的效果。<br>
+  通过Method.invoke可以调用任何类的任何对象上的任何方法。
+##第54条：谨慎地使用本地方法
+Java Native Interface（JNI）允许Java可以调用本地方法，本地方法是指用本地程序设计语言（c或c++）来编写的特殊方法。
