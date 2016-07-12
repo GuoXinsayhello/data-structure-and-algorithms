@@ -482,3 +482,67 @@ Java Native Interface（JNI）允许Java可以调用本地方法，本地方法�
 第9章：异常
 --
 2016/7/11看到217页
+第10章：并发
+--
+##第66条：同步访问共享的可变数据
+```java
+package com.sg.effective.study.four;
+
+import java.util.concurrent.TimeUnit;
+
+public class StopThread {
+	private static boolean stopRequested;
+	
+	public static void main(String[] args) throws InterruptedException {
+		Thread backgroundThread = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				int i = 0;
+				while(!stopRequested){
+					i++;
+				}
+			}
+		});
+		backgroundThread.start();
+		TimeUnit.SECONDS.sleep(1);
+		stopRequested = true;
+	}
+}
+```
+这个程序永远不会终止：因为后台线程永远在循环。问题在于，由于没有同步，就不能保证后台线程何时看到主线程对stopRequested的值所做的改变.因此应该修改为
+```java
+package com.sg.effective.study.four;
+
+import java.util.concurrent.TimeUnit;
+
+public class StopThread {
+	private static boolean stopRequested;
+	
+	private static synchronized void requestStop(){
+		stopRequested = true;
+	}
+	
+	private static synchronized boolean stopRequested(){
+		return stopRequested;
+	}
+	
+	
+	public static void main(String[] args) throws InterruptedException {
+		Thread backgroundThread = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				int i = 0;
+				while(!stopRequested()){
+					i++;
+				}
+			}
+		});
+		backgroundThread.start();
+		TimeUnit.SECONDS.sleep(1);
+		requestStop();
+	}
+}
+```
+修改后的程序会如预期的那样大概在1秒后终止。
