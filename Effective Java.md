@@ -554,4 +554,12 @@ public class StopThread {
 将计算结果写入内存<br>
 ###volatile
 如果给一个变量加上volatile修饰符，就相当于：每一个线程中一旦这个值发生了变化就马上刷新回主存，使得各个线程取出的值相同。编译器不要对这个变量的读、写操作做优化.但是值得注意的是，除了对long和double的简单操作之外，volatile并不能提供原子性。所以，就算你将一个变量修饰为volatile，但是对这个变量的操作并不是原子的，在并发环境下，还是不能避免错误的发生！<br>
-http://blog.psjay.com/posts/summary-of-java-concurrency-two-synchronized-and-atomicity/这篇文章很好地讲了同步性和原子性的问题。
+http://blog.psjay.com/posts/summary-of-java-concurrency-two-synchronized-and-atomicity/
+这篇文章很好地讲了同步性和原子性的问题。
+###死锁
+来自http://blog.csdn.net/ns_code/article/details/17200937<br>
+当线程需要同时持有多个锁时，有可能产生死锁。考虑如下情形：<br>
+      线程A当前持有互斥所锁lock1，线程B当前持有互斥锁lock2。接下来，当线程A仍然持有lock1时，它试图获取lock2，因为线程B正持有lock2，因此线程A会阻塞等待线程B对lock2的释放。如果此时线程B在持有lock2的时候，也在试图获取lock1，因为线程A正持有lock1，因此线程B会阻塞等待A对lock1的释放。二者都在等待对方所持有锁的释放，而二者却又都没释放自己所持有的锁，这时二者便会一直阻塞下去。这种情形称为死锁。
+第11章:序列化
+--
+将一个对象编码成一个字节流，称作将该对象序列化。JavaBeans是Java中一种特殊的类，可以将多个对象封装到一个对象（bean）中。特点是可序列化，提供无参构造器，提供getter方法和setter方法访问对象的属性。名称中的“Bean”是用于Java的可重用软件组件的惯用叫法。
