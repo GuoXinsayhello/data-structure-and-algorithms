@@ -546,3 +546,12 @@ public class StopThread {
 }
 ```
 修改后的程序会如预期的那样大概在1秒后终止。
+在多线程并发编程中synchronized和Volatile都扮演着重要的角色，Volatile是轻量级的synchronized，它在多处理器开发中保证了共享变量的“可见性”。可见性的意思是当一个线程修改一个共享变量时，另外一个线程能读到这个修改的值。Volatile变量修饰符如果使用恰当的话，它比synchronized的使用和执行成本会更低，因为它不会引起线程上下文的切换和调度。<br>
+###原子性
+具有原子性的操作被称为原子操作。原子操作在操作完毕之前不会线程调度器中断。在Java中，对除了long和double之外的基本类型的简单操作都具有原子性。简单操作就是赋值或者return。比如”a = 1;“和 “return a;”这样的操作都具有原子性。但是在Java中，上面买碘片例子中的类似”a += b”这样的操作不具有原子性，所以如果add方法不是同步的就会出现难以预料的结果。在某些JVM中”a += b”可能要经过这样三个步骤：<br>
+取出a和b<br>
+计算a+b<br>
+将计算结果写入内存<br>
+###volatile
+如果给一个变量加上volatile修饰符，就相当于：每一个线程中一旦这个值发生了变化就马上刷新回主存，使得各个线程取出的值相同。编译器不要对这个变量的读、写操作做优化.但是值得注意的是，除了对long和double的简单操作之外，volatile并不能提供原子性。所以，就算你将一个变量修饰为volatile，但是对这个变量的操作并不是原子的，在并发环境下，还是不能避免错误的发生！<br>
+http://blog.psjay.com/posts/summary-of-java-concurrency-two-synchronized-and-atomicity/这篇文章很好地讲了同步性和原子性的问题。
