@@ -1,6 +1,24 @@
 第2章
 --
 ##第1条：用静态工厂方法代替构造器
+```java
+PrimeNumber primeNumber1 = new PrimeNumber(int Random); // 返回一个素数  
+PrimeNumber primeNumber2 = PrimeNumber.newInstance(); // 使用静态工厂方法表示更为清楚  
+```
+```java
+class Father {  
+    private Father() {  
+    }  //构造器
+   
+    public static Father newInstance(String type) {  
+        if (type.equals("ChildA")) { // 根据类型判断返回那个子类对象  
+            return new ChildA();  
+        } else {  
+            return new ChildB();  
+        }  
+    } //静态工厂方法
+```
+静态工厂方法和其他静态方法从名字上看无法区分，所以我们可以约定静态工厂方法名字使用valueOf或者getInstance。
 优点：<br>
       1、静态工厂方法不必在每次调用它们的时候都创建一个新对象，确保实例受控类，比如singleton（单例类）<br>
       2、可以返回原返回类型的任何子类型对象<br>
