@@ -30,6 +30,69 @@ class Father {
 `重叠构造器模式`：为了适应不同情况，重复写具有不同个数参数的构造函数<br>
 `JavaBeans模式`：调用一个无参构造器来创建对象，然后调用setter方法来设置每个必要的参数<br>
 `Builder模式：` 不直接生成想要的对象，而是让客户端利用所有必要的参数调用<br>
+```java
+public class NutritionFacts {
+  private final int servingSize;
+  private final int servings;
+  private final int calories;
+  private final int fat;
+  private final int sodium;
+  private final int carbohydrate;
+
+  public static class Builder {
+    //Required parameters
+    private final int servingSize;
+    private final int servings;
+    //Optional parameters - initialized to default values
+    private int calories = 0;
+    private int fat = 0;
+    private int carbohydrate = 0;
+    private int sodium = 0;
+
+    public Builder(int servingSize, int servings) {
+      this.servingSize = servingSize;
+      this.servings = servings;
+    }
+
+    public Builder calories(int val) {
+      calories = val;
+      return this;
+    }
+    public Builder fat(int val) {
+      fat = val;
+      return this;
+    }
+    public Builder carbohydrate(int val) {
+      carbohydrate = val;
+      return this;
+    }
+    public Builder sodium(int val) {
+      sodium = val;
+      return this;
+    }
+
+    public NutritionFacts build() {
+      return new NutritionFacts(this);
+    }
+  }
+
+  private NutitionFacts(Builder builder) {
+    servingSize = builder.servingSize;
+    servings = builder.servings;
+    calories = builder.calories;
+    fat = builder.fat;
+    sodium = builder.sodium;
+    carbodydrate = builder.carbohydrate;
+  }
+}
+```
+```java
+NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8)
+  .calories(100)
+  .sodium(35)
+  .carbohydrate(27)
+  .build();
+```
 `通配符`是一种特殊语句，主要有星号(*)和问号(?)，用来模糊搜索文件。当查找文件夹时，可以使用它来代替一个或多个真正字符；当不知道真正字符
 或者懒得输入完整名字时，常常使用通配符代替一个或多个真正的字符。 实际上用“*Not?pad”可以对应Notpad\MyNotpad【*可以代表任何文字】;
 Notpad\Notepad【?仅代表单个字】;Notepad\Notepod【ao代表a与o里二选一】，其余以此类推。
