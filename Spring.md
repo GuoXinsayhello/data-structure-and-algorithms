@@ -11,3 +11,6 @@ IoC（Inversion of Control）控制反转，是一个重要的面向对象编程
 Spring是以IoC（Inverse of Control）和AOP（Aspect Oriented Programming:面向切面编程）为内核。`DAO(Data Access Object)`是一个数据访问接口，数据访问：顾名思义就是与数据库打交道。夹在业务逻辑与数据库资源中间。<br>
 `xmlns` ——是XML NameSpace的缩写，因为XML文件的标签名称都是自定义的，自己写的和其他人定义的标签很有可能会重复命名，而功能却不一样，所以需要加上一个namespace来区分这个xml文件和其他的xml文件，类似于java中的package。<br>
 `xmlns:xsi` ——是指xml文件遵守xml规范，xsi全名：xml schema instance
+第2章：快速入门
+--
+spring中的DAO是指数据访问对象（data access object）
