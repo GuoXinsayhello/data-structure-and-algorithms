@@ -33,4 +33,21 @@ spring中的DAO是指数据访问对象（data access object），DBCP（DataBas
 通过限制组件的行为（即，每个组件只能“看到”与其交互的紧邻层），将架构分解为若干等级的层。
 
 按需代码（Code-On-Demand，可选）
-支持通过下载并执行一些代码（例如Java Applet、Flash或JavaScript），对客户端的功能进行扩展。
+支持通过下载并执行一些代码（例如Java Applet、Flash或JavaScript），对客户端的功能进行扩展。<br>
+Servlet（Server Applet），全称Java Servlet，未有中文译文。是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容.<br>
+POJO（Plain Ordinary Java Object）简单的Java对象，实际就是普通JavaBeans，是为了避免和EJB混淆所创造的简称<br>
+第3章：IoC容器概述
+--
+IoC（Inverse of control)对于软件来说，就是某一个接口的具体实现类的选择控制权从调用类中移除，转交给第三方决定。DI（dependency injection）的概念也可以代替IoC，从注入方法上来看主要分为构造函数注入，属性注入，接口注入。<br>
+####构造函数注入
+```java
+public class MoAttack
+{
+ private Geli geli;
+ public MoAttack(Geli geli){
+  this.geli=geli;
+ }
+ public void cityAttack(){
+  geli.responseAsk("kkk");
+  }
+}
