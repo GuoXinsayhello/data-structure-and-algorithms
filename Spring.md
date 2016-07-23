@@ -178,4 +178,7 @@ public class Solution {
 }
 
 ```
-类装载器就是寻找类的节码文件并构造出类类在JVM内部表示对象的组件。JVM在运行时会产生三个ClassLoader：根装载器，ExtClassLoader和AppClassLoader，这三个互为父子层级。该书在50页介绍了一个小工具来查看JVM从哪个类包加载指定类。
+类装载器就是寻找类的节码文件并构造出类类在JVM内部表示对象的组件。JVM在运行时会产生三个ClassLoader：根装载器，ExtClassLoader和AppClassLoader，这三个互为父子层级。该书在50页介绍了一个小工具来查看JVM从哪个类包加载指定类。<br>
+通过类实例变量无法在外部访问私有变量，调用私有方法，但是通过反射机制可以绕过限制。<br>
+Spring框架使用resource装载各种资源。
+2016/7/23看到55页
