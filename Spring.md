@@ -111,3 +111,70 @@ public class Director {
 }  
 ```
 spring容器帮助完成类的初始化与装配工作，让开发者从这些底层实现类的实例化，依赖关系装配等工作中脱离，spring容器通过配置文件或者注解描述类和类之间的依赖。
+####Java反射机制实例
+```java
+package com.test;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.lang.reflect.Field;
+
+public class Interval {
+	public static Solution  initByDefaultConst() throws Throwable  
+    {  
+        //①通过类装载器获取Car类对象  
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();   
+        Class clazz = loader.loadClass("com.test.Solution");   
+          //②获取类的默认构造器对象并通过它实例化Car  
+        Constructor cons = clazz.getDeclaredConstructor((Class[])null);   
+        Solution car = (Solution)cons.newInstance();  
+          //③通过反射方法设置属性  
+        Method setBrand = clazz.getMethod("setBrand",String.class);          
+        setBrand.invoke(car,"红旗CA72");        
+        Method setColor = clazz.getMethod("setColor",String.class);  
+        setColor.invoke(car,"黑色");        
+        Method setMaxSpeed = clazz.getMethod("setMaxSpeed",int.class);  
+        setMaxSpeed.invoke(car,200);          
+        return car;  
+    }  
+    public static void main(String[] args) throws Throwable {  
+        Solution car = initByDefaultConst();  
+        car.introduce();  
+    }  
+	 
+}
+
+public class Solution {
+   
+	 private String brand;  
+	    private String color;  
+	    private int maxSpeed;  
+	      
+	     //①默认构造函数  
+	    public Solution(){}  
+	       
+	     //②带参构造函数  
+	    public Solution(String brand,String color,int maxSpeed){   
+	        this.brand = brand;  
+	        this.color = color;  
+	        this.maxSpeed = maxSpeed;  
+	    }  
+	    public void setBrand(String brand)
+	    {
+	    	this.brand=brand;
+	    }
+	    public void setColor(String color)
+	    {
+	    	this.color=color;
+	    }
+	    public void setMaxSpeed(int speed)
+	    {
+	    	this.maxSpeed=speed;
+	    }
+	  
+	     //③未带参的方法  
+	    public void introduce() {   
+	       System.out.println("brand:"+brand+";color:"+color+";maxSpeed:" +maxSpeed);  
+	    } 
+}
+
+```
