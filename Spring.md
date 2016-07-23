@@ -51,3 +51,62 @@ public class MoAttack
   geli.responseAsk("kkk");
   }
 }
+
+public class Director {  
+   public void direct(){  
+        //①指定角色的扮演者  
+       GeLi geli = new LiuDeHua();    
+  
+        //②注入具体扮演者到剧本中  
+       MoAttack moAttack = new MoAttack(geli);   
+       moAttack.cityGateAsk();  
+   }  
+}  
+```
+####属性注入
+```java
+public class MoAttack {  
+    private GeLi geli;  
+     //①属性注入方法  
+    public void setGeli(GeLi geli) {    
+        this.geli = geli;  
+    }  
+    public void cityGateAsk() {  
+        geli.responseAsk("墨者革离");  
+    }  
+}
+public class Director {  
+   public void direct(){  
+       GeLi geli = new LiuDeHua();  
+       MoAttack moAttack = new MoAttack();  
+  
+        //①调用属性Setter方法注入  
+       moAttack.setGeli(geli);   
+       moAttack.cityGateAsk();  
+   }  
+}  
+```
+####接口注入
+```java
+public interface ActorArrangable {  
+   void injectGeli(GeLi geli);  
+}  
+public class MoAttack implements ActorArrangable {  
+    private GeLi geli;  
+     //①实现接口方法  
+    public void injectGeli (GeLi geli) {    
+        this.geli = geli;         
+    }  
+    public void cityGateAsk() {  
+        geli.responseAsk("墨者革离");  
+    }  
+}
+public class Director {  
+   public void direct(){  
+       GeLi geli = new LiuDeHua();  
+       MoAttack moAttack = new MoAttack();  
+       moAttack. injectGeli (geli);  
+       moAttack.cityGateAsk();  
+   }  
+}  
+```
