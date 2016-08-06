@@ -181,4 +181,7 @@ public class Solution {
 类装载器就是寻找类的节码文件并构造出类类在JVM内部表示对象的组件。JVM在运行时会产生三个ClassLoader：根装载器，ExtClassLoader和AppClassLoader，这三个互为父子层级。该书在50页介绍了一个小工具来查看JVM从哪个类包加载指定类。<br>
 通过类实例变量无法在外部访问私有变量，调用私有方法，但是通过反射机制可以绕过限制。<br>
 Spring框架使用resource装载各种资源。
-2016/7/23看到55页
+2016/7/23看到55页<br>
+Spring不仅可以通过资源地址前缀识别不同的资源类型，还支持Ant风格带通配符的资源地址。Ant风格资源地址支持三种通配符：？：匹配文件名中的一个字符，*：匹配文件名中任意个字符；**：匹配多层路径<br>
+####Beanfactory和Applicationcontext
+也将ApplicationContext称为Spring容器，一般称呼BeanFactory为IoC容器。BeanFactory是一个类工厂，可以创建管理各种类的对象。BeanFactory在初始化容器时并未实例化bean,直到第一次访问某个Bean时才实例目标Bean；而ApplicationContext则在初始化应用上下文时就实例化所有单实例的bean
