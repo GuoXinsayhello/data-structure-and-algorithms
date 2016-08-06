@@ -184,4 +184,6 @@ Spring框架使用resource装载各种资源。
 2016/7/23看到55页<br>
 Spring不仅可以通过资源地址前缀识别不同的资源类型，还支持Ant风格带通配符的资源地址。Ant风格资源地址支持三种通配符：？：匹配文件名中的一个字符，*：匹配文件名中任意个字符；**：匹配多层路径<br>
 ####Beanfactory和Applicationcontext
-也将ApplicationContext称为Spring容器，一般称呼BeanFactory为IoC容器。BeanFactory是一个类工厂，可以创建管理各种类的对象。BeanFactory在初始化容器时并未实例化bean,直到第一次访问某个Bean时才实例目标Bean；而ApplicationContext则在初始化应用上下文时就实例化所有单实例的bean
+也将ApplicationContext称为Spring容器，一般称呼BeanFactory为IoC容器。BeanFactory是一个类工厂，可以创建管理各种类的对象。BeanFactory在初始化容器时并未实例化bean,直到第一次访问某个Bean时才实例目标Bean；而ApplicationContext则在初始化应用上下文时就实例化所有单实例的bean.<br>
+父子容器中，子容器可以访问父容器中的bean,但是父容器不能访问子容器的Bean。<br>
+2016/8/6 看到76页
