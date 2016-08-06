@@ -186,4 +186,10 @@ Spring不仅可以通过资源地址前缀识别不同的资源类型，还支�
 ####Beanfactory和Applicationcontext
 也将ApplicationContext称为Spring容器，一般称呼BeanFactory为IoC容器。BeanFactory是一个类工厂，可以创建管理各种类的对象。BeanFactory在初始化容器时并未实例化bean,直到第一次访问某个Bean时才实例目标Bean；而ApplicationContext则在初始化应用上下文时就实例化所有单实例的bean.<br>
 父子容器中，子容器可以访问父容器中的bean,但是父容器不能访问子容器的Bean。<br>
-2016/8/6 看到76页
+2016/8/6 看到76页<br>
+WEB-INF是Java的WEB应用的安全目录。
+第4章：在IoC容器中装配Bean
+--
+####Spring配置概述
+#####基于xml的配置
+spring2.0以后使用schema的格式对xml进行配置，xmlns:xsi ——是指xml文件遵守xml规范，xsi全名：xml schema instance。命名空间的别名和全限定名可以任意命名，
