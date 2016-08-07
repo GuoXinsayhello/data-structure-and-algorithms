@@ -226,3 +226,11 @@ spring2.0以后使用schema的格式对xml进行配置，xmlns:xsi ——是指x
 ##4.6bean之间的关系
 ###4.6.1继承
 继承就是应用了OOP的思想，把具有相同的属性抽象为一个父bean，然后子Bean继承。
+###4.6.2依赖
+Spring允许用户通过depends-on属性指定Bean前置依赖的Bean，前置依赖的Bean会在本Bean实例化之前创建好。
+###4.6.3引用
+ <bean id="exampleBean2" class="com.company.wws.test.ExampleBean2"/> 
+<bean id="exampleBean1" class="com.company.wws.test.ExampleBean1">  
+        <property name="exampleId"><idref bean="exampleBean2"/></property>  
+    </bean>  
+   
