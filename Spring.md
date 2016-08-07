@@ -206,7 +206,7 @@ spring2.0以后使用schema的格式对xml进行配置，xmlns:xsi ——是指x
 ###4.3.3工厂方法注入
 对于非静态工厂方法，需要定义一个工厂类的Bean，而对于静态工厂方法，就无须在配置文件中定义工厂类的Bean。工厂方法注入的方式不推荐。
 ##4.4注入参数详解
-如果字面值注入含有xml文件的特殊符号(&<>"'这五个)，就需要对其进行特殊处理，一种方法是采用<![CDATA[XXXXX]]>让xml解析器对中括号中的字符当做普通文本对待，另外一种方法是采用转义字符，并且在赋值时spring不会忽略空格。Bean通过<ref>标签引用其他的Bean。
+在spring配置文件中，用户可以将String，int等字面值注入到Bean中，还可以将集合、Map等类型的数据注入，此外还可以注入配置文件中其他定义的Bean如果字面值注入含有xml文件的特殊符号(&<>"'这五个)，就需要对其进行特殊处理，一种方法是采用<![CDATA[XXXXX]]>让xml解析器对中括号中的字符当做普通文本对待，另外一种方法是采用转义字符，并且在赋值时spring不会忽略空格。Bean通过<ref>标签引用其他的Bean。
 第一种形式也是最常见的形式是通过使用<ref/>标记指定bean属性的目标bean，通过该标签可以引用同一容器或父容器内的任何bean（无论是否在同一XML文件中）。XML 'bean'元素的值既可以是指定bean的id值也可以是其name值。
 ```xml
 <ref bean="someBean"/>
@@ -215,4 +215,5 @@ spring2.0以后使用schema的格式对xml进行配置，xmlns:xsi ——是指x
 ```xml
 <ref local="someBean"/>
 ```
-第三种方式是通过使用ref的parent属性来引用当前容器的父容器中的bean。parent属性值既可以是目标bean的id值，也可以是name属性值。而且目标bean必须在当前容器的父容器中。使用parent属性的主要用途是为了用某个与父容器中的bean同名的代理来包装父容器中的一个bean(例如，子上下文中的一个bean定义覆盖了他的父bean)。
+第三种方式是通过使用ref的parent属性来引用当前容器的父容器中的bean。parent属性值既可以是目标bean的id值，也可以是name属性值。而且目标bean必须在当前容器的父容器中。使用parent属性的主要用途是为了用某个与父容器中的bean同名的代理来包装父容器中的一个bean(例如，子上下文中的一个bean定义覆盖了他的父bean)。<br>
+通过util命名空间配置集合类型的Bean，Bean可以有list或者set，map类型等，
