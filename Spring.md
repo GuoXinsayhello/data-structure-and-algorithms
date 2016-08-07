@@ -216,4 +216,13 @@ spring2.0以后使用schema的格式对xml进行配置，xmlns:xsi ——是指x
 <ref local="someBean"/>
 ```
 第三种方式是通过使用ref的parent属性来引用当前容器的父容器中的bean。parent属性值既可以是目标bean的id值，也可以是name属性值。而且目标bean必须在当前容器的父容器中。使用parent属性的主要用途是为了用某个与父容器中的bean同名的代理来包装父容器中的一个bean(例如，子上下文中的一个bean定义覆盖了他的父bean)。<br>
-通过util命名空间配置集合类型的Bean，Bean可以有list或者set，map类型等，
+通过util命名空间配置集合类型的Bean，Bean可以有list或者set，map类型等.采用p命名空间会进一步简化XML文件的配置，采用bean的元素属性配置bean的属性，对于字面值属性，其格式为p:属性名="xxx",对于引用对象的属性，其格式为p:属性名-ref="xxx"
+##4.5方法注入
+###4.5.1lookup方法注入
+当Bean依赖另一个生命周期不同的bean，尤其是当singleton依赖一个non-singleton时，常会遇到不少问题，Lookup Method Injection正是对付这些问题而出现的，在上述情况中，setter和构造注入都会导致singleton去维护一个non-singleton bean的单个实例，某些情况下，我们希望让singleton bean每次要求获得bean时候都返回一个non-singleton bean的新实例 <br>
+应用场合：一个singleton的Bean需要引用一个prototype的Bean; 一个无状态的Bean需要引用一个有状态的Bean; ... ; 等等情景下. 
+###4.5.2方法替换
+用户可以使用某个Bean（比如Bean A）的方法去替换另外一个Bean（比如Bean B）的方法,此时Bean A必须实现MethodReplacer接口
+##4.6bean之间的关系
+###4.6.1继承
+继承就是应用了OOP的思想，把具有相同的属性抽象为一个父bean，然后子Bean继承。
