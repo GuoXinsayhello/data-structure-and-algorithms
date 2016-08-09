@@ -233,4 +233,11 @@ Spring允许用户通过depends-on属性指定Bean前置依赖的Bean，前置�
 <bean id="exampleBean1" class="com.company.wws.test.ExampleBean1">  
         <property name="exampleId"><idref bean="exampleBean2"/></property>  
     </bean>  
+##4.8 Bean作用域
+Bean的作用域类型有singleton，prototype，request，session，globalsession这五种，后三种仅限于WebAppliocationContext<br>
+ Spring之ContextLoaderListener的作用,在启动Web容器时，自动装配Spring applicationContext.xml的配置信息。其中request作用域的Bean对应一个HTTP请求和生命周期，如果作用域是session的话，Session中所有HTTP请求共享一个Bean，如果要将Web相关作用域的Bean注入到singleton或者prototye的Bean中，需要Spring AOP中的代理，也就是在Web作用域中的Bean设置
+ ```xml
+ <aop:scoped-proxy/>
+ ```
+ 2016/8/9看到118页
    
