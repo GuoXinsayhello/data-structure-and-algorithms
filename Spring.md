@@ -240,4 +240,14 @@ Bean的作用域类型有singleton，prototype，request，session，globalsessi
  <aop:scoped-proxy/>
  ```
  2016/8/9看到118页
-   
+##4.9 FactoryBean
+可以编写一个Java类实现FactoryBean接口，然后就可以在Bean.xml文件中以逗号分隔的方式简单地配置自己的Car Bean了。
+##4.10 基于注解的配置
+@Component<br>
+@Repository 用于对DAO实现类进行标注<br>
+@Service 用于对Service实现类进行标注<br>
+@Controller 用于对Controller实现类进行标注<br>
+后三个功能比较详细，@Component功能比较宽泛
+###4.10.3 自动装配Bean
+使用@Autowired进行自动注入
+
