@@ -249,5 +249,4 @@ Bean的作用域类型有singleton，prototype，request，session，globalsessi
 @Controller 用于对Controller实现类进行标注<br>
 后三个功能比较详细，@Component功能比较宽泛
 ###4.10.3 自动装配Bean
-使用@Autowired进行自动注入
-
+使用@Autowired进行自动注入，该注解默认按照类型匹配的方式；使用@Qualifier指定注入Bean的名称，用于当有一个以上匹配的Bean的时候，@Qualifier("userDao");@Scope("xx")可以对作用范围进行指定;@PostConstruct与@PreDestroy可以指定初始化以及容器销毁前执行的方法；
