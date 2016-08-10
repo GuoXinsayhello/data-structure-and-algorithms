@@ -262,5 +262,54 @@ BeanDefinition是配置文件<bean>元素标签在容器中内部表示形式。
 Spring属性编辑器负责将配置文件中的文本配置值转换为Bean属性的对应值，split 方法 将一个字符串分割为子字符串，然后将结果作为字符串数组返回。PropertyEditor是属性编辑器的接口，规定了将外部设置值转化成内部JavaBean属性值的转化接口方法。其中String getAsText()将属性对象用一个字符串表示；void setAsText(String text)用一个字符串去更新属性的内部值。<br>
 采用属性编辑器的一个用处就是配置Bean的属性。比如Boss类中有一个Car类型的car属性，另外一种直接的方法是在配置文件中为属性专门配置一个<bean>,然后在boss的<bean>中通过ref引用car的Bean。
 ##5.3使用外部属性文件
-通过PropertyPlaceholderConfigurer引入属性文件，这种方式可以减少维护的工作量，并且使部署更加简单。比如：可以在配置文件中写入p:username="${userName}"
+通过PropertyPlaceholderConfigurer引入属性文件，这种方式可以减少维护的工作量，并且使部署更加简单。比如：可以在配置文件中写入p:username="${userName}"。当然这种方式也可以用在基于注解以及基于Java类配置中，比如：@Value("${driverClassName}"),@Value为Bean注入一个字面值。<br>
+DES属于对称加密，也就是可以根据加密后的信息解密成原值，而MD5属于非对称加密，不能根据加密后的信息还原回原值。 
+##5.4引用Bean的属性值
+可以通过类似于#{beanName.beanProp}的方式方便地引用另一个Bean的值。比如SysConfig.java是一个配置信息的类，该类中有maxTabPageNum这个属性，可以在beans.xml中
+```java
+public class Polishing {  
+    int laboratory = 1;  
+  
+    public int getLavatory(int lavatory) {  
+        return lavatory;  
+    }  
+  
+    // Getters and setters are omitted  
+} 
+public class Freight {  
+    int laboratory;  
+    int slurry;  
+    int compensatory;  
+  
+    // Getters and setters are omitted  
+}  
+```
+beans.xml如下：
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="    
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">          
+    <bean id="polishing" class="com.john.spring.Polishing" />  
+    <bean id="freight" class="com.john.spring.Freight">  
+        <property name="laboratory" value="#{polishing.laboratory}" />  
+        <property name="slurry" value="#{polishing.getLaboratory()}" />  
+        <property name="compensatory" value="#{polishing.getLavatory(4)}" />  
+    </bean>  
+</beans>  
+```
+测试类代码如下：
+```java
+public class Perplex {  
+    public static void main(String[] args) {  
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");  
+        Freight bean2 = (Freight) ctx.getBean("freight");  
+        System.out.println(bean2.getLaboratory());  
+        System.out.println(bean2.getSlurry());  
+        System.out.println(bean2.getCompensatory());  
+    }  
+}  
+```
+
+
 
