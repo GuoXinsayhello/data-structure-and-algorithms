@@ -316,4 +316,8 @@ Portlet标准的目的是使开发人员开发出的portlet可以插入到任何
 `Servlet（Server Applet）`，全称Java Servlet，未有中文译文。是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。狭义的Servlet是指Java语言实现的一个接口，广义的Servlet是指任何实现了这个Servlet接口的类，一般情况下，人们将Servlet理解为后者。
 第6章：Spring AOP基础
 --
-
+###6.2.2 JDK动态代理
+JDK的动态代理主要涉及两个类：proxy和InvocationHandler，后者是一个接口，可以通过该接口定义横切逻辑，并且通过反射机制调用目标类的代码，动态将横切逻辑和业务逻辑编织在一起。而Proxy利用InvocationHandler动态创建一个符合某一接口的实例。
+###6.2.3 CGLib动态代理
+使用JDK创建代理的限制就是它只能为接口创建代理实例，而CGLib可以用于任何类。
+2016/8/10看到184页
