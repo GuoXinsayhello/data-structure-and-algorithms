@@ -310,6 +310,10 @@ public class Perplex {
     }  
 }  
 ```
-
-
+##5.6容器事件
+`Portlets`在Web门户上管理和显示的可插拔的用户界面组件。Portlet产生可以聚合到门户页面中的标记语言代码的片段，如HTML，XML等。通常，根据桌面隐喻，一个门户页面显示为一组互相不重叠的portlet窗口，其中每一个portlet窗口显示一个portlet。因此，可以说一个（或一组）portlet就像一个在门户网站上运行的基于Web的应用程序。 Portlet应用程序的一些例子包括电子邮件，天气预报，论坛和新闻等。
+Portlet标准的目的是使开发人员开发出的portlet可以插入到任何支持该标准的门户网站。
+`Servlet（Server Applet）`，全称Java Servlet，未有中文译文。是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。狭义的Servlet是指Java语言实现的一个接口，广义的Servlet是指任何实现了这个Servlet接口的类，一般情况下，人们将Servlet理解为后者。
+第6章：Spring AOP基础
+--
 
