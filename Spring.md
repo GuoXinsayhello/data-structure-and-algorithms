@@ -325,5 +325,11 @@ CGLib采用非常底层的字节码技术，可以为一个类创建子类，并
 2016/8/10看到184页<br>
 Spring AOP的底层就是通过使用JDK动态代理或者CGLib动态代理技术为目标Bean织入横切逻辑，由于CGLib采用动态创建子类的方式生成代理对象，所以不能对目标类中的final方法进行代理。
 ##6.3创建增强类
-按照增强在目标类方法的连接点位置，可以分为以下5类：前置增强（BeforeAdvice）、后置增强（AfterRunningAdvice)、环绕增强（MethodInterceptor)、异常抛出增强（ThrowsAdvice）、引介增强（IntroductionInterceptor）
-CGLib创建代理时速度慢，而创建出的代理对象运行效率较高，而使用JDK代理的表现正好相反。
+按照增强在目标类方法的连接点位置，可以分为以下5类：前置增强（BeforeAdvice）、后置增强（AfterRunningAdvice)、环绕增强（MethodInterceptor)、异常抛出增强（ThrowsAdvice）、引介增强（IntroductionInterceptor）<br>
+ `前置增强`，该增强织入在方法调用之前
+CGLib创建代理时速度慢，而创建出的代理对象运行效率较高，而使用JDK代理的表现正好相反。<br>
+`引介增强`：该增强方法是为目标类创建新的方法和属性，通过引介增强，可以为目标类添加一个接口的实现。<br>
+ThreadLocal是将非线程安全类改造成线程安全类的法宝。
+##6.4 创建切面
+如果只有增强，增强会被织入到目标类的所有方法中，而切点进一步描述织入到哪些类的哪些方法上。
+2016/8/11看到202页
