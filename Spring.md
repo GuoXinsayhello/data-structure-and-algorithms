@@ -317,7 +317,13 @@ Portlet标准的目的是使开发人员开发出的portlet可以插入到任何
 第6章：Spring AOP基础
 --
 ###6.2.2 JDK动态代理
+JDK动态代理允许开发者在运行期间创建接口的代理实例。
 JDK的动态代理主要涉及两个类：proxy和InvocationHandler，后者是一个接口，可以通过该接口定义横切逻辑，并且通过反射机制调用目标类的代码，动态将横切逻辑和业务逻辑编织在一起。而Proxy利用InvocationHandler动态创建一个符合某一接口的实例。
 ###6.2.3 CGLib动态代理
+CGLib采用非常底层的字节码技术，可以为一个类创建子类，并且在子类中采用方法拦截的技术拦截所有父类方法的调用。
 使用JDK创建代理的限制就是它只能为接口创建代理实例，而CGLib可以用于任何类。
-2016/8/10看到184页
+2016/8/10看到184页<br>
+Spring AOP的底层就是通过使用JDK动态代理或者CGLib动态代理技术为目标Bean织入横切逻辑，由于CGLib采用动态创建子类的方式生成代理对象，所以不能对目标类中的final方法进行代理。
+##6.3创建增强类
+按照增强在目标类方法的连接点位置，可以分为以下5类：前置增强（BeforeAdvice）、后置增强（AfterRunningAdvice)、环绕增强（MethodInterceptor)、异常抛出增强（ThrowsAdvice）、引介增强（IntroductionInterceptor）
+CGLib创建代理时速度慢，而创建出的代理对象运行效率较高，而使用JDK代理的表现正好相反。
