@@ -1,3 +1,7 @@
+
+94. Binary Tree Inorder Traversal  
+--
+也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
 ```java
 public List<Integer> inorderTraversal(TreeNode root) {
     List<Integer> list = new ArrayList<Integer>();
