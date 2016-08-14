@@ -480,3 +480,8 @@ p:pointcut='#{gcp.intersectionPointcut}' p:advice-ref='greetBeforeAdvice'></bean
 <bean id='waiter3' class='org.springframework.aop.framework.ProxyFactoryBean' 
 p:interceptorNames='composableAdvisor' p:target-ref='waiterTarget'/>
 ```
+##6.5自动创建增强
+ 1）基于Bean配置名规则的自动代理创建器：允许为一组特定配置名的Bean自动创建代理实例的代理创建器，实现类为BeanNameAutoProxyCreator；<br>
+ 2）基于Advisor匹配机制的自动代理创建器：它会对容器中所有的Advisor进行扫描，自动将这些切面应用到匹配的Bean中（即为目标Bean创建代理实例），实现类为DefaultAdvisorAutoProxyCreator；<br>
+ 3）基于Bean中AspjectJ注解标签的自动代理创建器：为包含AspectJ注解的Bean自动创建代理实例，它的实现类是AnnotationAwareAspectJAutoProxyCreator，该类是Spring 2.0的新增类。<br>
+http://www.cnblogs.com/yangyquin/p/5475664.html 这个网站对于这节讲的比较好
