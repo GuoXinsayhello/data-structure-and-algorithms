@@ -425,3 +425,25 @@ public class GreetingAdvisor extends StaticMethodMatcherPointcutAdvisor {
 
 </beans>
 ```
+##6.4.4静态正则表达式方法匹配切面
+```xml
+<!-- 正则表达式方法名匹配切面 -->  
+    <bean id="regexpAdvisor"  
+        class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"  
+        p:advice-ref="greetingAdvice">  
+        <!--   
+                   用正则表达式定义目标类全限定方法名（带类名的方法名）的匹配模式串   
+            pattern 如果只有一个，可以用这个属性  
+            patterns 定义多个匹配模式串，这些匹配模式串之间是或的关系  
+            order 切面在织入时对应的顺序  
+        -->  
+        <property name="patterns">  
+            <list>  
+                <value>.*greet.*</value>  
+            </list>  
+        </property>  
+    </bean>  
+    <bean id="waiter1" class="org.springframework.aop.framework.ProxyFactoryBean"  
+        p:interceptorNames="regexpAdvisor" p:target-ref="waiterTarget"  
+        p:proxyTargetClass="true" />  
+```
