@@ -447,3 +447,36 @@ public class GreetingAdvisor extends StaticMethodMatcherPointcutAdvisor {
         p:interceptorNames="regexpAdvisor" p:target-ref="waiterTarget"  
         p:proxyTargetClass="true" />  
 ```
+所谓静态切面是指在生成代理对象时，就确定了增强是否需要植入到目标类的连接点上，而动态切面是指必须在运行期间内根据方法入参的值来判断增强是否需要织入到目标类连接点上。
+###6.4.6流程切面
+流程切点代表由某个方法A直接或者间接发起调用的其他方法BB，希望A方法调用的其他方法BB都织入增强，此时需要使用流程切面来完成目标。流程切面和动态切面算是一类切面，因为两者都需要在运行期判断动态的环境。但是流程切点通常要比其他切点慢5到10倍。
+###6.4.7复合切点切面
+ComposablePointCut可以将一个复合切点和一个切点对象进行交并集运算
+```java
+import java.lang.reflect.Method;
+import org.springframework.aop.MethodMatcher;
+import org.springframework.aop.Pointcut;
+import org.springframework.aop.support.ComposablePointcut;
+import org.springframework.aop.support.ControlFlowPointcut;
+import org.springframework.aop.support.NameMatchMethodPointcut;
+
+public class GreetingComposablePointcut {
+    public Pointcut getIntersectionPointcut(){
+        ComposablePointcut cp=new ComposablePointcut();
+        Pointcut pt1=new ControlFlowPointcut(WaiterDelegate.class,"service");
+        MethodMatcher pt2=new NameMatchMethodPointcut(){
+            public boolean matches(Method method, Class<?> cls) {// 切点方法静态匹配
+                return "check".equals(method.getName());
+            }
+        };
+        return cp.intersection(pt1).intersection(pt2);
+    }
+}
+```
+```xml
+<bean id='gcp' class='com.GreetingComposablePointcut'></bean>
+<bean id='composableAdvisor' class='org.springframework.aop.support.DefaultPointcutAdvisor' 
+p:pointcut='#{gcp.intersectionPointcut}' p:advice-ref='greetBeforeAdvice'></bean>
+<bean id='waiter3' class='org.springframework.aop.framework.ProxyFactoryBean' 
+p:interceptorNames='composableAdvisor' p:target-ref='waiterTarget'/>
+```
