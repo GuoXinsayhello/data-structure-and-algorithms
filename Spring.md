@@ -516,3 +516,4 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
     <bean class="com.baobaotao.aspectj.example.PreGreetingAspect" />
 </beans>
 ```
+2016/8/14 看到231页
