@@ -22,3 +22,5 @@ public List<Integer> inorderTraversal(TreeNode root) {
     return list;
 }
 ```
+96
+https://discuss.leetcode.com/topic/8398/dp-solution-in-6-lines-with-explanation-f-i-n-g-i-1-g-n-i/2
