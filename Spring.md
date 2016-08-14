@@ -334,3 +334,94 @@ ThreadLocal是将非线程安全类改造成线程安全类的法宝。
 如果只有增强，增强会被织入到目标类的所有方法中，而切点进一步描述织入到哪些类的哪些方法上。
 2016/8/11看到202页<br>
 Spring提供了6种类型的切点：静态方法切点，动态方法切点，注解切点，表达式切点，流程切点，复合切点。
+###6.4.3 静态普通方法名匹配切面
+1.编写需要植入逻辑的代码
+```java
+public class Waiter {
+    public void greetTo(String name){
+        System.out.println("waiter greet to :"+name);
+    }
+    public void serveTo(String name){
+        System.out.println("waiter serve to :"+name);
+    }
+}
+public class Seller {
+    public void greetTo(String name){
+        System.out.println("seller greet to :"+name);
+    }
+}
+```
+2.编写需要植入的逻辑即增强
+```java
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+
+public class RoundGreeting implements MethodInterceptor {
+    @Override
+    public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+        Object[] args = methodInvocation.getArguments();
+        String name = (String) args[0];
+        System.out.println("how are you :Mr"+name);
+
+        Object obj = methodInvocation.proceed();
+
+        System.out.println("Please enjoy yourself!");
+
+        return obj;
+    }
+}
+```
+3.定义一个切面，可以通过类，方法名，以及方法方位等信息灵活的定义切面的连接点（即添加增强的地方）
+```java
+import org.springframework.aop.ClassFilter;
+import org.springframework.aop.support.StaticMethodMatcherPointcutAdvisor;
+
+import java.lang.reflect.Method;
+
+public class GreetingAdvisor extends StaticMethodMatcherPointcutAdvisor {
+    @Override
+    public boolean matches(Method method, Class<?> aClass) {
+        return "greetTo".equals(method.getName());
+    }
+
+    @Override
+    public ClassFilter getClassFilter() {
+        return new ClassFilter() {
+            @Override
+            public boolean matches(Class<?> aClass) {
+                return Waiter.class.isAssignableFrom(aClass);
+            }
+        };
+    }
+}
+```
+4.在xml文件中定义各种Bean
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="waiter" class="aspect.Waiter"/>
+    <bean id="seller" class="aspect.Seller"/>
+    <bean id="advice" class="aspect.RoundGreeting"/>
+
+    <bean id="advisor" class="aspect.GreetingAdvisor"
+          p:advice-ref="advice"
+            />
+    <bean id="parent" abstract="true"
+          class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:interceptorNames="advisor"
+          p:proxyTargetClass="true"
+          />
+    <bean id="proxyWaiter" parent="parent"
+          p:target-ref="waiter"
+            />
+    <bean id="proxySeller" parent="parent"
+            p:target-ref="seller"
+            />
+
+</beans>
+```
