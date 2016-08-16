@@ -517,8 +517,22 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 </beans>
 ```
 2016/8/14 看到231页
+###7.4.4不同增强类型
+@Before前置增强，@AfterReturning后置增强，相当于AfterReturningAdvice,@Around环绕增强，相当于MethodInterceptor；@AfterThrowing抛出增强；@After，final增强，不管是抛出异常或者正常退出，该增强都会得到执行；@DeclareParents引介增强，相当于IntroductionInterceptor
 ##7.5 切点函数详解
 `@annotation`表示标注了某个注解的所有方法。<br>
 `execution()`是最常用的的切点函数，该函数所指定的连接点，可以大到包，小到方法入参<br>
 `@args()`函数，首先定义在方法签名中入参类型在类继承树中的位置，称之为入参类型点，而标注了注解类M（标注了@M）的类在类继承树中的位置，称之为注解点。如果在类继承树中注解点高于入参类型点，则该目标方法不可能匹配切点@args（M）；反之，如果低于，则注解点所在的类及其子孙类作为方法入参时，该方法匹配@args（M)切点。<br>
-`within()`该函数定义的连接点是针对目标类而言，而不是针对运行期对象的类型而言，但是within()所指定的连接点最小范围只能是类，execution()函数的功能涵盖了within（）函数的功能。
+`within()`该函数定义的连接点是针对目标类而言，而不是针对运行期对象的类型而言，但是within()所指定的连接点最小范围只能是类，execution()函数的功能涵盖了within（）函数的功能。<br>
+`@within(M)`匹配标注了@M的类以及子孙类<br>
+`@target(M)`匹配任意标注了@M的目标类<br>
+`target()`切点函数通过判断目标类是否按照类型匹配指定类决定连接点是否匹配，比如Waiter是一个接口（含有serveTo()与greetTo()两个方法），NaiveWaiter与NaughtyWaiter都实现了Waiter的接口，target(XXXX.Waiter),则这两个实现类中的所有方法都匹配切点，包括Waiter中不存在的方法。<br>
+`this()`一般情况下，使用this()和target()通过定义切点，两者等效。也就是target(XXX.Waiter)等价于this(XXX.Waiter),target(XXX.NaiveWaiter)等价于this(XXX.NaiveWaiter).两者的区别体现在引介切面上，如果为NaiveWaiter引介一个Seller接口的实现，则this(XXX.Seller)匹配NaiveWaiter代理对象的所有方法，而target(XXX.Seller)不匹配通过引介切面产生的NaiveWaiter代理对象。
+##7.6@AspectJ进阶
+###7.6.2命名切点
+切点直接声明在增强方法处，这种切点声明方式为匿名切点，匿名切点只能在声明处使用。可以通过@Pointcut注解以及切面类方法对切点进行命名。
+###7.6.3增强织入的顺序
+1. 增强在同一个切面类中定义：依照增强在切面类中定义的顺序依次织入。 <br>
+2. 增强位于不同的切面，但果这些切面都实现了org.springframework.core.Ordered 接口，则由接口注解的顺序号决定(顺序号小的先织入）<br>
+3.如果增强位于不同的切面类中，且这些切面类没有实现org.springframework.core.Ordered 接口，织入的顺序不确定。<br>
+2016/8/16 看到247页
