@@ -542,3 +542,24 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 可以采用ProceedingJoinPoint表示连接点的对象。args()、this（）、target（）、@args（）、@within（）、@target（）和@annotaion这7个函数除了可以指定类名外，还可以指定参数名，将目标对象连接点上的方法入参绑定到增强的方法中。
 ##7.7基于Schema配置切面
 如果项目不能使用JDK5.0，那么就不能使用基于@AspectJ注解的切面了，但是可以在xml中使用Schema配置的方法，它完全可以替代基于@AspectJ注解声明切面的方法。
+```xml
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:aop="http://www.springframework.org/schema/aop"   
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+http://www.springframework.org/schema/aop  
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">  
+    <aop:config proxy-target-class="true">  
+        <aop:aspect ref="adviceMethod">  
+            <aop:before method="preGreeting" pointcut="target(com.zheng.demo7.NaiveWaiter) and execution(* greetTo(..))"/>  
+        </aop:aspect>  
+    </aop:config>  
+    <bean id="adviceMethod" class="com.zheng.demo7.AdviceMethod"></bean>  
+    <!-- 目标bean -->  
+    <bean id="waiter" class="com.zheng.demo7.NaiveWaiter"></bean>  
+</beans> 
+```
+2016/8/17 看到259页<br>
