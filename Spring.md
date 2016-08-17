@@ -536,7 +536,8 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 1. 增强在同一个切面类中定义：依照增强在切面类中定义的顺序依次织入。 <br>
 2. 增强位于不同的切面，但果这些切面都实现了org.springframework.core.Ordered 接口，则由接口注解的顺序号决定(顺序号小的先织入）<br>
 3.如果增强位于不同的切面类中，且这些切面类没有实现org.springframework.core.Ordered 接口，织入的顺序不确定。<br>
-2016/8/16 看到247页
+2016/8/16 看到247页<br>
+
 ###7.6.4
 可以采用ProceedingJoinPoint表示连接点的对象。args()、this（）、target（）、@args（）、@within（）、@target（）和@annotaion这7个函数除了可以指定类名外，还可以指定参数名，将目标对象连接点上的方法入参绑定到增强的方法中。
 ##7.7基于Schema配置切面
