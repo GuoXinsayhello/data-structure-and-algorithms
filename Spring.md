@@ -447,7 +447,8 @@ public class GreetingAdvisor extends StaticMethodMatcherPointcutAdvisor {
         p:interceptorNames="regexpAdvisor" p:target-ref="waiterTarget"  
         p:proxyTargetClass="true" />  
 ```
-所谓静态切面是指在生成代理对象时，就确定了增强是否需要植入到目标类的连接点上，而动态切面是指必须在运行期间内根据方法入参的值来判断增强是否需要织入到目标类连接点上。
+所谓静态切面是指在生成代理对象时，就确定了增强是否需要植入到目标类的连接点上，而动态切面是指必须在运行期间内根据方法入参的值来判断增强是否需要织入到目标类连接点上。<br>
+作者在这里推荐了一个关于正则表达式的小工具，RegexBuddy，可以快速形成，识别正则表达式。
 ###6.4.6流程切面
 流程切点代表由某个方法A直接或者间接发起调用的其他方法BB，希望A方法调用的其他方法BB都织入增强，此时需要使用流程切面来完成目标。流程切面和动态切面算是一类切面，因为两者都需要在运行期判断动态的环境。但是流程切点通常要比其他切点慢5到10倍。
 ###6.4.7复合切点切面
@@ -536,3 +537,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 2. 增强位于不同的切面，但果这些切面都实现了org.springframework.core.Ordered 接口，则由接口注解的顺序号决定(顺序号小的先织入）<br>
 3.如果增强位于不同的切面类中，且这些切面类没有实现org.springframework.core.Ordered 接口，织入的顺序不确定。<br>
 2016/8/16 看到247页
+###7.6.4
+可以采用ProceedingJoinPoint表示连接点的对象。args()、this（）、target（）、@args（）、@within（）、@target（）和@annotaion这7个函数除了可以指定类名外，还可以指定参数名，将目标对象连接点上的方法入参绑定到增强的方法中。
+##7.7基于Schema配置切面
+如果项目不能使用JDK5.0，那么就不能使用基于@AspectJ注解的切面了，但是可以在xml中使用Schema配置的方法，它完全可以替代基于@AspectJ注解声明切面的方法。
