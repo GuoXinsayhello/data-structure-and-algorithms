@@ -563,3 +563,11 @@ http://www.springframework.org/schema/aop
 </beans> 
 ```
 2016/8/17 看到259页<br>
+##7.8混合切面类型
+有四种定义切面的方式：<br>
+1)基于@AspectJ注解的方式<br>
+2)基于<aop:aspect>的方式<br>
+3)基于<aop:advisor>的方式<br>
+4)基于Advisor类的方式<br>
+##7.9JVM Class文件字节码转换基础知识
+除了在运行期通过JDK代理或者CGLib代理的方式实现织入切面，还可以在类加载期通过字节码编辑的技术，将切面织入到目标类，这种织入方式称为LTW（Load Time Weaving。）
