@@ -119,6 +119,7 @@ if(path[h][k-1]+path[h-1][k]!=0 && (s1.substring(k,k+1).equals(s3.substring(k+h-
 ```
 这个写法的错误在与会对字符串重复使用，也就是用过的字符会再用一次。
 98. Validate Binary Search Tree  
+--
 这道题注意二叉搜索树与二叉树的区别，二叉搜索树要求树左边所有点的值都要小于根的值，右边所有点的值都要大于根的值。
 ```java
 public class Solution {
@@ -131,5 +132,24 @@ public class Solution {
         if (root.val >= maxVal || root.val <= minVal) return false;
         return isValidBST(root.left, minVal, root.val) && isValidBST(root.right, root.val, maxVal);
     }
+}
+```
+下面这种解法用的是中序遍历
+```java
+public boolean isValidBST(TreeNode root) {
+   if (root == null) return true;
+   Stack<TreeNode> stack = new Stack<>();
+   TreeNode pre = null;
+   while (root != null || !stack.isEmpty()) {
+      while (root != null) {
+         stack.push(root);
+         root = root.left;
+      }
+      root = stack.pop();
+      if(pre != null && root.val <= pre.val) return false;
+      pre = root;
+      root = root.right;
+   }
+   return true;
 }
 ```
