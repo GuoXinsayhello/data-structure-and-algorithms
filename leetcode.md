@@ -153,3 +153,7 @@ public boolean isValidBST(TreeNode root) {
    return true;
 }
 ```
+99. Recover Binary Search Tree  
+作者仅仅用了简单的中序遍历，简洁优雅
+https://discuss.leetcode.com/topic/3988/no-fancy-algorithm-just-simple-and-powerful-in-order-traversal
+高效。
