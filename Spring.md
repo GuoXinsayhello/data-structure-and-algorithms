@@ -570,4 +570,4 @@ http://www.springframework.org/schema/aop
 3)基于<aop:advisor>的方式<br>
 4)基于Advisor类的方式<br>
 ##7.9JVM Class文件字节码转换基础知识
-除了在运行期通过JDK代理或者CGLib代理的方式实现织入切面，还可以在类加载期通过字节码编辑的技术，将切面织入到目标类，这种织入方式称为LTW（Load Time Weaving。）
+除了在运行期通过JDK代理或者CGLib代理的方式实现织入切面，还可以在类加载期通过字节码编辑的技术，将切面织入到目标类，这种织入方式称为LTW（Load Time Weaving。）但是Spring的LTW仅支持AspectJ定义的切面。
