@@ -571,3 +571,14 @@ http://www.springframework.org/schema/aop
 4)基于Advisor类的方式<br>
 ##7.9JVM Class文件字节码转换基础知识
 除了在运行期通过JDK代理或者CGLib代理的方式实现织入切面，还可以在类加载期通过字节码编辑的技术，将切面织入到目标类，这种织入方式称为LTW（Load Time Weaving。）但是Spring的LTW仅支持AspectJ定义的切面。
+
+第8章：Spring对DAO的支持
+--
+轻型目录存取协定（英文：Lightweight Directory Access Protocol，缩写：LDAP，英语发音：/ˈɛldæp/）
+是一个开放的，中立的，工业标准的应用协议，通过IP协议提供访问控制和维护分布式信息的目录信息。<br>
+ NoSQL，泛指非关系型的数据库.<br>
+ `悲观锁(Pessimistic Lock)`, 顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。<br>
+ `乐观锁(Optimistic Lock)`, 顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。乐观锁适用于多读的应用类型，这样可以提高吞吐量，像数据库如果提供类似于write_condition机制的其实都是提供的乐观锁。<br>
+ `JNDI(Java Naming and Directory Interface,Java命名和目录接口)`是SUN公司提供的一种标准的Java命名系统接口，JNDI提供统一的客户端API，通过不同的访问提供者接口JNDI服务供应接口(SPI)的实现，由管理者将JNDI API映射为特定的命名服务和目录系统，使得Java应用程序可以和这些命名服务和目录服务之间进行交互<br>
+` 对象关系映射`（英语：Object Relation Mapping，简称ORM，或O/RM，或O/R mapping），是一种程序技术，用于实现面向对象编程语言里不同类型系统的数据之间的转换。<br>
+假设你的数据库是mysql，如果数据源配置不当，将可能发生经典的`“8小时问题”`。原因是mysql在默认情况下，如果发现一个连接的空闲时间超过8小时，将会在数据库端自动关闭这个连接。而数据源并不知道这个连接已经关闭了，当它将这个无用的连接返回给某个dao时，dao就会报无法获取connection异常。
