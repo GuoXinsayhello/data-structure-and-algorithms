@@ -582,3 +582,5 @@ http://www.springframework.org/schema/aop
  `JNDI(Java Naming and Directory Interface,Java命名和目录接口)`是SUN公司提供的一种标准的Java命名系统接口，JNDI提供统一的客户端API，通过不同的访问提供者接口JNDI服务供应接口(SPI)的实现，由管理者将JNDI API映射为特定的命名服务和目录系统，使得Java应用程序可以和这些命名服务和目录服务之间进行交互<br>
 ` 对象关系映射`（英语：Object Relation Mapping，简称ORM，或O/RM，或O/R mapping），是一种程序技术，用于实现面向对象编程语言里不同类型系统的数据之间的转换。<br>
 假设你的数据库是mysql，如果数据源配置不当，将可能发生经典的`“8小时问题”`。原因是mysql在默认情况下，如果发现一个连接的空闲时间超过8小时，将会在数据库端自动关闭这个连接。而数据源并不知道这个连接已经关闭了，当它将这个无用的连接返回给某个dao时，dao就会报无法获取connection异常。
+##8.4 数据源
+其一是DBCP数据源，其二是C3P0数据源。
