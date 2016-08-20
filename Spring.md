@@ -604,7 +604,11 @@ A事务覆盖B事务已经提交的数据，造成B事务所做操作丢失。<b
 有四个等级的事务隔离级别：READ UNCOMMITED/READ COMMITED/REPEATABLE READ/SERIALIZABLE这四种
 ##9.2ThreadLocal基础知识
 ThreadLoacal是线程的一个本地化对象，当工作于多线程中的对象使用ThreadLocal维护变量时，ThreadLocal为每个使用该变量的线程分配一个独立的变量副本，每个线程可以改变自己的副本。<br>
-##事务管理
+##9.3事务管理
 在Spring事务管理SPI（Service Provider Interface）高层抽象层主要包括三个接口，分别是PlatformTransactionManager，TransactionDefinition，TransactionStatus<br>
 持久化（Persistence），即把数据（如内存中的对象）保存到可永久保存的存储设备中（如磁盘）。持久化的主要应用是将内存中的对象存储在的数据库中，或者存储在磁盘文件中、XML数据文件中等<br>
 2016/8/19 看到303页<br>
+JPA全称Java Persistence API.JPA通过JDK 5.0注解或XML描述对象－关系表的映射关系，并将运行期的实体对象持久化到数据库中。<br>
+JTA，即Java Transaction API，JTA允许应用程序执行分布式事务处理——在两个或多个网络计算机资源上访问并且更新数据。JDBC驱动程序的JTA支持极大地增强了数据访问能力。
+###9.3.4事务同步管理器
+ Spring的`事务同步管理器`SynchronizationManager使用ThreadLocal为不同事务线程提供了独立的资源副本，同时维护事务配置的属性和运行状态信息。事务同步管理器是Spring事务管理的基石部分，不管用户使用编程式事务管理，还是声明式事务管理，都离不开事务同步管理器.可以通过管理器的静态方法获取当前线程绑定的会话（session）或连接（connection）
