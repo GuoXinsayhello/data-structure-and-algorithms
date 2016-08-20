@@ -612,3 +612,41 @@ JPA全称Java Persistence API.JPA通过JDK 5.0注解或XML描述对象－关系�
 JTA，即Java Transaction API，JTA允许应用程序执行分布式事务处理——在两个或多个网络计算机资源上访问并且更新数据。JDBC驱动程序的JTA支持极大地增强了数据访问能力。
 ###9.3.4事务同步管理器
  Spring的`事务同步管理器`SynchronizationManager使用ThreadLocal为不同事务线程提供了独立的资源副本，同时维护事务配置的属性和运行状态信息。事务同步管理器是Spring事务管理的基石部分，不管用户使用编程式事务管理，还是声明式事务管理，都离不开事务同步管理器.可以通过管理器的静态方法获取当前线程绑定的会话（session）或连接（connection）
+ ##9.5使用XMl配置声明式事务
+ 在Spring早期版本，用户必须通过TransactionProxyFactoryBean代理类对需要事务管理的业务类进行代理。然而后来可以通过tx/aop命名空间进行配置。
+ ```xml
+ <!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="dataSource">
+	</bean>
+
+	<!-- 通过AOP配置提供事务增强，让service包下所有Bean的所有方法拥有事务 -->
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="serviceMethod"
+			expression=" execution(* net.yingyi.games.service..*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" />
+	</aop:config>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 定义JdbcTemplate的Bean -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+		p:dataSource-ref="dataSource">
+	</bean>
+	
+	<!-- 需要实施事务增强的目标业务Bean -->
+	<bean id="userScore"
+		class="net.hingyi.springDemo.transaction.service.UserScoreServiceImpl"
+		p:userScoreRepository-ref="userScoreRepository_jdbc" />
+	
+	<bean id="userScoreRepository_jdbc"
+		class="net.hingyi.springDemo.transaction.repository.UserScoreRepositoryImpl"
+         p:jdbcTemplate-ref="jdbcTemplate" />
+```
+
+##9.6使用注解配置声明式事务
+ 除了基于XMl的事务配置之外，还可以通过注解进行事务配置
