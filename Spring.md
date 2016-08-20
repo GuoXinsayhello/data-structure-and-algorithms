@@ -649,4 +649,9 @@ JTA，即Java Transaction API，JTA允许应用程序执行分布式事务处理
 ```
 
 ##9.6使用注解配置声明式事务
- 除了基于XMl的事务配置之外，还可以通过注解进行事务配置
+ 除了基于XMl的事务配置之外，还可以通过注解进行事务配置，此时需要在业务类加上@Transactional的注解符号，此外还需要对xml配置文件加上
+ ```xml
+ <tx:annotation-driven transaction-manager="txManager" />
+ ```
+ 虽然@Transactional可以用在接口上，但是Spring并不建议这么做，因为注解不能被继承，所以业务接口中标注的@Transactional注解不会被实现的业务类继承，所以最好在具体业务类上使用@Transactional注解。
+ 2016/8/20 看到321页
