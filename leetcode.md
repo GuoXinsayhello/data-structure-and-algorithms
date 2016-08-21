@@ -153,7 +153,92 @@ public boolean isValidBST(TreeNode root) {
    return true;
 }
 ```
-99. Recover Binary Search Tree  
+99. Recover Binary Search Tree 
+--
 作者仅仅用了简单的中序遍历，简洁优雅
 https://discuss.leetcode.com/topic/3988/no-fancy-algorithm-just-simple-and-powerful-in-order-traversal
 高效。
+100.same tree
+--
+自己写的方法，用的是递归的思想，
+```java
+public class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+    	if(p==null && q==null)
+    		return true;
+    	if(p==null && q!=null)
+    		return false;
+    	if(p!=null && q==null)
+    		return false;
+    	else 
+    	{
+    		if(p.val==q.val)
+    		return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+    		else
+    			return false;
+    	}
+	        
+	    }
+}
+```
+下面这个方法也是自己写的，用的中序遍历，仅仅击败1%的人，不太理想
+```java
+public class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+    	TreeNode curp=p;
+    	TreeNode curq=q;
+    	Stack<TreeNode> stp=new Stack<TreeNode>();
+    	Stack<TreeNode> stq=new Stack<TreeNode>();
+    	boolean flag=true;
+    	if(p==null && q==null)
+    		return true;
+    	outer:while( (curp!=null || !stp.isEmpty())   && (curq!=null || !stq.isEmpty()) )
+    	{
+    		while(curp!=null || curq!=null)
+    		{
+    		  if(curp!=null && curq!=null)
+    		  {
+    			if(curp.val==curq.val)
+    			{
+    				stp.push(curp);
+    				stq.push(curq);
+    				curp=curp.left;
+    				curq=curq.left;
+    			}
+    			else
+    			{
+    				flag=false;
+    				break outer;
+    			}
+    		  }
+    			else
+    			{
+    				flag=false;
+    				break outer;
+    			}
+    		}
+    		curp=stp.pop();
+    		curq=stq.pop();
+    		if(curq.val!=curp.val)
+    		{
+    			flag=false;
+    			break outer;
+    		}
+    		else
+    		{
+    			curp=curp.right;
+    			curq=curq.right;
+    		}
+    	}
+    	if(flag==false)
+    		return false;
+    	else
+    	{
+    		if(curp==null && stp.isEmpty() && curq==null && stq.isEmpty())
+    			return true;
+    		else
+    			return false;
+    	}  
+	    }
+}
+```
