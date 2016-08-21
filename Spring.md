@@ -727,3 +727,7 @@ class="footmark.spring.core.tx.programmatic.template.BankServiceImpl">
  
 第10章:Spring 的事务管理难点剖析
 --
+在相同线程中进行相互嵌套调用的事务方法工作于相同的事务中，如果这些相互嵌套调用的方法工作在不同的线程中，则不同线程下的事务方法工作在独立的事务中。
+##10.5混合框架
+如果要同时使用Hibernate和Spring JDBC读写数据，要考虑到Hibernate缓存机制引发的问题，及时调用Hibernate的flush(）方法。<br>
+2016/8/21 看到345页
