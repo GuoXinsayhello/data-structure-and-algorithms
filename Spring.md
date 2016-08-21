@@ -612,7 +612,76 @@ JPA全称Java Persistence API.JPA通过JDK 5.0注解或XML描述对象－关系�
 JTA，即Java Transaction API，JTA允许应用程序执行分布式事务处理——在两个或多个网络计算机资源上访问并且更新数据。JDBC驱动程序的JTA支持极大地增强了数据访问能力。
 ###9.3.4事务同步管理器
  Spring的`事务同步管理器`SynchronizationManager使用ThreadLocal为不同事务线程提供了独立的资源副本，同时维护事务配置的属性和运行状态信息。事务同步管理器是Spring事务管理的基石部分，不管用户使用编程式事务管理，还是声明式事务管理，都离不开事务同步管理器.可以通过管理器的静态方法获取当前线程绑定的会话（session）或连接（connection）
+ ##9.4编程式事务管理
+ ###基于底层 API 的编程式事务管理
+ 根据PlatformTransactionManager、TransactionDefinition 和 TransactionStatus 三个核心接口，我们完全可以通过编程的方式来进行事务管理。示例代码如清单4所示：<br>
+ ```java
+ public class BankServiceImpl implements BankService {
+private BankDao bankDao;
+private TransactionDefinition txDefinition;
+private PlatformTransactionManager txManager;
+......
+public boolean transfer(Long fromId， Long toId， double amount) {
+TransactionStatus txStatus = txManager.getTransaction(txDefinition);
+boolean result = false;
+try {
+result = bankDao.transfer(fromId， toId， amount);
+txManager.commit(txStatus);
+} catch (Exception e) {
+result = false;
+txManager.rollback(txStatus);
+System.out.println("Transfer Error!");
+}
+return result;
+}
+}
+```
+```xml
+<bean id="bankService" class="footmark.spring.core.tx.programmatic.origin.BankServiceImpl">
+<property name="bankDao" ref="bankDao"/>
+<property name="txManager" ref="transactionManager"/>
+<property name="txDefinition">
+<bean class="org.springframework.transaction.support.DefaultTransactionDefinition">
+<property name="propagationBehaviorName" value="PROPAGATION_REQUIRED"/>
+</bean>
+</property>
+</bean>
+```
+###基于 TransactionTemplate 的编程式事务管理
+`模板回调模式`<br>
+```java
+public class BankServiceImpl implements BankService {
+private BankDao bankDao;
+private TransactionTemplate transactionTemplate;
+......
+public boolean transfer(final Long fromId， final Long toId， final double amount) {
+return (Boolean) transactionTemplate.execute(new TransactionCallback(){
+public Object doInTransaction(TransactionStatus status) {
+Object result;
+try {
+result = bankDao.transfer(fromId， toId， amount);
+} catch (Exception e) {
+status.setRollbackOnly();
+result = false;
+System.out.println("Transfer Error!");
+}
+return result;
+}
+});
+}
+}
+```
+```xml
+<bean id="bankService"
+class="footmark.spring.core.tx.programmatic.template.BankServiceImpl">
+<property name="bankDao" ref="bankDao"/>
+<property name="transactionTemplate" ref="transactionTemplate"/>
+</bean>
+```
+
  ##9.5使用XMl配置声明式事务
+ Spring 的声明式事务管理在底层是建立在 AOP 的基础之上的。其本质是对方法前后进行拦截，然后在目标方法开始之前创建或者加入一个事务，在执行完目标方法之后根据执行情况提交或者回滚事务。
+声明式事务最大的优点就是不需要通过编程的方式管理事务，这样就不需要在业务逻辑代码中掺杂事务管理的代码，只需在配置文件中做相关的事务规则声明（或通过等价的基于标注的方式），便可以将事务规则应用到业务逻辑中.建议采用声明式事务。和编程式事务相比，声明式事务唯一不足地方是，后者的最细粒度只能作用到方法级别，无法做到像编程式事务那样可以作用到代码块级别。<br>
  在Spring早期版本，用户必须通过TransactionProxyFactoryBean代理类对需要事务管理的业务类进行代理。然而后来可以通过tx/aop命名空间进行配置。
  ```xml
  <!-- 配置事务管理器 -->
