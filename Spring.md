@@ -724,3 +724,6 @@ class="footmark.spring.core.tx.programmatic.template.BankServiceImpl">
  ```
  虽然@Transactional可以用在接口上，但是Spring并不建议这么做，因为注解不能被继承，所以业务接口中标注的@Transactional注解不会被实现的业务类继承，所以最好在具体业务类上使用@Transactional注解。
  2016/8/20 看到321页
+ 
+第10章:Spring 的事务管理难点剖析
+--
