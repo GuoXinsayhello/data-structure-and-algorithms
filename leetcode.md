@@ -242,3 +242,75 @@ public class Solution {
 	    }
 }
 ```
+101.Symmetric Tree
+下面这个做法是得分比较高的做法，作者用了递归方法，非常简洁
+```java
+public boolean isSymmetric(TreeNode root) {
+    return root==null || isSymmetricHelp(root.left, root.right);
+}
+
+private boolean isSymmetricHelp(TreeNode left, TreeNode right){
+    if(left==null || right==null)
+        return left==right;
+    if(left.val!=right.val)
+        return false;
+    return isSymmetricHelp(left.left, right.right) && isSymmetricHelp(left.right, right.left);
+}
+```
+下面的是自己的做法，用的是中序遍历，分别遍历左边和右边，左边是以左根右的顺序，右边是以右根左的顺序遍历的。
+```java
+public class Solution {
+    public boolean isSymmetric(TreeNode root) {
+    	if(root==null)
+    		return true;
+    	if(root.left==null && root.right==null)
+    		return true;
+    	if(root.left==null || root.right==null)
+    		return false;
+    	else
+    	{
+    		boolean flag=true;
+    		Stack<TreeNode> stl=new Stack<TreeNode>();
+    		Stack<TreeNode> str=new Stack<TreeNode>();
+    		TreeNode curl=root.left;
+    		TreeNode curr=root.right;
+    		stl.push(curl);
+    		str.push(curr);
+    		outer:while(!stl.isEmpty() && !stl.isEmpty())
+    		{
+    			while(curl!=null || curr!=null)
+    			{
+    				if(curl!=null && curr!=null)
+    				{
+    					if(curl.val!=curr.val)
+    					{
+    						flag=false;
+    						break outer;
+    					}
+    					else
+    					{
+    						str.push(curr);
+    						stl.push(curl);
+    						curr=curr.right;
+    						curl=curl.left;
+    					}
+    				}
+    				else
+    				{
+    					flag=false;
+    					break outer;
+    				}
+    			}
+    			curl=stl.pop();
+    			curr=str.pop();
+    			curl=curl.right;
+    			curr=curr.left;
+    		}
+    		if(flag==false)
+    			return false;
+    		else
+    			return true;
+    	}
+    }
+    }
+```
