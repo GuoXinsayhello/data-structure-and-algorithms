@@ -734,4 +734,7 @@ class="footmark.spring.core.tx.programmatic.template.BankServiceImpl">
 ##10.6 特殊方法成为漏网之鱼
 由于使用final、static、private修饰符的方法都不能被子类覆盖，相应的这些方法无法实施基于CGLib动态代理的AOP增强；而基于接口的动态代理策略，除public外的其他所有的方法不能被事务增强，此外public static也不能被增强。
 ##10.7数据连接泄露
-如果从数据源直接获取连接（比如jdbcTemplate.getDataSource().getConnection()) ，并且在使用完成后不主动归还给数据源(调用Connection#close())，则会造成数据连接泄露的问题。Spring提供了一个可以从当前事务上下文中获取绑定的数据连接的工具类，就是DataSourceUtils，该工具类在存在事务上下文的方法中貌似不会造成数据连接泄露，但是在没有事务上下文的方法中使用仍然会造成数据连接泄露，此时就需要显式调用DataSourceUtils.releaseConnection()方法来释放获取的连接。作者特别强调要在finally（也就是try，catch，finally那个地方）里面释放连接，因为如果在try里面最后释放连接，如果之前的语句发生异常，那么释放连接就不能被正常执行。
+如果从数据源直接获取连接（比如jdbcTemplate.getDataSource().getConnection()) ，并且在使用完成后不主动归还给数据源(调用Connection#close())，则会造成数据连接泄露的问题。Spring提供了一个可以从当前事务上下文中获取绑定的数据连接的工具类，就是DataSourceUtils，该工具类在存在事务上下文的方法中貌似不会造成数据连接泄露，但是在没有事务上下文的方法中使用仍然会造成数据连接泄露，此时就需要显式调用DataSourceUtils.releaseConnection()方法来释放获取的连接。作者特别强调要在finally（也就是try，catch，finally那个地方）里面释放连接，因为如果在try里面最后释放连接，如果之前的语句发生异常，那么释放连接就不能被正常执行。尽量使用JdbcTemplate、HibernateTemplate这些模板进行数据访问操作，避免直接获取数据连接的操作。
+第11章：使用Spring JDBC访问数据库
+--
+ 
