@@ -784,4 +784,17 @@ public class Mysql {
 获取查询结果并处理<br>
 处理异常<br>
 事务管理<br>
-释放各类资源——Statement，ResultSet，Connection
+释放各类资源——Statement，ResultSet，Connection<br>
+下面这个例子对于JDBDTemplate解释的比较详细<br>
+http://wiki.jikexueyuan.com/project/spring/jdbc-framework-overview/spring-jdbc-example.html<br>
+##11.2 基本的数据操作
+VARCHAR是一种比CHAR更加灵活的数据类型，同样用于表示字符数据，但是VARCHAR可以保存可变长度的字符串。 
+```java
+public void print(String... args) {
+        for (int i = 0; i < args.length; i++) {
+            out.println(args[i]);
+        }
+    }
+```
+上述代码的意思是参数的个数不定。<br>
+复合主键中所有字段联合起来才能唯一标示一条记录。
