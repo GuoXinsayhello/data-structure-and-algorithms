@@ -776,3 +776,12 @@ public class Mysql {
     }
 }
 ```
+使用JDBC连接数据库的步骤如下：<br>
+定义连接参数（包括动态加载驱动类com.mysql.jdbc.Driver）<br>
+建立数据库连接<br>
+指定Sql语句并参数化<br>
+执行Sql语句<br>
+获取查询结果并处理<br>
+处理异常<br>
+事务管理<br>
+释放各类资源——Statement，ResultSet，Connection
