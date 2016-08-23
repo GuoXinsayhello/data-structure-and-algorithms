@@ -737,4 +737,42 @@ class="footmark.spring.core.tx.programmatic.template.BankServiceImpl">
 如果从数据源直接获取连接（比如jdbcTemplate.getDataSource().getConnection()) ，并且在使用完成后不主动归还给数据源(调用Connection#close())，则会造成数据连接泄露的问题。Spring提供了一个可以从当前事务上下文中获取绑定的数据连接的工具类，就是DataSourceUtils，该工具类在存在事务上下文的方法中貌似不会造成数据连接泄露，但是在没有事务上下文的方法中使用仍然会造成数据连接泄露，此时就需要显式调用DataSourceUtils.releaseConnection()方法来释放获取的连接。作者特别强调要在finally（也就是try，catch，finally那个地方）里面释放连接，因为如果在try里面最后释放连接，如果之前的语句发生异常，那么释放连接就不能被正常执行。尽量使用JdbcTemplate、HibernateTemplate这些模板进行数据访问操作，避免直接获取数据连接的操作。
 第11章：使用Spring JDBC访问数据库
 --
-关于ENGINE=InnoDB/MyISAM  MyISAM类型不支持事务处理等高级处理，而InnoDB类型支持。 MyISAM类型的表强调的是性能，其执行数度比InnoDB类型更快，但是不提供事务支持，而InnoDB提供事务支持已经外部键等高级数据库功能。
+关于ENGINE=InnoDB/MyISAM  MyISAM类型不支持事务处理等高级处理，而InnoDB类型支持。 MyISAM类型的表强调的是性能，其执行数度比InnoDB类型更快，但是不提供事务支持，而InnoDB提供事务支持已经外部键等高级数据库功能。<br>
+下面这段代码已经能够实现向数据库中插入一条数据，不过貌似没有用JDBCTemplate
+```JAVA
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class Mysql {
+
+    /**
+     * 入口函数
+     * @param arg
+     */
+    public static void main(String arg[]) {
+        try {
+            Connection con = null; //定义一个MYSQL链接对象
+            Class.forName("com.mysql.jdbc.Driver").newInstance(); //MYSQL驱动
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", ""); //链接本地MYSQL
+
+            Statement stmt; //创建声明
+            stmt = con.createStatement();
+
+            //新增一条数据
+            stmt.executeUpdate("INSERT INTO customer (CUST_ID, NAME,AGE) VALUES ('2', 'KOBE','38')");
+            ResultSet res = stmt.executeQuery("select LAST_INSERT_ID()");
+            int ret_id;
+            if (res.next()) {
+                ret_id = res.getInt(1);
+                System.out.print(ret_id);
+            }
+
+        } catch (Exception e) {
+            System.out.print("MYSQL ERROR:" + e.getMessage());
+        }
+
+    }
+}
+```
