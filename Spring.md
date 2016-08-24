@@ -797,4 +797,20 @@ public void print(String... args) {
     }
 ```
 上述代码的意思是参数的个数不定。<br>
-复合主键中所有字段联合起来才能唯一标示一条记录。
+复合主键中所有字段联合起来才能唯一标示一条记录。<br>
+###11.2.1 更改、查询数据
+JDBCTemplate提供了若干个update（）方法来对数据进行更改和删除。Spring为KeyHolder接口指代了一个通用的实现类GeneratedKeyHolder，该类返回新增记录时的自增长主键值。如果需要一次性插入或更新多条数据，可以使用batchUpdate方法。如果需要查询数据可以用JDBCTemplate的void query(String sql,Object[] args,RowCallbackHandler rch)方法，使用RowCallbackHandler处理结果集，还有功能类似的RowMapper<T>来处理结果集。
+###11.2.5查询单值数据
+下面是获取int单值的例子<br>
+```java
+public int getForumNum()
+{
+ String sql="SELECT COUNT(*) FROM t_forum";
+ return getJdbcTemplate().queryForInt(sql);
+}
+```
+delimiter可以用在mysql里面使程序以其他设定的符号结束后执行，而不是以默认的分号结束后执行。
+###11.2.6调用存储过程
+https://blog.tankywoo.com/2015/04/01/mysql-stored-procedure.html 这个网址对于mysql的存储过程介绍的比较详细，个人理解mysql存储过程就像是函数，有人是这样理解的：<br>
+我们常用的操作数据库语言SQL语句在执行的时候需要要先编译，然后执行，而存储过程（Stored Procedure）是一组为了完成特定功能的SQL语句集，经编译后存储在数据库中，
+用户通过指定存储过程的名字并给定参数（如果该存储过程带有参数）来调用执行它。
