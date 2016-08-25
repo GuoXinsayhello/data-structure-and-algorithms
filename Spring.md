@@ -819,3 +819,15 @@ delimiter可以用在mysql里面使程序以其他设定的符号结束后执行
 https://blog.tankywoo.com/2015/04/01/mysql-stored-procedure.html 这个网址对于mysql的存储过程介绍的比较详细，个人理解mysql存储过程就像是函数，有人是这样理解的：<br>
 我们常用的操作数据库语言SQL语句在执行的时候需要要先编译，然后执行，而存储过程（Stored Procedure）是一组为了完成特定功能的SQL语句集，经编译后存储在数据库中，
 用户通过指定存储过程的名字并给定参数（如果该存储过程带有参数）来调用执行它。
+##11.3BLOB/CLOB类型数据的操作
+LOB代表大对象数据，包括BLOB和CLOB两种类型，前者用于存储大块的二进制数据，如图片数据，视频数据等；而后者用于存储长文本数据，如论坛的帖子内容，产品描述等。<br>
+Spring定义了以统一的方式操作各种数据库Lob类型数据的LobCreator接口，此外LobHandler接口为操作大二进制字段和大文本字段提供了统一访问接口。
+##11.5其他类型的JDBCTemplate
+Spring除了JDBCTemplate还提供了NamedParameterJDBCTemplate以及SimpleJDBCTemplate，前者提供命名参数绑定的功能，后者封装了JDBCTemplate，将常用的API开放出来。
+##11.6以OO的方式访问数据库
+用JDBCTemplate方式也能和以OO方式完成相似功能，只不过OO方式更加面向对象，是一种可以选择的方案。但是OO方式没什么优势，作者说是鸡肋。
+第12章：整合其他ORM框架
+--
+##12.2在spring中使用Hibernate
+`零过渡障碍的配置方式`<br>
+首先编写对象关系的映射文件xxx.hbm.xml，然后通过Hibernate的配置文件hibernate.cfg.xml将所有xxx.hbm.xml映射文件组装起来，
