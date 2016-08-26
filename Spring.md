@@ -842,10 +842,26 @@ SessionFactory可以用来创建session，一般一个应用只有一个SessionF
 ##13.2 Quartz快速入门
 http://www.blogjava.net/jzone/articles/322015.html 介绍了Quartz<br>
 Job：是一个接口，表示要执行什么任务，有一个execute的方法<br>
-JobDetail:具体是要执行什么任务<br>
+JobDetail:具体是要执行什么任务，那么Jobs与JobDetails有什么关系呢？简而言之，Job是对任务的一个具体实现；谁执行了这个任务呢？这就需要JobDetail来实现，所以JobDetail就是Job的一个具体实例；如9点上语文课是一个具体任务，而刘老师在9点上语文课就是这个任务的一个具体实例。 <br>
 Trigger:以什么样的方法去调度（时间，重复次数等）,主要有SimpleTrigger与CronTrigger之分，后者可以自定义表达式定义出复杂的调度方案<br>
 Calendar:特定的的时间集合<br>
 Scheduler:一个总的容器，Trigger和JobDetail可以注册到该容器当中。<br>
 ThreadPool:线程池。<br>
+Job中无法定义属性来传递数据，那么如果我们需要传递数据该怎么做？就是使用JobDataMap，它是JobDetail的一个属性。JobDataMap是Map接口的一个实现，并且它有一些便利的方法来储存和检索基本类型数据。 
+修改之前的测试类如下：
+```java
+JobDetail jobDetail = JobBuilder.newJob(HelloJob.class)
+                .withIdentity("helloJob", "group1")
+                .usingJobData("name", "孙悟空")
+                .build();
+```
+```java
+@Override
+    public void execute(JobExecutionContext context) throws JobExecutionException {
+        JobDataMap jobDataMap = context.getJobDetail().getJobDataMap();
+        String name = jobDataMap.getString("name");
+        System.out.println("hello "+name+", "+ DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+    }
+```
 ###13.2.3 使用CronTrigger
 Cron表达式
