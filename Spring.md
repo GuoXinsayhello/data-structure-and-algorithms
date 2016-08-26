@@ -836,4 +836,14 @@ Spring除了JDBCTemplate还提供了NamedParameterJDBCTemplate以及SimpleJDBCTe
 http://blog.csdn.net/chenssy/article/details/7728367 这篇博客对于Hibernate的HQL查询做了比较清晰的阐释，HQL是HIbernate的专有查询，相对于SQL语句的查询，HQL是完全面向对象的查询。<br>
 SessionFactory可以用来创建session，一般一个应用只有一个SessionFactory，并且它是线程安全的，如果应用中有多个数据库，则需要对于每个数据库都要设置一个SessionFactory对象。<br>
 `映射文件`指示 Hibernate 如何将已经定义的类或类组与数据库中的表对应起来。
-尽管有些 Hibernate 用户选择手写 XML 文件，但是有很多工具可以用来给先进的 Hibernate 用户生成映射文件。这样的工具包括 XDoclet, Middlegen 和 AndroMDA。
+尽管有些 Hibernate 用户选择手写 XML 文件，但是有很多工具可以用来给先进的 Hibernate 用户生成映射文件。这样的工具包括 XDoclet, Middlegen 和 AndroMDA。http://wiki.jikexueyuan.com/project/hibernate/mapping-files.html 这个网站对于Hibernate的映射文件讲的很详细。
+第13章：任务调度和异步执行器
+--
+##13.2 Quartz快速入门
+http://www.blogjava.net/jzone/articles/322015.html 介绍了Quartz<br>
+Job：是一个接口，表示要执行什么任务，有一个execute的方法<br>
+JobDetail:具体是要执行什么任务<br>
+Trigger:以什么样的方法去调度（时间，重复次数等）,主要有SimpleTrigger与CronTrigger之分，后者可以自定义表达式定义出复杂的调度方案<br>
+Calendar:特定的的时间集合<br>
+Scheduler:一个总的容器，Trigger和JobDetail可以注册到该容器当中。<br>
+ThreadPool:线程池。<br>
