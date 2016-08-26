@@ -830,4 +830,10 @@ Spring除了JDBCTemplate还提供了NamedParameterJDBCTemplate以及SimpleJDBCTe
 --
 ##12.2在spring中使用Hibernate
 `零过渡障碍的配置方式`<br>
-首先编写对象关系的映射文件xxx.hbm.xml，然后通过Hibernate的配置文件hibernate.cfg.xml将所有xxx.hbm.xml映射文件组装起来，
+首先编写对象关系的映射文件xxx.hbm.xml，然后通过Hibernate的配置文件hibernate.cfg.xml将所有xxx.hbm.xml映射文件组装起来，然后在spring配置文件中指定Hibernate配置文件。
+`更具Spring风格的配置`<br>
+也可以在Spring容器中定义数据源、指定映射文件、配置Hibernate控制属性等信息，完全抛开hibernate.cfg.xml配置文件<br>
+http://blog.csdn.net/chenssy/article/details/7728367 这篇博客对于Hibernate的HQL查询做了比较清晰的阐释，HQL是HIbernate的专有查询，相对于SQL语句的查询，HQL是完全面向对象的查询。<br>
+SessionFactory可以用来创建session，一般一个应用只有一个SessionFactory，并且它是线程安全的，如果应用中有多个数据库，则需要对于每个数据库都要设置一个SessionFactory对象。<br>
+`映射文件`指示 Hibernate 如何将已经定义的类或类组与数据库中的表对应起来。
+尽管有些 Hibernate 用户选择手写 XML 文件，但是有很多工具可以用来给先进的 Hibernate 用户生成映射文件。这样的工具包括 XDoclet, Middlegen 和 AndroMDA。
