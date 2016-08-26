@@ -847,3 +847,5 @@ Trigger:以什么样的方法去调度（时间，重复次数等）,主要有Si
 Calendar:特定的的时间集合<br>
 Scheduler:一个总的容器，Trigger和JobDetail可以注册到该容器当中。<br>
 ThreadPool:线程池。<br>
+###13.2.3 使用CronTrigger
+Cron表达式
