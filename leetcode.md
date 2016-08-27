@@ -243,6 +243,7 @@ public class Solution {
 }
 ```
 101.Symmetric Tree
+--
 下面这个做法是得分比较高的做法，作者用了递归方法，非常简洁
 ```java
 public boolean isSymmetric(TreeNode root) {
@@ -313,4 +314,30 @@ public class Solution {
     	}
     }
     }
+```
+
+ 105.Construct Binary Tree from Preorder and Inorder Traversal
+ --
+这道题的解法就是根据先序遍历找到根，然后再中序遍历中根左边就是左子树，右边就是右子树，然后递归。
+https://discuss.leetcode.com/topic/3695/my-accepted-java-solution/2
+```java
+public TreeNode buildTree(int[] preorder, int[] inorder) {
+    return helper(0, 0, inorder.length - 1, preorder, inorder);
+}
+
+public TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int[] inorder) {
+    if (preStart > preorder.length - 1 || inStart > inEnd) {
+        return null;
+    }
+    TreeNode root = new TreeNode(preorder[preStart]);
+    int inIndex = 0; // Index of current root in inorder
+    for (int i = inStart; i <= inEnd; i++) {
+        if (inorder[i] == root.val) {
+            inIndex = i;
+        }
+    }
+    root.left = helper(preStart + 1, inStart, inIndex - 1, preorder, inorder);
+    root.right = helper(preStart + inIndex - inStart + 1, inIndex + 1, inEnd, preorder, inorder);
+    return root;
+}
 ```
