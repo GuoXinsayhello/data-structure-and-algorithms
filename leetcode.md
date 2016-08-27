@@ -316,8 +316,8 @@ public class Solution {
     }
 ```
 
- 105.Construct Binary Tree from Preorder and Inorder Traversal
- --
+105.Construct Binary Tree from Preorder and Inorder Traversal
+--
 这道题的解法就是根据先序遍历找到根，然后再中序遍历中根左边就是左子树，右边就是右子树，然后递归。
 https://discuss.leetcode.com/topic/3695/my-accepted-java-solution/2
 ```java
