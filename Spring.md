@@ -920,3 +920,5 @@ public class User {
 	...
 	}
 ```
+###14.2.6 流化对象
+基于流而非DOM的XML解析器读取XML可以提高性能，首先需要实例化转换对象（User user=getUser（）），然后创建一个PrintWriter对象，将对象序列化到指定的XML文件当中，然后采用PrettyPrintWriter创建输出，然后调用XStream#createObjectOutputStream()方法创建对象输出流。
