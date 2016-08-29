@@ -877,3 +877,46 @@ EXecutor接口的主要目的是要将“任务提交”与“任务执行”两
 
 第14章：使用OXM进行对象XML映射
 --
+##14.2 XML处理利器：XStream
+XStream是Java对象和XML之间一个双向转换器。instanceof 针对实例 。isAssignableFrom针对class对象。isAssignableFrom   是用来判断一个类Class1和另一个类Class2是否相同或是另一个类的超类或接口。通常用法如下：<br>
+```java
+Class1.isAssignableFrom(Class2)   
+```
+不仅可以采用编码的方式对XML进行转换，而且可以采用基于注解的方式进行转换。<br>
+编码方式：<br>
+```java
+  public static void objectToXml()throws Exception{
+    	User user = getUser();
+        FileOutputStream fs = new FileOutputStream("D:\\masterSpring\\chapter14\\out\\XStreamAliasSample.xml");
+        xstream.toXML(user, fs);
+    }
+```
+注解方式：<br>
+```java
+public class User {
+	@XStreamAsAttribute
+	@XStreamAlias("id")
+	private int userId;
+	
+	@XStreamAlias("username")
+	private String userName;
+	
+	@XStreamAlias("password")
+	private String password;
+	
+	@XStreamAlias("credits")
+	private int credits;
+	
+	@XStreamOmitField
+	@XStreamAlias("lastIp")
+	private String lastIp;
+
+	@XStreamConverter(DateConverter.class)
+	private Date lastVisit;
+
+	@XStreamImplicit
+	private List logs;
+	
+	...
+	}
+```
