@@ -316,6 +316,17 @@ public class Solution {
     }
 ```
 
+104. Maximum Depth of Binary Tree
+--
+下面这种做法真的被惊艳到了！
+```java
+public int maxDepth(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        return 1+Math.max(maxDepth(root.left),maxDepth(root.right));
+    }
+```
 105.Construct Binary Tree from Preorder and Inorder Traversal
 --
 这道题的解法就是根据先序遍历找到根，然后再中序遍历中根左边就是左子树，右边就是右子树，然后递归。
