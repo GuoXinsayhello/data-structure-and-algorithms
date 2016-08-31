@@ -922,3 +922,11 @@ public class User {
 ```
 ###14.2.6 流化对象
 基于流而非DOM的XML解析器读取XML可以提高性能，首先需要实例化转换对象（User user=getUser（）），然后创建一个PrintWriter对象，将对象序列化到指定的XML文件当中，然后采用PrettyPrintWriter创建输出，然后调用XStream#createObjectOutputStream()方法创建对象输出流。
+
+
+尚学堂马士兵课程笔记
+==
+02
+--
+1.当面对一个问题时，如何用面向对象的思想去解决，首先应该考虑的问题是实体类。<br>
+2.在eclipse里面可以右键点击source，generate getters and setters自动为属性添加get和set方法。<br>
