@@ -341,3 +341,57 @@ public TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int
     return root;
 }
 ```
+108.Convert Sorted Array to Binary Search Tree
+--
+```java
+public TreeNode sortedArrayToBST(int[] num) {
+    if (num.length == 0) {
+        return null;
+    }
+    TreeNode head = helper(num, 0, num.length - 1);
+    return head;
+}
+
+public TreeNode helper(int[] num, int low, int high) {
+    if (low > high) { // Done
+        return null;
+    }
+    int mid = (low + high) / 2;
+    TreeNode node = new TreeNode(num[mid]);
+    node.left = helper(num, low, mid - 1);
+    node.right = helper(num, mid + 1, high);
+    return node;
+}
+```
+109. Convert Sorted List to Binary Search Tree  
+--
+下面这种解法的思想就是找到链表的中间位置（具体做法就是设置一个fast和low的ListNode，让fast以两倍的速度，而slow以一倍的速度遍历，这样slow最终停止的位置就是中间位置）
+```java
+public TreeNode sortedListToBST(ListNode head) {
+            // base case
+            if (head == null) return null;
+    
+            ListNode slow = head;
+            ListNode fast = head;
+            ListNode prev = null;
+            // find the median node in the linked list, after executing this loop
+            // fast will pointing to the last node, while slow is the median node.
+            while (fast.next != null) {
+                fast = fast.next;
+                if (fast.next == null) {
+                    break;
+                }
+                fast = fast.next;
+                prev = slow;
+                slow = slow.next;
+            }
+            if (prev != null) prev.next = null;
+            else head = null;
+    
+            TreeNode root = new TreeNode(slow.val);
+            root.left = sortedListToBST(head);
+            root.right = sortedListToBST(slow.next);
+    
+            return root;
+        }
+```
