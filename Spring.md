@@ -930,3 +930,4 @@ public class User {
 --
 1.当面对一个问题时，如何用面向对象的思想去解决，首先应该考虑的问题是实体类。<br>
 2.在eclipse里面可以右键点击source，generate getters and setters自动为属性添加get和set方法。<br>
+3.可以采用Astah软件来画UML图来阐释自己的软件思想。<br>
