@@ -931,3 +931,7 @@ public class User {
 1.当面对一个问题时，如何用面向对象的思想去解决，首先应该考虑的问题是实体类。<br>
 2.在eclipse里面可以右键点击source，generate getters and setters自动为属性添加get和set方法。<br>
 3.可以采用Astah软件来画UML图来阐释自己的软件思想。<br>
+
+05
+--
+1.如果要测试某个类，一般新建一个source folder，名字叫test，然后再里面新建和被测试类所在的package一样的package，然后在里面写上测试类，被测试类如果叫UserService，那么测试类就应该叫做UserServiceTest。具体生成的方法就是在被测试类上右键，选择new，Junit Test Case，选择要测试什么方法。
