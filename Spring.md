@@ -937,3 +937,10 @@ public class User {
 05
 --
 1.如果要测试某个类，一般新建一个source folder，名字叫test，然后再里面新建和被测试类所在的package一样的package，然后在里面写上测试类，被测试类如果叫UserService，那么测试类就应该叫做UserServiceTest。具体生成的方法就是在被测试类上右键，选择new，Junit Test Case，选择要测试什么方法。
+
+07
+--
+getMethod第一个参数是方法名，第二个参数是该方法的参数类型，因为存在同方法名不同参数这种情况，所以只有同时指定方法名和参数类型才能唯一确定一个方法<br>
+```java
+ Method m = o.getClass().getMethod(methodName, beanObject.getClass().getInterfaces()[0]);
+```
