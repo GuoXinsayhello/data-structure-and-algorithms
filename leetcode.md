@@ -406,3 +406,17 @@ public TreeNode sortedListToBST(ListNode head) {
             return root;
         }
 ```
+112.Path Sum
+--
+下面这种做法是递归方法
+```java
+public class Solution {
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if(root == null) return false;
+    
+        if(root.left == null && root.right == null && sum - root.val == 0) return true;
+    
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+    }
+}
+```
