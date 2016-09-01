@@ -211,6 +211,7 @@ spring2.0以后使用schema的格式对xml进行配置，xmlns:xsi ——是指x
 ```xml
 <ref bean="someBean"/>
 ```
+ref是引用，注入外部其他的bean，而直接使用bean是把两个bean合二为一，成了内部bean.<br>
 第二种形式是使用ref的local属性指定目标bean，它可以利用XML解析器来验证所引用的bean是否存在同一文件中。local属性值必须是目标bean的id属性值。如果在同一配置文件中没有找到引用的bean，XML解析器将抛出一个例外。如果目标bean是在同一文件内，使用local方式就是最好的选择（为了尽早地发现错误）。
 ```xml
 <ref local="someBean"/>
@@ -931,6 +932,7 @@ public class User {
 1.当面对一个问题时，如何用面向对象的思想去解决，首先应该考虑的问题是实体类。<br>
 2.在eclipse里面可以右键点击source，generate getters and setters自动为属性添加get和set方法。<br>
 3.可以采用Astah软件来画UML图来阐释自己的软件思想。<br>
+4.使用SAXbuilder可以解析一个xml文件。<br>
 
 05
 --
