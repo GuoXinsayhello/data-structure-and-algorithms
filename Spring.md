@@ -180,7 +180,13 @@ public class Solution {
 ```
 ClassLoader会把XXX.class加载到code segment当中，也说是内存当中，但是并非一次性加载，需要的时候才会加载。JDK中的ClassLoader不止一个，最顶层的是bootstrap classloader，用于加载核心类，当然该class loader也会把其他class loader加载到内存。但是通过getClassLoader()方法得到的空值（null）。
 类装载器就是寻找类的节码文件并构造出类类在JVM内部表示对象的组件。JVM在运行时会产生三个ClassLoader：根装载器，ExtClassLoader和AppClassLoader，这三个互为父子层级（但是并不是继承的关系）。<br>
-Class.forName(String classname)该方法把名字是classname的类加载到内存里面。
+Class.forName(String classname)该方法把名字是classname的类加载到内存里面。m.invoke(Object o, args),其中m为方法名，o为m方法属于的对象，args为方法的参数。<br>
+```java
+Class c=forName("Test");
+Object o=c.newInstance();
+Method[] ms=o.getMethods();
+ms[0].invoke(o);
+```
 该书在50页介绍了一个小工具来查看JVM从哪个类包加载指定类。<br>
 通过类实例变量无法在外部访问私有变量，调用私有方法，但是通过反射机制可以绕过限制。<br>
 Spring框架使用resource装载各种资源。
