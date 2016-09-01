@@ -187,6 +187,7 @@ Object o=c.newInstance();
 Method[] ms=o.getMethods();
 ms[0].invoke(o);
 ```
+比如上述程序ms[0]为test（int i，int i）{}方法，则就需要ms[0].invoke(o,1,5);就可以把i=1，j=5传进去。
 该书在50页介绍了一个小工具来查看JVM从哪个类包加载指定类。<br>
 通过类实例变量无法在外部访问私有变量，调用私有方法，但是通过反射机制可以绕过限制。<br>
 Spring框架使用resource装载各种资源。
