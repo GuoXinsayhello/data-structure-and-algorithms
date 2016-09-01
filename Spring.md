@@ -313,7 +313,7 @@ beans.xml如下：
 ```java
 public class Perplex {  
     public static void main(String[] args) {  
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");  
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");  //1处
         Freight bean2 = (Freight) ctx.getBean("freight");  
         System.out.println(bean2.getLaboratory());  
         System.out.println(bean2.getSlurry());  
@@ -321,6 +321,7 @@ public class Perplex {
     }  
 }  
 ```
+注意1处的ApplicationContext可以用BeanFactory，但是官方文档建议采用ApplicationContext。ApplicationContext是建立在BeanFactory之上的一个子接口。
 ##5.6容器事件
 `Portlets`在Web门户上管理和显示的可插拔的用户界面组件。Portlet产生可以聚合到门户页面中的标记语言代码的片段，如HTML，XML等。通常，根据桌面隐喻，一个门户页面显示为一组互相不重叠的portlet窗口，其中每一个portlet窗口显示一个portlet。因此，可以说一个（或一组）portlet就像一个在门户网站上运行的基于Web的应用程序。 Portlet应用程序的一些例子包括电子邮件，天气预报，论坛和新闻等。
 Portlet标准的目的是使开发人员开发出的portlet可以插入到任何支持该标准的门户网站。
