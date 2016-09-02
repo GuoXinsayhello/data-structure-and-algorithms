@@ -420,3 +420,59 @@ public class Solution {
     }
 }
 ```
+113. Path Sum II
+```java
+public List<List<Integer>> pathSum(TreeNode root, int sum) {
+    List<List<Integer>>ret = new ArrayList<List<Integer>>(); 
+    List<Integer> cur = new ArrayList<Integer>(); 
+    pathSum(root, sum, cur, ret);
+    return ret;
+}
+
+public void pathSum(TreeNode root, int sum, List<Integer>cur, List<List<Integer>>ret){
+    if (root == null){
+        return; 
+    }
+    cur.add(root.val);
+    if (root.left == null && root.right == null && root.val == sum){
+        ret.add(new ArrayList(cur));
+    }else{
+        pathSum(root.left, sum - root.val, cur, ret);
+        pathSum(root.right, sum - root.val, cur, ret);
+    }
+    cur.remove(cur.size()-1);
+}
+```
+
+114.
+--
+```java
+  while(x>1)
+	   {
+		   System.out.println("fuck");
+		   if(x>0)
+		   {
+			   x--;
+			   continue;
+		   }
+		   System.out.println("a");
+	   }
+```
+这段程序会输出两个fuck，也就是说遇到continue，会直接跳到while（x>1），后面的程序不会执行下去。
+`递归的调用顺序`<br>
+```java
+public static void main(String[] args)
+	{
+		int x=1;
+		up(x);
+		
+        }
+	private static void up(int i)
+	{
+		System.out.println(i);
+		if(i<4)
+			up(i+1);
+		System.out.println(i);
+	}
+```
+这段程序会输出12344321.具体可以参见http://wenku.baidu.com/link?url=E-iZXdptlqUtUp0UOCFU7weyox1nCKl6d5NOlyKpGAJLAxKWfVVdVXRKn1Vv_Ma_pdGjsxNR-XK-ffPG1gkMt0UbNl5VsmGB-vEo8lBxX6K 
