@@ -444,7 +444,7 @@ public void pathSum(TreeNode root, int sum, List<Integer>cur, List<List<Integer>
 }
 ```
 
-114.
+114.Flatten Binary Tree to Linked List  
 --
 ```java
   while(x>1)
@@ -476,3 +476,17 @@ public static void main(String[] args)
 	}
 ```
 这段程序会输出12344321.具体可以参见http://wenku.baidu.com/link?url=E-iZXdptlqUtUp0UOCFU7weyox1nCKl6d5NOlyKpGAJLAxKWfVVdVXRKn1Vv_Ma_pdGjsxNR-XK-ffPG1gkMt0UbNl5VsmGB-vEo8lBxX6K 
+
+```java
+private TreeNode prev = null;
+
+public void flatten(TreeNode root) {
+    if (root == null)
+        return;
+    flatten(root.right);
+    flatten(root.left);
+    root.right = prev;
+    root.left = null;
+    prev = root;
+}
+```
