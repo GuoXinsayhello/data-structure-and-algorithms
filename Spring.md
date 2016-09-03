@@ -956,3 +956,7 @@ getMethod第一个参数是方法名，第二个参数是该方法的参数类�
  Method m = o.getClass().getMethod(methodName, beanObject.getClass().getInterfaces()[0]);
 ```
 可以选择run一个class的配置参数，VM arguments中如果加上-verbose：class此时就会把详细的运行过程输出到控制台。静态（static）语句块只会load一次。动态语句块每次new新的对象都会加载一次。
+
+09
+--
+可以在preference中的xml的catalog中引入标准文件，这样在对xml进行编辑的时候，编译器会自动给出提示。
