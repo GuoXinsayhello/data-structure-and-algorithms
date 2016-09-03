@@ -518,3 +518,18 @@ public int numDistinct(String S, String T) {
     return mem[T.length()][S.length()];
 }
 ```
+116. Populating Next Right Pointers in Each Node
+--
+```java
+public void connect(TreeLinkNode root) {
+   while (root != null) {
+       TreeLinkNode p = root;
+       while (p != null && p.left != null) {
+           p.left.next = p.right;
+           p.right.next = p.next == null ? null : p.next.left;
+           p = p.next;
+       }
+       root = root.left;
+   }
+}
+```
