@@ -266,6 +266,8 @@ Bean的作用域类型有singleton，prototype，request，session，globalsessi
 ##4.11基于Java类的配置
 在类的定义处@Configuration注解，说明这个类可以用于为Spring提供Bean的定义信息，类的方法处可以标注@Bean注解。<br>
 在XML文件中，通过<context:component-scan>可以扫描到相应的配置类。可以在@Configuration配置类中通过@ImportResource引入XML配置文件，并且通过@Autowired引用XML配置文件中定义的Bean。<br>
+在xml配置了
+\<context:component-scan base-package="com.acme"/\>这个标签后，spring可以自动去扫描base-pack下面或者子包下面的Java文件，如果扫描到有@Component @Controller@Service等这些注解的类，则把这些类注册为bean
 所以综上有基于XML，基于注解以及基于Java类这三种方式来配置。lazy-init属性的含义是延迟初始化。
 第5章：Spring容器高级主题
 --
