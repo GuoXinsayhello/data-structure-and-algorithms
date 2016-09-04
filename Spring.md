@@ -260,7 +260,8 @@ Bean的作用域类型有singleton，prototype，request，session，globalsessi
 @Controller 用于对Controller实现类进行标注<br>
 后三个功能比较详细，@Component功能比较宽泛
 ###4.10.3 自动装配Bean
-使用@Autowired进行自动注入，该注解默认按照类型匹配的方式；使用@Qualifier指定注入Bean的名称，用于当有一个以上匹配的Bean的时候，@Qualifier("userDao");@Scope("xx")可以对作用范围进行指定;@PostConstruct与@PreDestroy可以指定初始化以及容器销毁前执行的方法；
+使用@Autowired进行自动注入，该注解默认按照类型匹配的方式；使用@Qualifier指定注入Bean的名称，用于当有一个以上匹配的Bean的时候，@Qualifier("userDao");@Scope("xx")可以对作用范围进行指定;@PostConstruct与@PreDestroy可以指定初始化以及容器销毁前执行的方法；<br>
+什么是自动装配，就是不用自己在xml里面配置，Spring会帮我们自动实现功能。http://wiki.jikexueyuan.com/project/spring/beans-auto-wiring/spring-autowiring-byType.html 这个文章讲的比较好，在配置文件中，如果一个 bean 定义设置为自动装配 byType，并且它包含 SpellChecker 类型的 spellChecker 属性，那么 Spring 就会查找定义名为 SpellChecker 的 bean，并且用它来设置这个属性。你仍然可以使用 <property> 标签连接其余属性。
 ##4.11基于Java类的配置
 在类的定义处@Configuration注解，说明这个类可以用于为Spring提供Bean的定义信息，类的方法处可以标注@Bean注解。<br>
 在XML文件中，通过<context:component-scan>可以扫描到相应的配置类。可以在@Configuration配置类中通过@ImportResource引入XML配置文件，并且通过@Autowired引用XML配置文件中定义的Bean。<br>
