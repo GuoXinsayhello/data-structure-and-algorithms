@@ -533,3 +533,83 @@ public void connect(TreeLinkNode root) {
    }
 }
 ```
+117.Populating Next Right Pointers in Each Node II
+--
+基本思想就是一层一层地迭代，然后每一次层从左到右。
+```java
+public class Solution {
+    
+    //based on level order traversal
+    public void connect(TreeLinkNode root) {
+
+        TreeLinkNode head = null; //head of the next level
+        TreeLinkNode prev = null; //the leading node on the next level
+        TreeLinkNode cur = root;  //current node of current level
+
+        while (cur != null) {
+            
+            while (cur != null) { //iterate on the current level
+                //left child
+                if (cur.left != null) {
+                    if (prev != null) {
+                        prev.next = cur.left;
+                    } else {
+                        head = cur.left;
+                    }
+                    prev = cur.left;
+                }
+                //right child
+                if (cur.right != null) {
+                    if (prev != null) {
+                        prev.next = cur.right;
+                    } else {
+                        head = cur.right;
+                    }
+                    prev = cur.right;
+                }
+                //move to next node
+                cur = cur.next;
+            }
+            
+            //move to next level
+            cur = head;
+            head = null;
+            prev = null;
+        }
+        
+    }
+}
+```
+
+118.
+--
+```java
+ls.add(1);
+fils.add(ls);
+ls.add(1);
+fils.add(ls);
+return fils;
+```
+这样写会出现<br>
+1 1<br>
+1 1<br>
+的奇怪结果
+下面这个答案挺好的
+```java
+public class Solution {
+public List<List<Integer>> generate(int numRows)
+{
+	List<List<Integer>> allrows = new ArrayList<List<Integer>>();
+	ArrayList<Integer> row = new ArrayList<Integer>();
+	for(int i=0;i<numRows;i++)
+	{
+		row.add(0, 1);
+		for(int j=1;j<row.size()-1;j++)
+			row.set(j, row.get(j)+row.get(j+1));
+		allrows.add(new ArrayList<Integer>(row));
+	}
+	return allrows;
+	
+}
+}
+```
