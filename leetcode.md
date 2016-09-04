@@ -613,3 +613,18 @@ public List<List<Integer>> generate(int numRows)
 }
 }
 ```
+基本思想就是在首先在第0位插入1，然后该位的值是原来该位的数加上后面一位的数。
+120. Triangle
+--
+```java
+public int minimumTotal(List<List<Integer>> triangle) {
+    int[] A = new int[triangle.size()+1];
+    for(int i=triangle.size()-1;i>=0;i--){
+        for(int j=0;j<triangle.get(i).size();j++){
+            A[j] = Math.min(A[j],A[j+1])+triangle.get(i).get(j);
+        }
+    }
+    return A[0];
+}
+```
+感觉这个想法很厉害啊，自己刚开始是想能否用动态规划去做，这个类似于倒序的动态规划。
