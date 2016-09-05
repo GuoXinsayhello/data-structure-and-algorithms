@@ -334,7 +334,8 @@ Portlet标准的目的是使开发人员开发出的portlet可以插入到任何
 --
 ###6.2.2 JDK动态代理
 JDK动态代理允许开发者在运行期间创建接口的代理实例。
-JDK的动态代理主要涉及两个类：proxy和InvocationHandler，后者是一个接口，可以通过该接口定义横切逻辑，并且通过反射机制调用目标类的代码，动态将横切逻辑和业务逻辑编织在一起。而Proxy利用InvocationHandler动态创建一个符合某一接口的实例。
+JDK的动态代理主要涉及两个类：proxy和InvocationHandler，后者是一个接口，可以通过该接口定义横切逻辑，并且通过反射机制调用目标类的代码，动态将横切逻辑和业务逻辑编织在一起。而Proxy利用InvocationHandler动态创建一个符合某一接口的实例。<br>
+http://blog.csdn.net/arthur0088/article/details/5377736 这篇文章对于proxy以及InvocationHandler讲述的比较清楚。
 ###6.2.3 CGLib动态代理
 CGLib采用非常底层的字节码技术，可以为一个类创建子类，并且在子类中采用方法拦截的技术拦截所有父类方法的调用。
 使用JDK创建代理的限制就是它只能为接口创建代理实例，而CGLib可以用于任何类。
