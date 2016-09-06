@@ -201,6 +201,7 @@ WEB-INF是Java的WEB应用的安全目录。
 第4章：在IoC容器中装配Bean
 --
 ##4.1Spring配置概述
+无论是IOC还是AOP都是既可以采用Annotation的方式也可以采用XML的方式，根据马士兵所说，IOC的annotation应用较广，而AOP的XML应用较广泛。
 ###4.1.2基于xml的配置
 spring2.0以后使用schema的格式对xml进行配置，xmlns:xsi ——是指xml文件遵守xml规范，xsi全名：xml schema instance。命名空间的别名和全限定名可以任意命名。
 ##4.3依赖注入
