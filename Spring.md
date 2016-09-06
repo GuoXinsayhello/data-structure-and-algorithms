@@ -536,6 +536,8 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
     <bean class="com.baobaotao.aspectj.example.PreGreetingAspect" />
 </beans>
 ```
+这种方法没有采用spring自动装配的方式，因为在beans.xml里面显式指出了PreGreetingaspect,当然也可以采用自动装配的方式，此时需要使用
+<context:component-scan base-package="XXX">标签。
 2016/8/14 看到231页
 ###7.4.4不同增强类型
 @Before前置增强，@AfterReturning后置增强，相当于AfterReturningAdvice,当方法正常返回时执行。@Around环绕增强，相当于MethodInterceptor；@AfterThrowing抛出增强；@After，final增强，不管是抛出异常或者正常退出，该增强都会得到执行；@DeclareParents引介增强，相当于IntroductionInterceptor
