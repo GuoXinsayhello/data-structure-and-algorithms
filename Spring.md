@@ -539,6 +539,17 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 2016/8/14 看到231页
 ###7.4.4不同增强类型
 @Before前置增强，@AfterReturning后置增强，相当于AfterReturningAdvice,当方法正常返回时执行。@Around环绕增强，相当于MethodInterceptor；@AfterThrowing抛出增强；@After，final增强，不管是抛出异常或者正常退出，该增强都会得到执行；@DeclareParents引介增强，相当于IntroductionInterceptor
+```java
+@Aspect
+public class AroundExample {
+    @Around("com.xyz.myapp.SystemArchitecture.businessService()")
+    public void doBasicProfiling(ProceedingJoinPoint pjp) throws Throwable {
+        // start stopwatch表示之前的增强逻辑
+        Object retVal = pjp.proceed();//表示继续执行，有可能被下一个增强逻辑捕捉到
+        // stop stopwatch表示之后的增强逻辑
+     
+    }
+```
 ##7.5 切点函数详解
 `@annotation`表示标注了某个注解的所有方法。<br>
 `execution()`是最常用的的切点函数，该函数所指定的连接点，可以大到包，小到方法入参<br>
