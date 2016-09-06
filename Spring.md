@@ -538,7 +538,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 ```
 2016/8/14 看到231页
 ###7.4.4不同增强类型
-@Before前置增强，@AfterReturning后置增强，相当于AfterReturningAdvice,@Around环绕增强，相当于MethodInterceptor；@AfterThrowing抛出增强；@After，final增强，不管是抛出异常或者正常退出，该增强都会得到执行；@DeclareParents引介增强，相当于IntroductionInterceptor
+@Before前置增强，@AfterReturning后置增强，相当于AfterReturningAdvice,当方法正常返回时执行。@Around环绕增强，相当于MethodInterceptor；@AfterThrowing抛出增强；@After，final增强，不管是抛出异常或者正常退出，该增强都会得到执行；@DeclareParents引介增强，相当于IntroductionInterceptor
 ##7.5 切点函数详解
 `@annotation`表示标注了某个注解的所有方法。<br>
 `execution()`是最常用的的切点函数，该函数所指定的连接点，可以大到包，小到方法入参<br>
@@ -551,6 +551,14 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 ##7.6@AspectJ进阶
 ###7.6.2命名切点
 切点直接声明在增强方法处，这种切点声明方式为匿名切点，匿名切点只能在声明处使用。可以通过@Pointcut注解以及切面类方法对切点进行命名。
+```java
+@Pointcut("execution(* transfer(..))")// the pointcut expression
+private void anyOldTransfer() {}// the pointcut signature
+@Before("execution("anyOldTransfer()")
+private void before(){
+XXX//前置增强业务逻辑
+}
+```
 ###7.6.3增强织入的顺序
 1. 增强在同一个切面类中定义：依照增强在切面类中定义的顺序依次织入。 <br>
 2. 增强位于不同的切面，但果这些切面都实现了org.springframework.core.Ordered 接口，则由接口注解的顺序号决定(顺序号小的先织入）<br>
