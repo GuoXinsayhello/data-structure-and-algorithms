@@ -1009,3 +1009,72 @@ getMethod第一个参数是方法名，第二个参数是该方法的参数类�
 09
 --
 可以在preference中的xml的catalog中引入标准文件，这样在对xml进行编辑的时候，编译器会自动给出提示。
+27.spring中整合Hibernate框架
+--
+首先在beans.xml中初始化SessionFactory，可以去官方文档20.3.1 SessionFactory setup in a Spring container看是如何初始化的。
+```xml
+<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.bjsxt.model.User</value>   //表示给了注解的class,官方name是mappingResources，值是hbm.xml，
+			        //这个xml里面是hibernate用来说明哪些是实体类，哪些是注解类，而这里用的是annotation 
+				<value>com.bjsxt.model.Log</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+```
+其中User类的写法如下
+```java
+@Entity
+public class User {
+	private int id;
+	private String name;
+	
+	@Id
+	@GeneratedValue
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+}
+```
+这个User注解的@Entity以及@Id,@GeneratedValue是Hibernate的写法，说明哪些是实体类。
+只要有setXXX，就可以通过Spring把XXX注入进来。
+接下来写DAO的实现，在这里也就是UserDAOImpl，
+```java
+@Component("u") 
+public class UserDAOImpl implements UserDAO {
+	private SessionFactory sessionFactory;
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	@Resource
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	public void save(User user) {
+			Session s = sessionFactory.getCurrentSession();
+			s.save(user);
+		//throw new RuntimeException("exeption!");
+	}
+}
+```
