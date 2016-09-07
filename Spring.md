@@ -1079,3 +1079,7 @@ public class UserDAOImpl implements UserDAO {
 }
 ```
 使用@Transactional可以自动使事务出现异常的时候回滚，而不用自己写try catch finally等代码捕捉。
+
+29.
+--
+这个视频说了@Transactional的配置，首先说了propagation，具体有哪几类可以看17.5.7，要求记住Propagation.Required.这个比较常用。可以采用注解的方式，也可以采用xml的方式来进行事务管理的配置，一般情况下用xml的配置方式，因为不用在每个方法上都添加@Transactional。具体可以参见17.5.8
