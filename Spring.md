@@ -1078,3 +1078,4 @@ public class UserDAOImpl implements UserDAO {
 	}
 }
 ```
+使用@Transactional可以自动使事务出现异常的时候回滚，而不用自己写try catch finally等代码捕捉。
