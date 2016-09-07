@@ -629,7 +629,7 @@ public int minimumTotal(List<List<Integer>> triangle) {
 ```
 感觉这个想法很厉害啊，自己刚开始是想能否用动态规划去做，这个类似于倒序的动态规划。<br>
 其实现在想想，正序的也可以，只不过写程序的时候每行开头和末尾填入的值没有选择性，写起来比较麻烦。
-121
+121.Best Time to Buy and Sell Stock I
 --
 https://discuss.leetcode.com/topic/19853/kadane-s-algorithm-since-no-one-has-mentioned-about-this-so-far-in-case-if-interviewer-twists-the-input
 这个做法用的是Kadane's algorithm的方法，也可以用来解决最大子串问题。
@@ -644,3 +644,17 @@ public int maxProfit(int[] prices) {
     }
 ```
 这个做法的含义就是找到在每一天提交的最大收益，然后再比较一共prices.length个收益的最大值。
+122.Best Time to Buy and Sell Stock II
+--
+这道题改变之后，解法比上一题简单了。
+```java
+public class Solution {
+public int maxProfit(int[] prices) {
+    int total = 0;
+    for (int i=0; i< prices.length-1; i++) {
+        if (prices[i+1]>prices[i]) total += prices[i+1]-prices[i];
+    }
+    
+    return total;
+}
+```
