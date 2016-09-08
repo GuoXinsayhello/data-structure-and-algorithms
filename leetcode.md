@@ -658,3 +658,55 @@ public int maxProfit(int[] prices) {
     return total;
 }
 ```
+
+124.Binary Tree Maximum Path Sum
+--
+这道题
+```
+public class Solution {
+    int maxValue;
+    
+    public int maxPathSum(TreeNode root) {
+        maxValue = Integer.MIN_VALUE;
+        maxPathDown(root);
+        return maxValue;
+    }
+    
+    private int maxPathDown(TreeNode node) {
+        if (node == null) return 0;
+        int left = Math.max(0, maxPathDown(node.left));
+        int right = Math.max(0, maxPathDown(node.right));
+        maxValue = Math.max(maxValue, left + right + node.val);
+        return Math.max(left, right) + node.val;
+    }
+}
+```
+下面的代码是自己写的，但是是`错误的`，请注意！！！！！！！！！
+```java
+public class Solution {
+    public int maxPathSum(TreeNode root) { 
+        return maxPathDown(root)+Math.min(maxPathDown(root.left), maxPathDown(root.right));
+    }
+    
+    private int maxPathDown(TreeNode node) {
+        if (node == null) return 0;
+        int left = Math.max(0, maxPathDown(node.left));
+        int right = Math.max(0, maxPathDown(node.right));
+        return Math.max(left, right) + node.val;
+    }
+```
+这个错误写法把maxValue去掉了，但是这种方法无法通过【2，-1】这个输入。就是说输入为负值的时候得到的是错误的结果。
+
+125
+--
+有时候a=a+b不能等同于a+=b。比如:<br>
+```java
+char a='m';
+a+=32;
+```
+这是可以的，但是<br>
+```java
+char a='m';
+a=a+32;
+```
+这就不允许了。
