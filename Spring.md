@@ -1083,3 +1083,10 @@ public class UserDAOImpl implements UserDAO {
 29.
 --
 这个视频说了@Transactional的配置，首先说了propagation，具体有哪几类可以看17.5.7，要求记住Propagation.Required.这个比较常用。可以采用注解的方式，也可以采用xml的方式来进行事务管理的配置，一般情况下用xml的配置方式，因为不用在每个方法上都添加@Transactional。具体可以参见17.5.8
+30
+--
+在回答面试官什么是AOP的时候，有两点，1，画图（一条箭头，两条竖线）2，内部实现方式是动态代理，如果类实现了接口，就用JDK的proxy以及innovacationhandler，如果没有实现就用cglib直接操作二进制码。如果问到用途：1，权限管理2、日志，性能 3，transaction（事务）
+
+31
+--
+HibernateTemplate
