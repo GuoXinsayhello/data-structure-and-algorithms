@@ -743,3 +743,17 @@ public int ladderLength(String beginWord, String endWord, Set<String> wordDict) 
 ```
 这是https://discuss.leetcode.com/topic/20965/java-solution-using-dijkstra-s-algorithm-with-explanation 的做法（附有解释）
 这个做法的基本思想就是有一个reached的set，表示可以到达的单词，然后遍历set中的所有word，对于每个单词都改变每个字母，从a改变到z，然后看字典中是否有改变后的单词，如果有就把这个单词添加到reached的set。
+个人觉得为什么要从a到z，有些尝试是根本不必要的，比如修改为一个字典中所有单词都没有的字母，这样的尝试没用，或者可以首先把字典中的所有单词的字母提取出来，自定义一个字母表，然后改变就改变为这些字母。
+```java
+Set<String> set=new HashSet<String>();
+	   set.add("abc");
+	   set.add("cde");
+	   List<Character> pdict=new ArrayList<Character>();
+	   for(String s:set){
+		   for(char c:s.toCharArray()){
+		   if(!pdict.contains(c)){
+			   pdict.add(c);
+		   }
+		   }  
+	   }
+```
