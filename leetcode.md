@@ -757,3 +757,6 @@ Set<String> set=new HashSet<String>();
 		   }  
 	   }
 ```
+127
+--
+java中Arrays.sort的实现原理，对于基本的（primitive）类型采用的是快速排序，而对于Object类型，有两种，一种是归并排序，另外一种采用的是插入与归并结合的排序TimSort。http://www.jianshu.com/p/d083332c3c29 这个网址说的比较好。
