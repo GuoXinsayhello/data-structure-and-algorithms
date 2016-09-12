@@ -710,3 +710,36 @@ char a='m';
 a=a+32;
 ```
 这就不允许了。
+
+126.
+--
+```java
+public int ladderLength(String beginWord, String endWord, Set<String> wordDict) {
+    Set<String> reached = new HashSet<String>();
+    reached.add(beginWord);
+    wordDict.add(endWord);
+	int distance = 1;
+	while(!reached.contains(endWord)) {
+		Set<String> toAdd = new HashSet<String>();
+		for(String each : reached) {
+			for (int i = 0; i < each.length(); i++) {
+                char[] chars = each.toCharArray();
+                for (char ch = 'a'; ch <= 'z'; ch++) {
+                	chars[i] = ch;
+                    String word = new String(chars);
+                    if(wordDict.contains(word)) {
+                    	toAdd.add(word);
+                    	wordDict.remove(word);
+                    }
+                }
+			}
+		}
+		distance ++;
+		if(toAdd.size() == 0) return 0;
+		reached = toAdd;
+	}
+	return distance;
+}
+```
+这是https://discuss.leetcode.com/topic/20965/java-solution-using-dijkstra-s-algorithm-with-explanation 的做法（附有解释）
+这个做法的基本思想就是有一个reached的set，表示可以到达的单词，然后遍历set中的所有word，对于每个单词都改变每个字母，从a改变到z，然后看字典中是否有改变后的单词，如果有就把这个单词添加到reached的set。
