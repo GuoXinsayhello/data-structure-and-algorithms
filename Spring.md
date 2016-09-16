@@ -1090,3 +1090,5 @@ public class UserDAOImpl implements UserDAO {
 31
 --
 HibernateTemplate
+2016/9/16 <br>
+今天尝试在eclipse上部署tomcat，但是总是出现404错误，原因是没有配置web.xml,把web.xml中第三行改为<welcome-file>/WEB-INF/NewFile.jsp</welcome-file>即可，这样就不会出现404错误，而且会直接跳转到这个页面上。
