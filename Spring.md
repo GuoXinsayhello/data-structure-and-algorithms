@@ -1,5 +1,9 @@
+spring
+==
+这上面主要是Spring 3.x企业应用开发实战的读书笔记以及马士兵Spring课程的笔记以及极客学院的Wiki
 Spring 3.x 企业应用开发实战
 ==
+
 http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-placeholderconfigurer
 这个是Springframework的官方文档，可以到上面去查资料。
 第1章：Spring概述
@@ -40,7 +44,7 @@ Servlet（Server Applet），全称Java Servlet，未有中文译文。是用Jav
 POJO（Plain Ordinary Java Object）简单的Java对象，实际就是普通JavaBeans，是为了避免和EJB混淆所创造的简称<br>
 第3章：IoC容器概述
 --
-IoC（Inverse of control)对于软件来说，就是某一个接口的具体实现类的选择控制权从调用类中移除，转交给第三方决定。DI（dependency injection）的概念也可以代替IoC，从注入方法上来看主要分为构造函数注入，属性注入，接口注入。<br>
+IoC（Inverse of control)对于软件来说，就是某一个接口的具体实现类的选择控制权从调用类中移除，转交给第三方决定。DI（dependency injection），控制反转（IoC）是一个通用的概念，它可以用许多不同的方式去表达，依赖注入仅仅是控制反转的一个具体的例子。从注入方法上来看主要分为构造函数注入，属性注入，接口注入。<br>
 ####构造函数注入
 ```java
 public class MoAttack
@@ -1094,3 +1098,9 @@ HibernateTemplate
 今天尝试在eclipse上部署tomcat，但是总是出现404错误，原因是没有配置web.xml,把web.xml中第三行改为<welcome-file>/WEB-INF/NewFile.jsp</welcome-file>即可，这样就不会出现404错误，而且会直接跳转到这个页面上。
 2016年9月18日 星期日
 该看第38视频
+
+极客学院->Wiki->Spring 教程
+==
+1.概述
+--
+http://blog.csdn.net/wangpeng047/article/details/17038659 这个网站分析了Hibernate与Mybatis的区别，前者相比后者更加重量级，后者比较小巧，轻便。
