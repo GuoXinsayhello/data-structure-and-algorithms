@@ -1107,7 +1107,7 @@ List<String> DFS(String s, Set<String> wordDict, HashMap<String, LinkedList<Stri
     return res;
 }
 ```
-142
+142.Linked List Cycle II
 --
 ```java
 public class Solution {
@@ -1131,3 +1131,39 @@ public class Solution {
         }
 ```
 佩服地五体投地！！详细解释见https://discuss.leetcode.com/topic/19367/java-o-1-space-solution-with-detailed-explanation
+143.reorder list
+--
+```java
+public void reorderList(ListNode head) {
+            if(head==null||head.next==null) return;
+            
+            //Find the middle of the list
+            ListNode p1=head;
+            ListNode p2=head;
+            while(p2.next!=null&&p2.next.next!=null){ 
+                p1=p1.next;
+                p2=p2.next.next;
+            }
+            
+            //Reverse the half after middle  1->2->3->4->5->6 to 1->2->3->6->5->4
+            ListNode preMiddle=p1;
+            ListNode preCurrent=p1.next;
+            while(preCurrent.next!=null){
+                ListNode current=preCurrent.next;
+                preCurrent.next=current.next;
+                current.next=preMiddle.next;
+                preMiddle.next=current;
+            }
+            
+            //Start reorder one by one  1->2->3->6->5->4 to 1->6->2->5->3->4
+            p1=head;
+            p2=preMiddle.next;
+            while(p1!=preMiddle){
+                preMiddle.next=p2.next;
+                p2.next=p1.next;
+                p1.next=p2;
+                p1=p2.next;
+                p2=preMiddle.next;
+            }
+        }
+```
