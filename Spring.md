@@ -44,6 +44,7 @@ Servlet（Server Applet），全称Java Servlet，未有中文译文。是用Jav
 POJO（Plain Ordinary Java Object）简单的Java对象，实际就是普通JavaBeans，是为了避免和EJB混淆所创造的简称<br>
 第3章：IoC容器概述
 --
+容器调用带有一组参数的类构造函数时，基于构造函数的 DI 就完成了，其中每个参数代表一个对其他类的依赖。
 IoC（Inverse of control)对于软件来说，就是某一个接口的具体实现类的选择控制权从调用类中移除，转交给第三方决定。DI（dependency injection），控制反转（IoC）是一个通用的概念，它可以用许多不同的方式去表达，依赖注入仅仅是控制反转的一个具体的例子。从注入方法上来看主要分为构造函数注入，属性注入，接口注入。<br>
 ####构造函数注入
 ```java
@@ -1103,4 +1104,22 @@ HibernateTemplate
 ==
 1.概述
 --
-http://blog.csdn.net/wangpeng047/article/details/17038659 这个网站分析了Hibernate与Mybatis的区别，前者相比后者更加重量级，后者比较小巧，轻便。
+http://blog.csdn.net/wangpeng047/article/details/17038659 这个网站分析了Hibernate与Mybatis的区别，前者相比后者更加重量级，后者比较小巧，轻便。OXM是Object-to-XML-Mapping的缩写，它是一个O/M-mapper，将java对象映射成XML数据，或者将XML数据映射成java对象。ctrl+F11在eclipse里面可以运行文件
+2.IoC容器
+--
+有两种容器：BeanFactory容器以及ApplicationContext容器。最好用ApplicationContext。ApplicationContext的实现类不仅仅有ClassPathXmlApplicationContext，而且还有FileSystemXmlApplicationContext。scope为singleton的bean的destroy方法则是在容器关闭时执行，而scope为prototype的bean是不会执行destroy方法的。<br>
+`BeanFactoryPostProcessor`接口:
+```java
+public interface BeanFactoryPostProcessor {
+void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException;
+}
+```
+实现该接口，可以在spring的bean创建之前，修改bean的定义属性。也就是说，Spring允许BeanFactoryPostProcessor在容器实例化任何其它bean之前读取配置元数据，并可以根据需要进行修改，例如可以把bean的scope从singleton改为prototype，也可以把property的值给修改掉。可以同时配置多个BeanFactoryPostProcessor，并通过设置'order'属性来控制各个BeanFactoryPostProcessor的执行次序。注意：BeanFactoryPostProcessor是在spring容器加载了bean的定义文件之后，在bean实例化之前执行的。接口方法的入参是ConfigurrableListableBeanFactory，使用该参数，可以获取到相关bean的定义信息.
+`BeanPostProcessor`接口：
+```java
+public interface BeanPostProcessor {
+Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException;
+Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException;
+}
+```
+BeanPostProcessor，可以在spring容器实例化bean之后，在执行bean的初始化方法前后，添加一些自己的处理逻辑,注意BeanPostProcessor是在spring容器加载了bean的定义文件并且实例化bean之后执行的.http://blog.sina.com.cn/s/blog_8e5354210102vmnr.html 这个博客对于这两个接口解释的比较好。
