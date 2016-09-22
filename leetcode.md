@@ -1167,3 +1167,151 @@ public void reorderList(ListNode head) {
             }
         }
 ```
+145.Binary Tree Postorder Traversal
+--
+`PRE ORDER TRAVERSE`
+```java
+public List<Integer> preorderTraversal(TreeNode root) {
+    List<Integer> result = new ArrayList<>();
+    Deque<TreeNode> stack = new ArrayDeque<>();
+    TreeNode p = root;
+    while(!stack.isEmpty() || p != null) {
+        if(p != null) {
+            stack.push(p);
+            result.add(p.val);  // Add before going to children
+            p = p.left;
+        } else {
+            TreeNode node = stack.pop();
+            p = node.right;   
+        }
+    }
+    return result;
+}
+```
+`IN ORDER TRAVERSE`
+```java
+public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> result = new ArrayList<>();
+    Deque<TreeNode> stack = new ArrayDeque<>();
+    TreeNode p = root;
+    while(!stack.isEmpty() || p != null) {
+        if(p != null) {
+            stack.push(p);
+            p = p.left;
+        } else {
+            TreeNode node = stack.pop();
+            result.add(node.val);  // Add after all left children
+            p = node.right;   
+        }
+    }
+    return result;
+}
+```
+`POST ORDER TRAVERSE`
+```java
+public List<Integer> postorderTraversal(TreeNode root) {
+    LinkedList<Integer> result = new LinkedList<>();
+    Deque<TreeNode> stack = new ArrayDeque<>();
+    TreeNode p = root;
+    while(!stack.isEmpty() || p != null) {
+        if(p != null) {
+            stack.push(p);
+            result.addFirst(p.val);  // Reverse the process of preorder
+            p = p.right;             // Reverse the process of preorder
+        } else {
+            TreeNode node = stack.pop();
+            p = node.left;           // Reverse the process of preorder
+        }
+    }
+    return result;
+}
+```
+https://discuss.leetcode.com/topic/30632/preorder-inorder-and-postorder-iteratively-summarization/2 这个作者把先序、中序、后序遍历都写了出来，用的是相同的结构，值得借鉴。
+
+147.insertion sort list
+--
+```java
+public ListNode insertionSortList(ListNode head) {
+		if( head == null ){
+			return head;
+		}
+		
+		ListNode helper = new ListNode(0); //new starter of the sorted list
+		ListNode cur = head; //the node will be inserted
+		ListNode pre = helper; //insert node between pre and pre.next
+		ListNode next = null; //the next node will be inserted
+		//not the end of input list
+		while( cur != null ){
+			next = cur.next;
+			//find the right place to insert
+			while( pre.next != null && pre.next.val < cur.val ){
+				pre = pre.next;
+			}
+			//insert between pre and pre.next
+			cur.next = pre.next;
+			pre.next = cur;
+			pre = helper;
+			cur = next;
+		}
+		
+		return helper.next;
+	}
+```
+148 sort list
+--
+```java
+public class Solution {
+    
+    //merge two sorted list, return result head
+    public ListNode merge(ListNode h1, ListNode h2){
+        if(h1 == null){
+            return h2;
+        }
+        if(h2 == null){
+            return h1;
+        }
+        
+        if(h1.val < h2.val){
+            h1.next = merge(h1.next, h2);
+            return h1;
+        }
+        else{
+            h2.next = merge(h1, h2.next);
+            return h2;
+        }
+        
+    }
+    
+    public ListNode sortList(ListNode head) {
+        //bottom case
+        if(head == null){
+            return head;
+        }
+        if(head.next == null){
+            return head;
+        }
+        
+        //p1 move 1 step every time, p2 move 2 step every time, pre record node before p1
+        ListNode p1 = head;
+        ListNode p2 = head;
+        ListNode pre = head;
+        
+        while(p2 != null && p2.next != null){
+            pre = p1;
+            p1 = p1.next;
+            p2 = p2.next.next;
+        }
+        //change pre next to null, make two sub list(head to pre, p1 to p2)
+        pre.next = null;
+        
+        //handle those two sub list
+        ListNode h1 = sortList(head);
+        ListNode h2 = sortList(p1);
+        
+        return merge(h1, h2);
+        
+    }
+    
+}
+```
+作者用的类似于merge算法来解决，比较好懂。
