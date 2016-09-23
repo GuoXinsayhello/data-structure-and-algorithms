@@ -1123,3 +1123,33 @@ Object postProcessAfterInitialization(Object bean, String beanName) throws Beans
 }
 ```
 BeanPostProcessor，可以在spring容器实例化bean之后，在执行bean的初始化方法前后，添加一些自己的处理逻辑,注意BeanPostProcessor是在spring容器加载了bean的定义文件并且实例化bean之后执行的.http://blog.sina.com.cn/s/blog_8e5354210102vmnr.html 这个博客对于这两个接口解释的比较好。
+
+3.依赖注入
+--
+当容器调用带有一组参数的类构造函数时，基于构造函数的 DI 就完成了，其中每个参数代表一个对其他类的依赖。因此每个参数都可以构建一个bean。基于构造函数与基于setter函数的区别就是在基于构造函数注入中，我们使用的是  〈bean〉 标签中的 〈constructor-arg〉元素，而在基于设值函数的注入中，我们使用的是〈bean〉 标签中的 〈property〉元素。
+```xml
+<bean id="john-classic" class="com.example.Person"
+      p:name="John Doe"
+      p:spouse-ref="jane"/>
+</bean>
+<bean name="jane" class="com.example.Person">
+        <property name="name" value="Jane Doe"/>
+</bean>
+```
+其中spouse是一个属性，然后引用的是jane这个bean
+4.自动装配
+--
+自动装配 autowire分为byName,byType以及constructor自动装配，下面举一个constructor的例子：
+```xml
+ <bean id="textEditor" class="com.tutorialspoint.TextEditor" 
+      autowire="constructor">
+</bean>
+<bean id="SpellChecker" class="com.tutorialspoint.SpellChecker">
+</bean>
+```
+5.基于注解的配置
+--
+注解在默认情况下在 Spring 容器中不打开。因此，在可以使用基于注解的连线之前，我们将需要在我们的 Spring 配置文件中启用它。
+<context:annotation-config/><br>
+@Required
+@Required 注解应用于 bean 属性的 setter 方法
