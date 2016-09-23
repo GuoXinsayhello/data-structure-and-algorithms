@@ -1150,6 +1150,17 @@ BeanPostProcessor，可以在spring容器实例化bean之后，在执行bean的�
 5.基于注解的配置
 --
 注解在默认情况下在 Spring 容器中不打开。因此，在可以使用基于注解的连线之前，我们将需要在我们的 Spring 配置文件中启用它。
-<context:annotation-config/><br>
-@Required
-@Required 注解应用于 bean 属性的 setter 方法
+<context:annotation-config/><br>@Required
+@Required 注解应用于 bean 属性的 setter 方法它表明受影响的 bean 属性在配置时必须放在 XML 配置文件中，否则容器就会抛出一个 BeanInitializationException 异常.<br>
+@Autowired 注解可以应用到 bean 属性的 setter 方法，非 setter 方法，构造函数和属性。<br>
+Setter 方法中的 @Autowired:当 Spring遇到一个在 setter 方法中使用的 @Autowired 注释，它会在方法中视图执行 byType 自动连接。<br>
+属性中的 @Autowired:你可以在属性中使用 @Autowired 注释来除去 setter 方法。当时使用 为自动连接属性传递的时候，Spring 会将这些传递过来的值或者引用自动分配给那些属性。<br>
+构造函数中的 @Autowired:你也可以在构造函数中使用 @Autowired。一个构造函数 @Autowired 说明当创建 bean 时，即使在 XML 文件中没有使用 元素配置 bean ，构造函数也会被自动连接。<br>
+默认情况下，@Autowired 注释意味着依赖是必须的，它类似于 @Required 注释，然而，你可以使用 @Autowired 的 （required=false） 选项关闭默认行为。<br>
+@Qualifier会指定哪一个bean会被应用。
+Spring也支持JSR-250的@Resource的注解类型
+In spring, `registerShutdownHook()` method is used to shut down IoC container in non-web applications.
+
+6.基于Java的配置
+--
+基于Java的配置可以不用配置xml，带有 @Configuration 的注解类表示这个类可以使用 Spring IoC 容器作为 bean 定义的来源。@Bean 注解告诉 Spring，一个带有 @Bean 的注解方法将返回一个对象，该对象应该被注册为在 Spring 应用程序上下文中的 bean。一旦定义了配置类，你就可以使用 AnnotationConfigApplicationContext 来加载并把他们提供给 Spring 容器
