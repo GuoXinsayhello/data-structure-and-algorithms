@@ -1376,29 +1376,34 @@ int maxProduct(int A[], int n) {
 ```
 153.
 --
-下面用的是二分搜索法，参见https://discuss.leetcode.com/topic/5170/java-solution-with-binary-search
+下面用的是二分搜索法，参见https://discuss.leetcode.com/topic/6468/my-pretty-simple-code-to-solve-it/2
+虽然下面这个方法用于重复的元素，不重复的也可以。
 ```java
 public class Solution {
-    public int findMin(int[] num) {
-        if (num == null || num.length == 0) {
-            return 0;
-        }
-        if (num.length == 1) {
-            return num[0];
-        }
-        int start = 0, end = num.length - 1;
-        while (start < end) {
-            int mid = (start + end) / 2;
-            if (mid > 0 && num[mid] < num[mid - 1]) {
-                return num[mid];
+ public  int findMin(int[] num) {
+        int lo = 0;
+        int hi = num.length - 1;
+        int mid = 0;
+        
+        while(lo < hi) {
+            mid = lo + (hi - lo) / 2;
+            
+            if (num[mid] > num[hi]) {
+                lo = mid + 1;
             }
-            if (num[start] <= num[mid] && num[mid] > num[end]) {
-                start = mid + 1;
-            } else {
-                end = mid - 1;
+            else if (num[mid] < num[hi]) {
+                hi = mid;
+            }
+            else { // when num[mid] and num[hi] are same
+                hi--;
             }
         }
-        return num[start];
+        return num[lo];
     }
-}
 ```
+154.
+--
+有人问了这样一个问题
+a simple question: why mid = lo + (hi - lo) / 2 rather than mid = (hi + lo) / 2 ?
+而有人回答是这样的：This is a famous bug in binary search. if the size of array are too large, equal or larger than the upper bound of int type, hi + lo may cause an overflow and become a negative number. It's ok to write (hi + lo) / 2 here, leetcode will not give you a very large array to test. But we'd better know this. For a detailed information or history of this bug, you could search "binary search bug" on google.<br>
+具体代码见上题
