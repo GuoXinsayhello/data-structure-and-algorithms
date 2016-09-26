@@ -1164,3 +1164,9 @@ In spring, `registerShutdownHook()` method is used to shut down IoC container in
 6.基于Java的配置
 --
 基于Java的配置可以不用配置xml，带有 @Configuration 的注解类表示这个类可以使用 Spring IoC 容器作为 bean 定义的来源。@Bean 注解告诉 Spring，一个带有 @Bean 的注解方法将返回一个对象，该对象应该被注册为在 Spring 应用程序上下文中的 bean。一旦定义了配置类，你就可以使用 AnnotationConfigApplicationContext 来加载并把他们提供给 Spring 容器
+
+7.事务管理
+--
+一个数据库事务是一个被视为单一的工作单元的操作序列。这些操作应该要么完整地执行，要么完全不执行，具有四个属性：原子性，一致性，隔离性，持久性。<br>
+编程式事务管理 ：这意味着你在编程的帮助下有管理事务。这给了你极大的灵活性，但却很难维护。<br>
+声明式事务管理 ：这意味着你从业务代码中分离事务管理。你仅仅使用注释或 XML 配置来管理事务。声明式事务管理方法允许你在配置的帮助下而不是源代码硬编程来管理事务<br>
