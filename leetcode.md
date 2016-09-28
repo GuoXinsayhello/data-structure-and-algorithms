@@ -1407,3 +1407,88 @@ public class Solution {
 a simple question: why mid = lo + (hi - lo) / 2 rather than mid = (hi + lo) / 2 ?
 而有人回答是这样的：This is a famous bug in binary search. if the size of array are too large, equal or larger than the upper bound of int type, hi + lo may cause an overflow and become a negative number. It's ok to write (hi + lo) / 2 here, leetcode will not give you a very large array to test. But we'd better know this. For a detailed information or history of this bug, you could search "binary search bug" on google.<br>
 具体代码见上题
+
+160.
+--
+我自己的想法和下面这个差不多，为什么通过只通过了38/42个例子
+自己写的
+```java
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    	ListNode firstA=headA;
+    	ListNode firstB=headB;
+    	ListNode sec=new ListNode(0);
+    	while(firstA!=null && firstB!=null){
+    		firstA=firstA.next;
+    		firstB=firstB.next;
+    	}
+    	if(firstA==null && firstB==null){
+    		while(headA!=null){
+    			if(headA==headB){
+    				return headA;
+    			}
+    			headA=headA.next;
+    			headB=headB.next;
+    		}
+    		return null;
+    	}
+    	else if(firstA==null){
+    		sec=headB;
+    	while(firstB!=null){
+    		firstB=firstB.next;
+    		sec=sec.next;
+    	}
+    	while(headA.next!=null){
+    		if(headA==sec)
+    			return headA;
+    		headA=headA.next;
+    		sec=sec.next;
+    	}
+    	return null;
+    	}
+    	else {
+    		sec=headA;
+    	while(firstA!=null){
+    		firstA=firstA.next;
+    		sec=sec.next;
+    	}
+    	while(headB.next!=null){
+    		if(headB==sec)
+    			return headB;
+    		headB=headB.next;
+    		sec=sec.next;
+    	}
+    	return null;
+    	}	
+    }
+```
+ 别人的
+```java
+public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    int lenA = length(headA), lenB = length(headB);
+    // move headA and headB to the same start point
+    while (lenA > lenB) {
+        headA = headA.next;
+        lenA--;
+    }
+    while (lenA < lenB) {
+        headB = headB.next;
+        lenB--;
+    }
+    // find the intersection until end
+    while (headA != headB) {
+        headA = headA.next;
+        headB = headB.next;
+    }
+    return headA;
+}
+
+private int length(ListNode node) {
+    int length = 0;
+    while (node != null) {
+        node = node.next;
+        length++;
+    }
+    return length;
+}
+```
