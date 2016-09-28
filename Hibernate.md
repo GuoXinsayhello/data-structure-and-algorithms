@@ -35,3 +35,6 @@ Hibernate 的一个重要特征为代理，它取决于该持久化类是处于�
 --
 作者说XDoclet, Middlegen 和 AndroMDA等等这些工具可以给HIbernate用户自动生成映射文件
 
+5.O/R映射
+--
+集合映射，关联映射，组件映射
