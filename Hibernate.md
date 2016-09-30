@@ -54,3 +54,16 @@ cr.add(Restrictions.like("firstName", "zara%"));
 // Case sensitive form of the above restriction.
 cr.add(Restrictions.ilike("firstName", "zara%"));
 ```
+Hibernate Session 接口提供了 createCriteria() 方法，可用于创建一个 Criteria 对象，使当您的应用程序执行一个标准查询时返回一个持久化对象的类的实例。比如<br>
+```java
+Criteria cr = session.createCriteria(Employee.class);  
+List results = cr.list();  
+```
+8.缓存策略
+--
+并发策略<br>
+一个并发策略是一个中介，它负责保存缓存中的数据项和从缓存中检索它们。如果你将使用一个二级缓存，你必须决定，对于每一个持久类和集合，使用哪一个并发策略。<br>
+Transactional:为主读数据使用这个策略，在一次更新的罕见状况下并发事务阻止过期数据是关键的。<br>
+Read-write:为主读数据再一次使用这个策略，在一次更新的罕见状况下并发事务阻止过期数据是关键的。<br>
+Nonstrict-read-write:这个策略不保证缓存和数据库之间的一致性。如果数据几乎不改变并且过期数据不是很重要，使用这个策略。<br>
+Read-only:一个适合永不改变数据的并发策略。只为参考数据使用它。<br>
