@@ -44,3 +44,13 @@ Hibernate 的一个重要特征为代理，它取决于该持久化类是处于�
 @Table 注释允许您明确表的详细信息保证实体在数据库中持续存在。<br>
 @Id每一个实体 bean 都有一个主键，你在类中可以用 @Id 来进行注释。<br>
 @Column 注释用于指定某一列与某一个字段或是属性映射的细节信息。
+7.标准查询
+--
+HQL语句中的like模糊查询，用于大小写不分的情况，而ilike用于区分大小写的情况。
+```java
+// To get records having fistName starting with zara
+cr.add(Restrictions.like("firstName", "zara%"));
+
+// Case sensitive form of the above restriction.
+cr.add(Restrictions.ilike("firstName", "zara%"));
+```
