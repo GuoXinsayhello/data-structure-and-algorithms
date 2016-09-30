@@ -1492,3 +1492,52 @@ private int length(ListNode node) {
     return length;
 }
 ```
+162.Find Peak Element 
+--
+```java
+class Solution {
+public:
+    int findPeakElement(const vector<int> &num) 
+    {
+        int low = 0;
+        int high = num.size()-1;
+        
+        while(low < high)
+        {
+            int mid1 = (low+high)/2;
+            int mid2 = mid1+1;
+            if(num[mid1] < num[mid2])
+                low = mid2;
+            else
+                high = mid1;
+        }
+        return low;
+    }
+};
+```
+我自己就是很普通的从左到右遍历，上述方法用的是二分法搜索。
+165. Compare Version Numbers
+--
+1、如果用“.”作为分隔的话,必须是如下写法,String.split("\\."),这样才能正确的分隔开,不能用String.split(".");
+
+2、如果用“|”作为分隔的话,必须是如下写法,String.split("\\|"),这样才能正确的分隔开,不能用String.split("|");
+
+“.”和“|”都是转义字符,必须得加"\\";
+```java
+public int compareVersion(String version1, String version2) {
+    String[] levels1 = version1.split("\\.");
+    String[] levels2 = version2.split("\\.");
+    
+    int length = Math.max(levels1.length, levels2.length);
+    for (int i=0; i<length; i++) {
+    	Integer v1 = i < levels1.length ? Integer.parseInt(levels1[i]) : 0;
+    	Integer v2 = i < levels2.length ? Integer.parseInt(levels2[i]) : 0;
+    	int compare = v1.compareTo(v2);
+    	if (compare != 0) {
+    		return compare;
+    	}
+    }
+    
+    return 0;
+}
+```
