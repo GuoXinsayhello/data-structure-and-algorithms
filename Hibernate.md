@@ -80,3 +80,6 @@ Read-only:一个适合永不改变数据的并发策略。只为参考数据使�
 马士兵Spring课程
 ==
 Hibernate的目的就是原来要把一个类存到数据库里面，需要SQL语句去写很多，而SQL语句不是面向对象的，因此HIbernate就在这里发挥了作用，不用去写SQL语句，直接交给HIbernate里面的SessionFactory方法去处理。
+02
+--
+可以在eclipse中window-preferences-java-build path-user library新建自己的library把自己需要的jar包加进去。映射文件要和实体类放在一个包里面。假如在映射文件里面只是写了java的类名而没有写表名，默认是和类名一样的名字，在数据库里面表名不区分大小写。
