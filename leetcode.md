@@ -1541,3 +1541,34 @@ public int compareVersion(String version1, String version2) {
     return 0;
 }
 ```
+169. Majority Element
+--
+```java
+public class Solution {
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+	  int len = nums.length;
+	  return nums[len/2];
+    }
+}
+```
+这个做法挺精妙的。<br>
+当然下面这个是Boyer–Moore majority vote algorithm的做法
+```java
+public class Solution {
+    public int majorityElement(int[] num) {
+
+        int major=num[0], count = 1;
+        for(int i=1; i<num.length;i++){
+            if(count==0){
+                count++;
+                major=num[i];
+            }else if(major==num[i]){
+                count++;
+            }else count--;
+            
+        }
+        return major;
+    }
+}
+```这个做法的问题就是有局限性，如果当大多数的数目小于n/2时就会随便输出一个结果。
