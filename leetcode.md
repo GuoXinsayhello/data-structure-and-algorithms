@@ -1572,3 +1572,38 @@ public class Solution {
     }
 }
 ```这个做法的问题就是有局限性，如果当大多数的数目小于n/2时就会随便输出一个结果。
+
+172.Factorial Trailing Zeroes
+--
+```java
+    return n == 0 ? 0 : n / 5 + trailingZeroes(n / 5);
+```
+这个做法就是输出n到1中5的因子个数，不错！
+173.Binary Search Tree Iterator
+--
+这个方法好精妙
+```java
+public class BSTIterator {
+    private Stack<TreeNode> stack = new Stack<TreeNode>();
+    
+    public BSTIterator(TreeNode root) {
+        pushAll(root);
+    }
+
+    /** @return whether we have a next smallest number */
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
+
+    /** @return the next smallest number */
+    public int next() {
+        TreeNode tmpNode = stack.pop();
+        pushAll(tmpNode.right);
+        return tmpNode.val;
+    }
+    
+    private void pushAll(TreeNode node) {
+        for (; node != null; stack.push(node), node = node.left);
+    }
+}
+```
