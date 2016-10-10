@@ -88,4 +88,4 @@ Hibernate的目的就是原来要把一个类存到数据库里面，需要SQL�
 如果不给提示，可以alt + / 就会给出提示，并且在windows，preference，content中有content assitance就会有关于提示的设置。
 06
 --
-马士兵在这里自己模拟了一下hibernate的原理，就是自己用java语言拼了一个sql语句，然后得到通过反射的方法得到java中的方法名以及参数，然后将其持久化到数据库当中。这个视频感觉挺不错的，主要用到了反射机制。具体步骤就是首先根据配置内容自己拼出SQL语句，然后找到方法名，然后用反射调用方法拿到返回值，根据返回值的类型，从而决定PreparedStatement究竟是setString还是setInt等等其他的
+马士兵在这里自己模拟了一下hibernate的原理，就是自己用java语言拼了一个sql语句，然后得到通过反射的方法得到java中的方法名以及参数，然后将其持久化到数据库当中。这个视频感觉挺不错的，主要用到了反射机制。具体步骤就是首先根据配置内容自己拼出SQL语句，然后找到方法名，然后用反射调用方法拿到返回值，根据返回值的类型，从而决定PreparedStatement究竟是setString还是setInt等等其他的。得到方法名,比如methodname之后，用类的实例比如Method m=s.getClass().getMethod(methodname)就可以得到这个方法。
