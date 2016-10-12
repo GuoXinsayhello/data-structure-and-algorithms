@@ -1683,3 +1683,24 @@ public class Solution {
 }
 ```
 上面这种 做法是正确的，但是如果要将1处的代码该为nums=newnum，那么就是错的，这就是实参和形参的问题，形参变了，但是实际的参数nums并没有发生变化，所以输出的是没有改变的结果。
+
+下面是别人的做法
+比如  1,2,3,4,5,6  k=2，首先变成654321，然后前k个逆序，后边的逆序，变成561234 ，so cool
+```java
+public void rotate(int[] nums, int k) {
+    k %= nums.length;
+    reverse(nums, 0, nums.length - 1);
+    reverse(nums, 0, k - 1);
+    reverse(nums, k, nums.length - 1);
+}
+
+public void reverse(int[] nums, int start, int end) {
+    while (start < end) {
+        int temp = nums[start];
+        nums[start] = nums[end];
+        nums[end] = temp;
+        start++;
+        end--;
+    }
+}
+```
