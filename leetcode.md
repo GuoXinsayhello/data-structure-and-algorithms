@@ -1658,3 +1658,28 @@ public List<String> findRepeatedDnaSequences(String s) {
     return new ArrayList(repeated);
 }
 ```
+189.Rotate Array
+--
+```java
+public class Solution {
+    public void rotate(int[] nums, int k) {
+        if(k==0)
+        return ;
+        int l=nums.length;
+        if(k>l)
+        k=k%l;
+        int [] newnum=new int[l];
+        for(int i=0;i<k;i++){
+            newnum[i]=nums[l-k+i];
+        }
+        for(int j=k;j<l;j++){
+            newnum[j]=nums[j-k];
+        }
+        for(int t=0;t<l;t++){  //1
+        	nums[t]=newnum[t];//1
+        }//1
+   
+    }
+}
+```
+上面这种 做法是正确的，但是如果要将1处的代码该为nums=newnum，那么就是错的，这就是实参和形参的问题，形参变了，但是实际的参数nums并没有发生变化，所以输出的是没有改变的结果。
