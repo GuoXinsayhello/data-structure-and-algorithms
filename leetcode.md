@@ -1731,9 +1731,9 @@ public static int hammingWeight(int n) {
     	return ones;
 }
 ```
-198.
+198.House Robber
 --
-https://discuss.leetcode.com/topic/9764/java-solution-and-optimization 解释的还是比较清楚
+https://discuss.leetcode.com/topic/11082/java-o-n-solution-space-o-1/8 解释的还是比较清楚
 ```java
 public static int rob(int[] nums) 
 	{
