@@ -1704,3 +1704,30 @@ public void reverse(int[] nums, int start, int end) {
     }
 }
 ```
+190
+--
+```java
+public int reverseBits(int n) {
+    int result = 0;
+    for (int i = 0; i < 32; i++) {
+        result += n & 1;
+        n >>>= 1;   // CATCH: must do unsigned shift
+        if (i < 31) // CATCH: for last digit, don't shift!
+            result <<= 1;
+    }
+    return result;
+}
+```
+192.
+--
+这道题和上题的思想类似都是用的按位运算，比起用现成的把数转换成二进制字符串要好多了
+```java
+public static int hammingWeight(int n) {
+	int ones = 0;
+    	while(n!=0) {
+    		ones = ones + (n & 1);
+    		n = n>>>1;
+    	}
+    	return ones;
+}
+```
