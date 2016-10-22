@@ -98,4 +98,7 @@ hibernate可以通过数据库的表生成实体类以及xml配置文件，此�
 先建表还是先建类呢？理论上先类后表，因为面向对象的编程，有了类可以生成各种各样的表（SQL，Oracle等等），但是实际当中是先表后类，如果让类自动生成表就难以对数据库进行优化，而先表后类可以人为优化数据库。用powerdesigner先建表。
 13
 --
-做日志的框架有很多，有slf，log4j，apache commons log等等。在这里有slf的API，以及log4j的jar包，需要把这两个连起来，于是就需要导入slf4j-log4j的jar包把这两个连起来，这是一种适配器模式。用log4j需要写一个log4j.properties的配置文件，或者直接导入也可以，这个文件是说什么log输出，什么log不输出
+做日志的框架有很多，有slf，log4j，apache commons log等等。在这里有slf的API，以及log4j的jar包，需要把这两个连起来，于是就需要导入slf4j-log4j的jar包把这两个连起来，这是一种适配器模式。用log4j需要写一个log4j.properties的配置文件，或者直接导入也可以，这个文件是说什么log输出，什么log不输出。
+14
+--
+自己写一个Junit test，马士兵模仿Maven，新建了一个source folder，z里面放的的是测试代码，然后和源代码结构一样，也就是说src文件夹下有什么类对应的test就有一个测试类。然后在测试文件下中写入@Test注解。一般而言sessionfactory只用实例化一次，所以可以用单例以及static语句块只实例化一次。
