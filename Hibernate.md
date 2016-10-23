@@ -104,4 +104,4 @@ hibernate可以通过数据库的表生成实体类以及xml配置文件，此�
 自己写一个Junit test，马士兵模仿Maven，新建了一个source folder，z里面放的的是测试代码，然后和源代码结构一样，也就是说src文件夹下有什么类对应的test就有一个测试类。然后在测试文件下中写入@Test注解。一般而言sessionfactory只用实例化一次，所以可以用单例以及static语句块只实例化一次。但是在5.2中好像不用static语句块了，而是用metadatasource来创建。
 16
 --
-如果表名和类名不一样，需要用@Table进行显式声明，@Table(name="XXX"),当然也可以在xml文件里面用table=“XXX”进行配置。如果字段名和属性名不一样，用@Column进行显式指定。Annotation会默认把所有的属性都会持久化，如果不想让其中某个属性 持久化就在对应的get方法上加上@Transient，本意是透明的。而xml中只有显式指明才会持久化，所以不想持久化只要不写就可以。
+如果表名和类名不一样，需要用@Table进行显式声明，@Table(name="XXX"),当然也可以在xml文件里面用table=“XXX”进行配置。如果字段名和属性名不一样，用@Column进行显式指定。Annotation会默认把所有的属性都会持久化，如果不想让其中某个属性 持久化就在对应的get方法上加上@Transient，本意是透明的。而xml中只有显式指明才会持久化，所以不想持久化只要不写就可以。要想映射枚举类型，在注解中只需要添加@Enumerated,在xml会比较麻烦。
