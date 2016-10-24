@@ -112,3 +112,4 @@ hibernate可以通过数据库的表生成实体类以及xml配置文件，此�
 20
 --
 主要说的ID生成策略，在xml标签里面加入\<generator class="XXX"\>就可以。如果使用注解，可以加@GeneratedValue，要用javax.persistence下的generator。
+@SequenceGenerator是根据sequence生成id. TableGenerators是自动产生table值来生成id号
