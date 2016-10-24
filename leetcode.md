@@ -1859,3 +1859,44 @@ bool isHappy(int n) {
 }
 ```
 这个用的居然是Floyd cycle detection algorithm，好厉害！
+```java
+public boolean isHappy(int n) {
+    Set<Integer> inLoop = new HashSet<Integer>();
+    int squareSum,remain;
+	while (inLoop.add(n)) {
+		squareSum = 0;
+		while (n > 0) {
+		    remain = n%10;
+			squareSum += remain*remain;
+			n /= 10;
+		}
+		if (squareSum == 1)
+			return true;
+		else
+			n = squareSum;
+	}
+	return false;
+}
+```
+下面这种方法用的是hash set方法。
+203
+--
+```java
+public class Solution {
+    public int countPrimes(int n) {
+        boolean[] notPrime = new boolean[n];
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (notPrime[i] == false) {
+                count++;
+                for (int j = 2; i*j < n; j++) {
+                    notPrime[i*j] = true;
+                }
+            }
+        }
+        
+        return count;
+    }
+}
+```
+这个做法相当于利用y以前的结果，把n以内某数倍数的设为不是质数，不用再算了。
