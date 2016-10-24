@@ -111,4 +111,4 @@ hibernate可以通过数据库的表生成实体类以及xml配置文件，此�
 如果Juint不报异常，但是有错误，可以用try catch,如果还是不报异常，可以写上public static void main(String[] args)方法，把Junit 程序当做Application来运行。
 20
 --
-主要说的ID生成策略，在xml标签里面加入\<generator class="XXX"\>就可以。
+主要说的ID生成策略，在xml标签里面加入\<generator class="XXX"\>就可以。如果使用注解，可以加@GeneratedValue，要用javax.persistence下的generator。
