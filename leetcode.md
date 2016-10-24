@@ -1901,3 +1901,6 @@ public class Solution {
 }
 ```
 这个做法相当于利用y以前的结果，把n以内某数倍数的设为不是质数，不用再算了。
+205. Isomorphic Strings
+--
+插入一个map需要用到put方法，得到对应的key的value要用到map.get(key)方法，判断是否包括某key要用到map.containsKey(key),判断是否包括某value要用到map.containsValue(value);
