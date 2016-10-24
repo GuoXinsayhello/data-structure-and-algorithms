@@ -105,3 +105,10 @@ hibernate可以通过数据库的表生成实体类以及xml配置文件，此�
 16
 --
 如果表名和类名不一样，需要用@Table进行显式声明，@Table(name="XXX"),当然也可以在xml文件里面用table=“XXX”进行配置。如果字段名和属性名不一样，用@Column进行显式指定。Annotation会默认把所有的属性都会持久化，如果不想让其中某个属性 持久化就在对应的get方法上加上@Transient，本意是透明的。而xml中只有显式指明才会持久化，所以不想持久化只要不写就可以。要想映射枚举类型，在注解中只需要添加@Enumerated,在xml会比较麻烦。
+17
+--
+@Id可以放在成员变量上面，也可以放在get方法上。如果放在属性上，这样会破坏java面向对象的封装性，Java可以用映射的方法获取成员变量。所以建议放在get方法上。当然有可能是没有field，但是有get方法，比如只有单价和数目两个field，但是有一个getTotalPrice方法，所以放在get方法上依然可以在数据库中持久化。
+如果Juint不报异常，但是有错误，可以用try catch,如果还是不报异常，可以写上public static void main(String[] args)方法，把Junit 程序当做Application来运行。
+20
+--
+主要说的ID生成策略，在xml标签里面加入\<generator class="XXX"\>就可以。
