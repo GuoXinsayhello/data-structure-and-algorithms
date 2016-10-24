@@ -111,5 +111,9 @@ hibernate可以通过数据库的表生成实体类以及xml配置文件，此�
 如果Juint不报异常，但是有错误，可以用try catch,如果还是不报异常，可以写上public static void main(String[] args)方法，把Junit 程序当做Application来运行。
 20
 --
-主要说的ID生成策略，在xml标签里面加入\<generator class="XXX"\>就可以。如果使用注解，可以加@GeneratedValue，要用javax.persistence下的generator。
+主要说的ID生成策略，在xml标签里面加入\<generator class="XXX"\>就可以,class常用有 uuid，sequence，identity。如果使用注解，可以加@GeneratedValue，要用javax.persistence下的generator。
 @SequenceGenerator是根据sequence生成id. TableGenerators是自动产生table值来生成id号
+
+24
+--
+如果要使用联合主键，需要用到\<composite-id name="XXX" class="XXX"\>,其中class为多个主键组成的联合主键类， name为该类实例化的名字，该类要实现java.io.serializable接口，而且还要重写equals方法以及hashcode方法，这是马士兵当时讲的，不知道现在的新版本还需要不需要。另外也可以用注解实现，第一种方法 ：@Embededable 放在 组件类上，也就是联合主键类，然后把主键set方法加上@Id。第二种方法 ：@EmbededId放在联合主键的get方法上。第三种方法：用@IdClass，表示联合主键类是谁，此时需要在 两个联合 主键上写上@Id 。常用二三方法
