@@ -1815,3 +1815,47 @@ private void DFSMarking(char[][] grid, int i, int j) {
 }
 }
 ```
+201.Bitwise AND of Numbers Range
+```java
+public class Solution {
+    public int rangeBitwiseAnd(int m, int n) {
+        if(m == 0){
+            return 0;
+        }
+        int moveFactor = 1;
+        while(m != n){
+            m >>= 1;
+            n >>= 1;
+            moveFactor <<= 1;
+        }
+        return m * moveFactor;
+    }
+}
+```
+202.
+`Floyd判圈算法(Floyd Cycle Detection Algorithm)`，又称`龟兔赛跑算法(Tortoise and Hare Algorithm)`。该算法由美国科学家罗伯特·弗洛伊德发明，是一个可以在有限状态机、迭代函数或者链表上判断是否存在环，求出该环的起点与长度的算法。[1]
+如果有限状态机、迭代函数或者链表上存在环，那么在某个环上以不同速度前进的2个指针必定会在某个时刻相遇。同时显然地，如果从同一个起点(即使这个起点不在某个环上)同时开始以不同速度前进的2个指针最终相遇，那么可以判定存在一个环，且可以求出2者相遇处所在的环的起点与长度。
+```c
+int digitSquareSum(int n) {
+    int sum = 0, tmp;
+    while (n) {
+        tmp = n % 10;
+        sum += tmp * tmp;
+        n /= 10;
+    }
+    return sum;
+}
+
+bool isHappy(int n) {
+    int slow, fast;
+    slow = fast = n;
+    do {
+        slow = digitSquareSum(slow);
+        fast = digitSquareSum(fast);
+        fast = digitSquareSum(fast);
+    } while(slow != fast);
+    if (slow == 1) return 1;
+    else return 0;
+}
+```
+这个用的居然是Floyd cycle detection algorithm，好厉害！
