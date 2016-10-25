@@ -127,4 +127,4 @@ openSession与getCurrentSession不能混用。对象的三种状态：transient�
 
 30
 --
-session.load()方法可以从数据库拿到session，其中第一个参数表示类型，第二个参数表示序列化的元素，马老师此时在这里用的是id号，例子中直接写为1.session.get()方法也可以。但是两者有着很大的区别，如果用load的时候，返回的是代理对象，什么时候用到对象属性才会在什么时候发出sql语句。所以如果session在commit之后，再想拿到该session就会报错，而get方法不会这样，get之后立刻发出sql语句。
+session.load()方法可以从数据库拿到session，其中第一个参数表示类型，第二个参数表示序列化的元素，马老师此时在这里用的是id号，例子中直接写为1.session.get()方法也可以。但是两者有着很大的区别，如果用load的时候，返回的是代理对象，什么时候用到对象属性才会在什么时候发出sql语句。所以如果session在commit之后，再想拿到该session就会报错，而get方法不会这样，get之后立刻发出sql语句，不会延迟。验证是否是代理对象，可以用t.getClass()
