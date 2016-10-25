@@ -1924,4 +1924,19 @@ public class Solution {
 }
 ```
 这个方法就是建立一个长度为512的数组，因为ASCII码的长度为256，然后前边部分是s1的映射，后半部分是s2的映射，然后看两个映射是否相同。
+206.reverse linked list
+--
+```java
+public ListNode reverseList(ListNode head) {
+    /* iterative solution */
+    ListNode newHead = null;
+    while (head != null) {
+        ListNode next = head.next;
+        head.next = newHead;
+        newHead = head;
+        head = next;
+    }
+    return newHead;
+}
+```
 			
