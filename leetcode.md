@@ -1939,4 +1939,39 @@ public ListNode reverseList(ListNode head) {
     return newHead;
 }
 ```
-			
+207.
+--
+queue的方法：offer ，添加一个元素并返回true，如果队列已满，则返回false
+```java
+public boolean canFinish(int numCourses, int[][] prerequisites) {
+    int[][] matrix = new int[numCourses][numCourses]; // i -> j
+    int[] indegree = new int[numCourses];
+    
+    for (int i=0; i<prerequisites.length; i++) {
+        int ready = prerequisites[i][0];
+        int pre = prerequisites[i][1];
+        if (matrix[pre][ready] == 0)
+            indegree[ready]++; //duplicate case
+        matrix[pre][ready] = 1;
+    }
+    
+    int count = 0;
+    Queue<Integer> queue = new LinkedList();
+    for (int i=0; i<indegree.length; i++) {
+        if (indegree[i] == 0) queue.offer(i);
+    }
+    while (!queue.isEmpty()) {
+        int course = queue.poll();
+        count++;
+        for (int i=0; i<numCourses; i++) {
+            if (matrix[course][i] != 0) {
+                if (--indegree[i] == 0)
+                    queue.offer(i);
+            }
+        }
+    }
+    return count == numCourses;
+}
+```
+这个方法好像是According to the Wiki about what Topological sorting is (https://en.wikipedia.org/wiki/Topological_sorting)
+and the Kahn's algorithm as shown below，这个方法。没怎么看懂。
