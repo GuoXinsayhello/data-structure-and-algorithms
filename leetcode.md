@@ -1904,3 +1904,24 @@ public class Solution {
 205. Isomorphic Strings
 --
 插入一个map需要用到put方法，得到对应的key的value要用到map.get(key)方法，判断是否包括某key要用到map.containsKey(key),判断是否包括某value要用到map.containsValue(value);
+```java
+String s1="abc";
+int[] m=new int[256];
+m[97]=89;
+System.out.println(m[s1.charAt(0)]);
+```
+数组居然还有这样的用法，
+```java
+public class Solution {
+    public boolean isIsomorphic(String s1, String s2) {
+        int[] m = new int[512];
+        for (int i = 0; i < s1.length(); i++) {
+            if (m[s1.charAt(i)] != m[s2.charAt(i)+256]) return false;
+            m[s1.charAt(i)] = m[s2.charAt(i)+256] = i+1;
+        }
+        return true;
+    }
+}
+```
+这个方法就是建立一个长度为512的数组，因为ASCII码的长度为256，然后前边部分是s1的映射，后半部分是s2的映射，然后看两个映射是否相同。
+			
