@@ -133,3 +133,7 @@ session.load()方法可以从数据库拿到session，其中第一个参数表�
 --
 update方法可以用来更新一个detached对象，也可以更新persistent对象，但是更新transient对象会报错，如果自己给transient对象设定一个id，此时更新该transient对象就不会报错（要求数据库中有这个对象）。一个persistent对象如果修改了与原来的值不同，就会发update语句，如果相同就不会发update语句，发的时候所有字段都会更新。所有字段都会更新因此就会使效率变低，所以如果想让某些字段不更新的话，就可以用注解@Column(updatable=false),当然在xml中也可以，用
 update=true|false,但是这种方式不灵活，很少用。第二种方法是在cfg.xml配置文件里面的的class后写上属性dynamic-update=true,但是在hibernate 5.0没找到，可能已经进行了优化。这种方法就是比较和缓存中是否有改动，如果改了就更新该字段，因此该方法对于更新detached对象的时候就没用，因此还是更新所有对象。因此如果想跨session进行update，也就是commit一个session，然后再重启一个session，再修改，此时可以用session.merge()方法。第三种方法建议用HQL（EJBQL）语句,Query q = session.createQuery("XXX").executeUpdate();
+
+33
+--
+Clear the Session so the person entity becomes detached，这是session.clear()方法的作用，就是强制清除session的缓存。flush()方法是强制缓存中的额内容和数据库中的内容做同步，commit()方法会默认包含flush(),flush同步时机是由flushmode决定的，可以手动设置。
