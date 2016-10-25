@@ -120,3 +120,7 @@ hibernate可以通过数据库的表生成实体类以及xml配置文件，此�
 26
 --
 hibernate.cfg.xml不必一定叫这个名， 如果改叫其他的名字，只要在sessionFactory = new AnnotationConfiguration().configure("XXX").buildSessionFactory()即可.openSession()永远是打开新的session，需要close().getCurrentSession() 如果有就会拿到当前存在的，所以拿到的session与刚才的session是相同的，但是如果session commit之后，这个session就关闭了，不用手动close().此时如果再getCurrentSession()就会得到 一个新的session。getCurrentSession一般用于一个事务中（transaction）多个事件，比如添加一个用户，添加后写入log，此时就应该是一个session。current_session_context_class表示目前session的上下文，jta, thread, managed, or a custom class四种取值。主要有两种上下文：JTA以及thread，jta运行时需要application server的支持，分布式界定事务，thread主要从数据库界定事务
+
+28
+--
+openSession与getCurrentSession不能混用。对象的三种状态：transient、persistent、detached。刚开始是transient状态，save之后是persistent状态，session close之后，变成detached状态。特征，transient：无ID。save之后，缓存中和数据库都有id。但是commit后之后数据库有id，缓存没有id。
