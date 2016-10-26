@@ -140,4 +140,4 @@ Clear the Session so the person entity becomes detached，这是session.clear()�
 
 35
 --
-主要讲了对象之间一对一的关系映射，举例husband和wife，husband中有一个Wife引用，生成setWife，getWife方法，然后在getWifes方法上写上@OneToOne，这样就会自动建立两个表之间的关联。
+主要讲了对象之间一对一的关系映射，举例husband和wife，husband中有一个Wife引用，生成setWife，getWife方法，然后在getWifes方法上写上@OneToOne，这样就会自动建立两个表之间的关联。如果要想设置映射的外键的属性，可以用@JoinColumn(),里面可以设置name=“XXX”,表示生成列的名称。
