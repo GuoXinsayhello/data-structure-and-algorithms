@@ -137,3 +137,7 @@ update=true|false,但是这种方式不灵活，很少用。第二种方法是�
 33
 --
 Clear the Session so the person entity becomes detached，这是session.clear()方法的作用，就是强制清除session的缓存。flush()方法是强制缓存中的额内容和数据库中的内容做同步，commit()方法会默认包含flush(),flush同步时机是由flushmode决定的，可以手动设置。
+
+35
+--
+主要讲了对象之间一对一的关系映射，举例husband和wife，husband中有一个Wife引用，生成setWife，getWife方法，然后在getWifes方法上写上@OneToOne，这样就会自动建立两个表之间的关联。
