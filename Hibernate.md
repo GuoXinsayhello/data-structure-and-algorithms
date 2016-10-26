@@ -140,4 +140,8 @@ Clear the Session so the person entity becomes detached，这是session.clear()�
 
 35
 --
-主要讲了对象之间一对一的关系映射，举例husband和wife，husband中有一个Wife引用，生成setWife，getWife方法，然后在getWifes方法上写上@OneToOne，这样就会自动建立两个表之间的关联。如果要想设置映射的外键的属性，可以用@JoinColumn(),里面可以设置name=“XXX”,表示生成列的名称。
+主要讲了对象之间一对一的关系映射，举例husband和wife，husband中有一个Wife引用，生成setWife，getWife方法，然后在getWifes方法上写上@OneToOne，这样就会自动建立两个表之间的关联。如果要想设置映射的外键的属性，可以用@JoinColumn(),里面可以设置name=“XXX”,表示生成列的名称。当然也可以在xml文件中设置\<many-to-one  unique="true"/> 标签,虽然是多对一，但是加上unique之后就变成一对一的了。不过貌似现在hibernate都提倡用annotation，xml配置的在user guide都没有了。以上是一对一单向外键关联。<br>
+
+37
+--
+讲了对象之间OneToOne的双向外键关联，继续上面的，在husband和wife中都添加对方的引用，然后分别在相应的get方法上添加@OneToOne注解，这时两个表都会分别生成对方的关联，用powerdesigner就会看到两个表有各自指向对方的箭头。因此此时在Wife类的getHusband方法@OneToOne后添加(mappedBy="wife").只要有双向关联，mappedby一定要设，只要定义一边就可以。
