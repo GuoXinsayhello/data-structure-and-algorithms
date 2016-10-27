@@ -1,4 +1,62 @@
+1.Two Sum
+--
+```java
+ int[] nums={2,1,3};
+int[] nums2=nums;
+Arrays.sort(nums);
+for(int i:nums2)
+System.out.println(i);
+```
+发现一个问题，这时输出的是1,2,3，而不是2,1,3，这就是引用拷贝，如果要想深度拷贝的话，需要用clone()方法，如下：
+```java
+ int[] nums={2,1,3};
+ int[] nums2=new int[3];
+ nums2=nums.clone();
+```
 
+下面这种方法自己写的，击败了99.39%的用户
+```java
+public class Solution {
+    public int[] twoSum(int[] nums, int target) {
+    	int[] nums2=new int[3];
+    	nums2=nums.clone();
+    	Arrays.sort(nums);
+    	int le=0;
+    	int ri=nums.length-1;
+    	int n1=0,n2=0;
+    	while(le<ri){
+    		if(nums[le]+nums[ri]==target){
+    			n1=nums[le];
+    			n2=nums[ri];
+    			
+    			break;
+    		}
+    		else if(nums[le]+nums[ri]>target){
+    			ri--;
+    		}
+    		else
+    			le++;
+    	}
+    	int fi1=0;
+    	int fi2=0;
+    	for(int i=0;i<nums.length;i++){
+    		if(nums2[i]==n1){
+    			fi1=i;
+    			break;
+    		}	
+    	}
+    	for(int j=nums.length-1;j>=0;j--){
+    		if(nums2[j]==n2){
+    			fi2=j;
+    			break;
+    		}	
+    	}
+    	return new int[]{fi1,fi2};
+	}
+}
+```
+发现其实和服务器的性能有关，这个代码后来提交只能击败82%的用户。<br>
+看到得分比较多的是用一个HashMap来做，感觉想法一般。
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
