@@ -154,4 +154,8 @@ Clear the Session so the person entity becomes detached，这是session.clear()�
         @JoinColumn(name = "lname", referencedColumnName = "lastname")
     })
 ```
-这是语法，表示联合的主键参考了谁，生成的列名称叫什么。
+这是语法，表示联合的主键参考了谁，生成的列名称叫什么。并且联合主键类要实现Serializable接口，并且要重写equals方法以及hashcode()方法。
+
+41.
+--
+讲的是组件映射，就是两个类，其中一个类B是另外一个类A的一部分，最后映射到数据库中是一张表，B称为A的组件，因此类B不用写@Entity，同时也不用写自己的主键，不用@Id.类A中要有B的引用，然后在getB的方法上添加上@Embedded，此时cfg.xml的\<mapping \>标签不用y映射B类了。在xml文件中也非常简单，只需要用\<component即可，同样，官方已经没有了。
