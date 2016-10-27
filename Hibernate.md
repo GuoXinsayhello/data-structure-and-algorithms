@@ -147,4 +147,11 @@ Clear the Session so the person entity becomes detached，这是session.clear()�
 讲了对象之间OneToOne的双向外键关联，继续上面的，在husband和wife中都添加对方的引用，然后分别在相应的get方法上添加@OneToOne注解，这时两个表都会分别生成对方的关联，用powerdesigner就会看到两个表有各自指向对方的箭头。因此此时在Wife类的getHusband方法@OneToOne后添加(mappedBy="wife"),表示是由对方husband中的属性wife决定映射.只要有双向关联，mappedby一定要设，只要定义一边就可以。
 38
 --
-@PrimaryKeyJoinColumn用于主键关联,马士兵说主键关联不重要。
+@PrimaryKeyJoinColumn用于主键关联,马士兵说主键关联不重要。39讲了联合主键，<br>
+```java
+ @JoinColumns({
+        @JoinColumn(name = "fname", referencedColumnName = "firstname"),
+        @JoinColumn(name = "lname", referencedColumnName = "lastname")
+    })
+```
+这是语法，表示联合的主键参考了谁，生成的列名称叫什么。
