@@ -159,3 +159,7 @@ Clear the Session so the person entity becomes detached，这是session.clear()�
 41.
 --
 讲的是组件映射，就是两个类，其中一个类B是另外一个类A的一部分，最后映射到数据库中是一张表，B称为A的组件，因此类B不用写@Entity，同时也不用写自己的主键，不用@Id.类A中要有B的引用，然后在getB的方法上添加上@Embedded，此时cfg.xml的\<mapping \>标签不用y映射B类了。在xml文件中也非常简单，只需要用\<component即可，同样，官方已经没有了。
+
+42
+--
+讲的是多对一，方法是在多的这方加外键。比如一个类叫group，一个类叫user，多个user属于同一个group，在user类中引入Group的引用，然后在getGroup方法上添加@ManyToOne即可。43讲的是一对多的单向关联，在一的一方加入多的集合（set，map，数组都可以），比如private Set\<User\> users;然后在对应的get方法上添加@OneToMany 并且加上@JoinColumn，否则会生成一个group和user的中间表。
