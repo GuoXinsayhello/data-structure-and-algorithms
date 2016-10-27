@@ -80,6 +80,18 @@ public List<Integer> inorderTraversal(TreeNode root) {
     return list;
 }
 ```
+2.add two numbers
+--
+发现另外一个问题
+```java
+	ListNode l1=new ListNode(0);
+		ListNode l2=l1.next;//1
+		 l2=new ListNode(1);//2
+			System.out.println(l1.next.val);
+```
+例如这段代码会出现空指针错误1处和2处的l2不是同一个。如果打印l2.val会输出1<br>
+http://6924918.blog.51cto.com/6914918/1283761 这篇博客对于值传递和引用传递说的比较清楚，一般对于基本类型作为参数传递时，是传递值的拷贝，无论你怎么改变这个拷贝，原值是不会改变的，对象作为参数传递时，是把对象的引用传递过去，如果引用在方法内被改变了，那么原对象也跟着改变
+。
 95.Unique Binary Search Trees II
 --
 ```java
