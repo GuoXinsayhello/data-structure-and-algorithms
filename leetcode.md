@@ -57,6 +57,47 @@ public class Solution {
 ```
 发现其实和服务器的性能有关，这个代码后来提交只能击败82%的用户。<br>
 看到得分比较多的是用一个HashMap来做，感觉想法一般。
+2.add two numbers
+--
+发现另外一个问题
+```java
+	ListNode l1=new ListNode(0);
+		ListNode l2=l1.next;//1
+		 l2=new ListNode(1);//2
+			System.out.println(l1.next.val);
+```
+例如这段代码会出现空指针错误1处和2处的l2不是同一个。如果打印l2.val会输出1<br>
+http://6924918.blog.51cto.com/6914918/1283761 这篇博客对于值传递和引用传递说的比较清楚，一般对于基本类型作为参数传递时，是传递值的拷贝，无论你怎么改变这个拷贝，原值是不会改变的，对象作为参数传递时，是把对象的引用传递过去，如果引用在方法内被改变了，那么原对象也跟着改变。<br>
+又比如一个链表1-》2-》3-》4-》5-》6，开头是root,如果输入root2=root2.next；那么打印出root.next.valc会输出2<br>
+```java
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode c1 = l1;
+        ListNode c2 = l2;
+        ListNode sentinel = new ListNode(0);
+        ListNode d = sentinel;
+        int sum = 0;
+        while (c1 != null || c2 != null) {
+            sum /= 10;
+            if (c1 != null) {
+                sum += c1.val;
+                c1 = c1.next;
+            }
+            if (c2 != null) {
+                sum += c2.val;
+                c2 = c2.next;
+            }
+            d.next = new ListNode(sum % 10);
+            d = d.next;
+        }
+        if (sum / 10 == 1)
+            d.next = new ListNode(1);
+        return sentinel.next;
+    }
+}
+```
+这个方法还是比较简洁明了。
+。
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
@@ -80,18 +121,7 @@ public List<Integer> inorderTraversal(TreeNode root) {
     return list;
 }
 ```
-2.add two numbers
---
-发现另外一个问题
-```java
-	ListNode l1=new ListNode(0);
-		ListNode l2=l1.next;//1
-		 l2=new ListNode(1);//2
-			System.out.println(l1.next.val);
-```
-例如这段代码会出现空指针错误1处和2处的l2不是同一个。如果打印l2.val会输出1<br>
-http://6924918.blog.51cto.com/6914918/1283761 这篇博客对于值传递和引用传递说的比较清楚，一般对于基本类型作为参数传递时，是传递值的拷贝，无论你怎么改变这个拷贝，原值是不会改变的，对象作为参数传递时，是把对象的引用传递过去，如果引用在方法内被改变了，那么原对象也跟着改变
-。
+
 95.Unique Binary Search Trees II
 --
 ```java
