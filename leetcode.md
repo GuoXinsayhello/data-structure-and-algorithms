@@ -98,6 +98,56 @@ public class Solution {
 ```
 这个方法还是比较简洁明了。
 。
+3.Longest Substring Without Repeating Characters
+--
+List有一个subList(int fromindex，int endindex)方法,可以截取一个list。<br>
+map的put方法既可以作为insert来用，也可以当做update来用，比如：
+```java
+Map<Integer,String> map=new HashMap<Integer,String>();
+   map.put(1, "a");
+   map.put(1, "b");
+   System.out.println(map.get(1));
+```
+此时不会出现编译错误。
+```java
+public int lengthOfLongestSubstring(String s) {
+        if (s.length()==0) return 0;
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        int max=0;
+        for (int i=0, j=0; i<s.length(); ++i){
+            if (map.containsKey(s.charAt(i))){
+                j = Math.max(j,map.get(s.charAt(i))+1);
+            }
+            map.put(s.charAt(i),i);
+            max = Math.max(max,i-j+1);
+        }
+        return max;
+    }
+```
+这是一个投票较高的做法，下面是自己的做法
+```java
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+    	char[] arr=s.toCharArray();
+    	List<Character> set=new ArrayList<Character>();
+    	int l=0;
+    	for(int i=0;i<s.length();i++){
+    		if(!set.contains(arr[i]))
+    			set.add(arr[i]);
+    		else{
+    			if(set.size()>l)
+    				l=set.size();
+    			set=set.subList(set.indexOf(arr[i])+1,set.size());
+    			set.add(arr[i]);
+    		}
+    			
+    	}
+    	
+    	return Math.max(l, set.size());
+    }
+    }
+```
+自己的做法感觉想法差不多，不过用的数据结构不好，另外每次都要用sublist重新截取list，效率比较低。
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
