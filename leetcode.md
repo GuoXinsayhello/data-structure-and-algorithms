@@ -179,6 +179,28 @@ private void extendPalindrome(String s, int j, int k) {
 }}
 ```
 这个方法的思想就是从开始不断向周围扩展，直到不是回文字符，然后求出最大值。
+6.Zig Zag Conversion
+--
+```java
+public String convert(String s, int nRows) {
+    char[] c = s.toCharArray();
+    int len = c.length;
+    StringBuffer[] sb = new StringBuffer[nRows];
+    for (int i = 0; i < sb.length; i++) sb[i] = new StringBuffer();
+    
+    int i = 0;
+    while (i < len) {
+        for (int idx = 0; idx < nRows && i < len; idx++) // vertically down
+            sb[idx].append(c[i++]);
+        for (int idx = nRows-2; idx >= 1 && i < len; idx--) // obliquely up
+            sb[idx].append(c[i++]);
+    }
+    for (int idx = 1; idx < sb.length; idx++)
+        sb[0].append(sb[idx]);
+    return sb[0].toString();
+}
+```
+这个想法就是每一行都建立一个StringBuffer，然后按照ZIGZAG顺序依次写入每个StringBuffer。
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
