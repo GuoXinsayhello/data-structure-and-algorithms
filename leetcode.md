@@ -148,6 +148,37 @@ public class Solution {
     }
 ```
 自己的做法感觉想法差不多，不过用的数据结构不好，另外每次都要用sublist重新截取list，效率比较低。
+
+5.plin
+--
+```java
+public class Solution {
+private int lo, maxLen;
+
+public String longestPalindrome(String s) {
+	int len = s.length();
+	if (len < 2)
+		return s;
+	
+    for (int i = 0; i < len-1; i++) {
+     	extendPalindrome(s, i, i);  //assume odd length, try to extend Palindrome as possible
+     	extendPalindrome(s, i, i+1); //assume even length.
+    }
+    return s.substring(lo, lo + maxLen);
+}
+
+private void extendPalindrome(String s, int j, int k) {
+	while (j >= 0 && k < s.length() && s.charAt(j) == s.charAt(k)) {
+		j--;
+		k++;
+	}
+	if (maxLen < k - j - 1) {
+		lo = j + 1;
+		maxLen = k - j - 1;
+	}
+}}
+```
+这个方法的思想就是从开始不断向周围扩展，直到不是回文字符，然后求出最大值。
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
