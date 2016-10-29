@@ -201,6 +201,66 @@ public String convert(String s, int nRows) {
 }
 ```
 这个想法就是每一行都建立一个StringBuffer，然后按照ZIGZAG顺序依次写入每个StringBuffer。
+7.reverse Integer
+--
+下面这个方法是自己写的，用的是try catch去捕捉overflow。
+```java
+public class Solution {
+    public int reverse(int x) {
+    	String str=String .valueOf(x);
+    	StringBuffer sb=new StringBuffer();
+    	char[] arr=str.toCharArray();
+    	int res=0;
+    	if(x>=0){
+    		for(int i=arr.length-1;i>=0;i--){
+    			sb.append(arr[i]);
+    		}
+    		try{
+    			 res=Integer.parseInt(sb.toString());
+    		}
+    		catch(NumberFormatException e){
+    			return 0;
+    		}
+    		return res;
+    	}
+    	else{
+    		   sb.append('-');
+        		for(int j=arr.length-1;j>0;j--){
+        			sb.append(arr[j]);
+        		}
+        		try{
+        			 res=Integer.parseInt(sb.toString());
+        		}
+        		catch(NumberFormatException e){
+        			return 0;
+        		}
+        		return res;
+        	
+    	}
+    }
+    }
+```
+下面这个方法投票比较高，当出现overflow时，重新计算时结果与之前的不一样，此时抛出0.
+```java
+public int reverse(int x)
+{
+    int result = 0;
+
+    while (x != 0)
+    {
+        int tail = x % 10;
+        int newResult = result * 10 + tail;
+        if ((newResult - tail) / 10 != result)
+        { return 0; }
+        result = newResult;
+        x = x / 10;
+    }
+
+    return result;
+}
+```
+这个方法就是再算一遍，如果overflow，那么结果y和之前的就会不同。
+
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
