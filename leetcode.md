@@ -260,7 +260,26 @@ public int reverse(int x)
 }
 ```
 这个方法就是再算一遍，如果overflow，那么结果y和之前的就会不同。
-
+8.
+--
+```java
+public static int myAtoi(String str) {
+    if (str.isEmpty()) return 0;
+    int sign = 1, base = 0, i = 0;
+    while (str.charAt(i) == ' ')
+        i++;
+    if (str.charAt(i) == '-' || str.charAt(i) == '+')
+        sign = str.charAt(i++) == '-' ? -1 : 1;
+    while (i < str.length() && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+        if (base > Integer.MAX_VALUE / 10 || (base == Integer.MAX_VALUE / 10 && str.charAt(i) - '0' > 7)) {
+            return (sign == 1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+        }
+        base = 10 * base + (str.charAt(i++) - '0');
+    }
+    return base * sign;
+}
+```
+下面这个做法还是挺靠谱的。
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
