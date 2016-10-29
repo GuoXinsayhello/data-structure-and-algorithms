@@ -162,4 +162,17 @@ Clear the Session so the person entity becomes detached，这是session.clear()�
 
 42
 --
-讲的是多对一，方法是在多的这方加外键。比如一个类叫group，一个类叫user，多个user属于同一个group，在user类中引入Group的引用，然后在getGroup方法上添加@ManyToOne即可。43讲的是一对多的单向关联，在一的一方加入多的集合（set，map，数组都可以），比如private Set\<User\> users;然后在对应的get方法上添加@OneToMany 并且加上@JoinColumn，否则会生成一个group和user的中间表。
+讲的是多对一，方法是在多的这方加外键。比如一个类叫group，一个类叫user，多个user属于同一个group，在user类中引入Group的引用，然后在getGroup方法上添加@ManyToOne即可。<br>
+43讲的是一对多的单向关联，在一的一方加入多的集合（set，map，数组都可以），比如private Set\<User\> users;然后在对应的get方法上添加@OneToMany 并且加上@JoinColumn，否则会生成一个group和user的中间表。<br>
+44讲的是一对多，多对一的双向关联，此时需要在两个类中都加上注解标签，然后在少的一方，@OneToMany后加上（mappedBy="XXX"）xxx为对方类中的属性字段。
+
+45
+--
+讲的是manytomany，多对多单向关联， 如果要自定义生成的表名和列名，要用jointable。 
+```java
+@JoinTable(name = "repository_properties",
+        joinColumns = @JoinColumn(name = "repository_id"),
+        inverseJoinColumns = @JoinColumn(name = "property_id")
+    )
+```
+46讲的是manytomany的双向关联，要在两个类中都要写上@ManyToMany的注解，并且要写上 mappedBy,注意在 cfg.xml配置文件当中，如果是用注解配置的话要写上\<mapping class=" xxx.xxx.xxx/>  如果是xml配置的话，要写上\<mapping resource="xxx/xxx/xxx/xxx.hbm.xml/>
