@@ -280,6 +280,20 @@ public static int myAtoi(String str) {
 }
 ```
 下面这个做法还是挺靠谱的。
+9. Palindrome Number
+--
+```java
+public boolean isPalindrome(int x) {
+    if (x<0 || (x!=0 && x%10==0)) return false;
+    int rev = 0;
+    while (x>rev){
+    	rev = rev*10 + x%10;
+    	x = x/10;
+    }
+    return (x==rev || x==rev/10);
+}
+```
+这个做法还是挺好的， 思想就是把整数反过来，不过只反过来一半，这样就不会出现overflow的问题。
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
