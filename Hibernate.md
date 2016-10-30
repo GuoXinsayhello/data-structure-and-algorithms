@@ -176,3 +176,19 @@ Clear the Session so the person entity becomes detached，这是session.clear()�
     )
 ```
 46讲的是manytomany的双向关联，要在两个类中都要写上@ManyToMany的注解，并且要写上 mappedBy,注意在 cfg.xml配置文件当中，如果是用注解配置的话要写上\<mapping class=" xxx.xxx.xxx/>  如果是xml配置的话，要写上\<mapping resource="xxx/xxx/xxx/xxx.hbm.xml/>
+
+47.
+--
+讲的是增删改查，如果要插入一个数据
+```java
+public void testSaveUser{
+ User u = new User();
+ Group g= new Group();
+ u.setGroup(g);
+ SessionFactory s = sessionFactory.getCurrentSession();
+ s.beginTransaction();
+ s.save(g);
+ s.save(u);
+ s.getTansaction().commit();
+
+}
