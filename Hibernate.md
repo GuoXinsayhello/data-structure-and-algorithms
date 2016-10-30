@@ -187,8 +187,10 @@ public void testSaveUser{
  u.setGroup(g);
  SessionFactory s = sessionFactory.getCurrentSession();
  s.beginTransaction();
- s.save(g);
- s.save(u);
+ s.save(g);//1
+ s.save(u);//2
  s.getTansaction().commit();
 
 }
+```
+注意1处和2处的程序，现在user和group有关联，所以如果只写s.save(u),不写s.save(g)的话，需要在user类的@ManyToOne注解后添加cascade属性，指明为ALL，表示增删改查的所有时候都会将group和user级联在一起。
