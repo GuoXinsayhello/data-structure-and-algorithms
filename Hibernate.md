@@ -193,4 +193,8 @@ public void testSaveUser{
 
 }
 ```
-注意1处和2处的程序，现在user和group有关联，所以如果只写s.save(u),不写s.save(g)的话，需要在user类的@ManyToOne注解后添加cascade属性，指明为ALL，表示增删改查的所有时候都会将group和user级联在一起。
+注意1处和2处的程序，现在user和group有关联，所以如果只写s.save(u),不写s.save(g)的话，需要在user类的@ManyToOne注解后添加cascade属性，指明为ALL，表示增删改查的所有时候都会将group和user级联在一起。双向关系的时候要设置好双向关联，否则可能会出现有关联的两个表没有存进去。
+
+48
+--
+讲的是查（read），User u=(User)s.get(User.class,1);此时在manytoone的模式中，即使没有指定cascade，也会把one取出来。但是如果是Group g=(group)s.get(Group.class,1);就是要取一的一方，不会吧把多的一方也取出来，即使cascade设置为all也不会取出来，此时的fetch默认为lazy。所以cascade管理的是CUD，没有R。fetch管理load，get等读的操作。fetch的选择有LAZY和EAGER两种。
