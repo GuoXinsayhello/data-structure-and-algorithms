@@ -197,4 +197,5 @@ public void testSaveUser{
 
 48
 --
-讲的是查（read），User u=(User)s.get(User.class,1);此时在manytoone的模式中，即使没有指定cascade，也会把one取出来。但是如果是Group g=(group)s.get(Group.class,1);就是要取一的一方，不会吧把多的一方也取出来，即使cascade设置为all也不会取出来，此时的fetch默认为lazy。所以cascade管理的是CUD，没有R。fetch管理load，get等读的操作。fetch的选择有LAZY和EAGER两种。
+讲的是查（read），User u=(User)s.get(User.class,1);此时在manytoone的模式中，即使没有指定cascade，也会把one取出来。但是如果是Group g=(group)s.get(Group.class,1);就是要取一的一方，不会吧把多的一方也取出来，即使cascade设置为all也不会取出来，此时的fetch默认为lazy。所以cascade管理的是CUD，没有R。fetch管理load，get等读的操作。fetch的选择有LAZY和EAGER两种。<br>
+49 如果设置为lazy，那么直到get的时候才会从内存去拿， 如果此时session已经commit的话，那么就会报错。
