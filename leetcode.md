@@ -359,6 +359,28 @@ public boolean isMatch(String s, String p) {
     return isMatch(s, p.substring(2));
 }
 ```
+
+11. Container With Most Water
+这道题第一遍的时候没有写出来，第二遍的时候自己写的用的是投票最高的方法，s提交之后居然超时。下面是自己写的方法。
+--
+```java
+
+    public int maxArea(int[] h) {
+        int l=0,r=h.length-1;
+        int max=Math.min(h[r], h[l])*(r-l);
+        while(l<r){
+        	if(h[l]<=h[r]){
+        		max=Math.max(max, h[l]*(r-l));
+        		l++;
+        	}
+        	else{
+        		max=Math.max(max, h[r]*(r-l));
+        		r--;
+        	}
+        }
+        return max;
+    }
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
