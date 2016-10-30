@@ -333,6 +333,32 @@ public class Solution {
     }
 }
 ```
+下面这个方法用的是递归来做的
+```java
+public boolean isMatch(String s, String p) {
+    if (p.isEmpty()) {
+        return s.isEmpty();
+    }
+
+    if (p.length() == 1 || p.charAt(1) != '*') {
+        if (s.isEmpty() || (p.charAt(0) != '.' && p.charAt(0) != s.charAt(0))) {
+            return false;
+        } else {
+            return isMatch(s.substring(1), p.substring(1));
+        }
+    }
+    
+    //P.length() >=2
+    while (!s.isEmpty() && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.')) {  
+        if (isMatch(s, p.substring(2))) { 
+            return true;                     
+        }                                    
+        s = s.substring(1);
+    }
+
+    return isMatch(s, p.substring(2));
+}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
