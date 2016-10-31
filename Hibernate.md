@@ -207,3 +207,9 @@ cascade可以选择的类型persist，merge表示调用这些方法的时候会c
 53.
 --
 集合映射。可以在list添加@OrderBy（）进行排序。当然k也可以在HQL语言中用语句排序。如果要用map的话，有一个@MapKey注解m，表示用哪个作为key，比如@MapKey（name=“id”）
+55
+--
+讲了继承映射，第一种方法：就父类一张表，继承类型叫SINGLE_TABLE。在父类中用@Inheritance注解类，@DiscriminatorColumn表示区分器类型，名字等，@DiscriminatorValue表示父类如果存到表中用什么 样的字符串表示父类类型。子类中不要写id，因为父类已经有了， 子类中写上@DiscriminatorValue（“student”），表示插入表中的字段名叫什么。<br>。
+第二种方法:子类也有表，父表中拥有子表的所有属性，继承类型为TABLE_PER_CLASS。不过这种方法比较麻烦，因为学生和老师的id不能一样，因此id的生成策略不能自动，所以要用bytable<br>
+第三种方法： 父表是共有字段，子表是独有字段，不过通过主键与父表连接。此时父类中@Inheritance（stragy=InterianceType.JOINED）.<br>
+第一和第三种用的比较多。
