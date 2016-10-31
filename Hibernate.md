@@ -202,4 +202,4 @@ public void testSaveUser{
 
 50
 --
-cascade可以选择的类型persist，merge表示调用这些方法的时候会cascade
+cascade可以选择的类型persist，merge表示调用这些方法的时候会cascade。如果想要删除某条user，可以首先打破user与group的关联关系，比如user.setGroup(null);或者也可以使用HQL或者EJBQL语句，比如ssession.createQuery("delete from User u where u.id=1")
