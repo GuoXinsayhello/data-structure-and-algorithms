@@ -203,3 +203,7 @@ public void testSaveUser{
 50
 --
 cascade可以选择的类型persist，merge表示调用这些方法的时候会cascade。如果想要删除某条user，可以首先打破user与group的关联关系，比如user.setGroup(null);或者也可以使用HQL或者EJBQL语句，比如ssession.createQuery("delete from User u where u.id=1")
+
+53.
+--
+集合映射。可以在list添加@OrderBy（）进行排序。当然k也可以在HQL语言中用语句排序。如果要用map的话，有一个@MapKey注解m，表示用哪个作为key，比如@MapKey（name=“id”）
