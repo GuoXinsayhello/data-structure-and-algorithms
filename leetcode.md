@@ -381,6 +381,52 @@ public boolean isMatch(String s, String p) {
         return max;
     }
 ```
+12. Integer to Roman
+--
+```java
+public class Solution {
+public String intToRoman(int num) {
+
+    int[] values = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
+    String[] strs = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+    
+    StringBuilder sb = new StringBuilder();
+    
+    for(int i=0;i<values.length;i++) {
+        while(num >= values[i]) {
+            num -= values[i];
+            sb.append(strs[i]);
+        }
+    }
+    return sb.toString();
+}
+```
+这个做法就是每次都要遍历一遍values。
+
+13.
+--
+```java
+public List<List<Integer>> threeSum(int[] num) {
+    Arrays.sort(num);
+    List<List<Integer>> res = new LinkedList<>(); 
+    for (int i = 0; i < num.length-2; i++) {
+        if (i == 0 || (i > 0 && num[i] != num[i-1])) {
+            int lo = i+1, hi = num.length-1, sum = 0 - num[i];
+            while (lo < hi) {
+                if (num[lo] + num[hi] == sum) {
+                    res.add(Arrays.asList(num[i], num[lo], num[hi]));
+                    while (lo < hi && num[lo] == num[lo+1]) lo++;
+                    while (lo < hi && num[hi] == num[hi-1]) hi--;
+                    lo++; hi--;
+                } else if (num[lo] + num[hi] < sum) lo++;
+                else hi--;
+           }
+        }
+    }
+    return res;
+}
+```
+这个做法就是target从0到length-3,把0-target作为求和目标sum，然后low为该目标的o右边一位，hi为最右，不断验证lo+hi是否等于sum，等于的话就x记录下来，然后lo++，hi--，看是否还有其他的组合，如果大于sum就hi--，否则lo++。
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
