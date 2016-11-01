@@ -427,6 +427,55 @@ public List<List<Integer>> threeSum(int[] num) {
 }
 ```
 这个做法就是target从0到length-3,把0-target作为求和目标sum，然后low为该目标的o右边一位，hi为最右，不断验证lo+hi是否等于sum，等于的话就x记录下来，然后lo++，hi--，看是否还有其他的组合，如果大于sum就hi--，否则lo++。
+
+16 3sum closest
+--
+自己写的
+```java
+public class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+    	int lo=0;
+    	int hi=nums.length-1;
+    	int gap=Integer.MAX_VALUE;
+    	int flag=0;
+    	Arrays.sort(nums);
+    	outer:for(int m=0;m<nums.length-2;m++){
+    		lo=m+1;
+    		hi=nums.length-1;
+    		
+    		while(lo<hi){
+    			if(nums[lo]+nums[hi]+nums[m]==target){
+    				flag=0;
+    				break outer;
+    			}
+    			else if(nums[lo]+nums[hi]+nums[m]-target<0){
+    				if(Math.abs(nums[lo]+nums[hi]+nums[m]-target)<gap){
+    					gap=Math.abs(nums[lo]+nums[hi]+nums[m]-target);
+    					flag=-1;
+    				}
+    				while(lo<hi && nums[lo+1]==nums[lo])lo++;
+    				lo++;
+    			}
+    			else{
+    				if(Math.abs(nums[lo]+nums[hi]+nums[m]-target)<gap){
+    					gap=Math.abs(nums[lo]+nums[hi]+nums[m]-target);
+    					flag=1;
+    				}
+    					
+    				while(lo<hi && nums[hi-1]==nums[hi])hi--;
+    				hi--;
+    			}
+    				
+    		}
+    	}
+    	if(flag==0)
+    		return target;
+    	else if(flag==-1)
+    		return target-gap;
+    	else
+    		return target+gap;
+	}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
