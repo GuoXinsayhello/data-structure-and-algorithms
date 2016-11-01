@@ -219,3 +219,17 @@ cascade可以选择的类型persist，merge表示调用这些方法的时候会c
 第二种方法:子类也有表，父表中拥有子表的所有属性，继承类型为TABLE_PER_CLASS。不过这种方法比较麻烦，因为学生和老师的id不能一样，因此id的生成策略不能自动，所以要用bytable<br>
 第三种方法： 父表是共有字段，子表是独有字段，不过通过主键与父表连接。此时父类中@Inheritance（stragy=InterianceType.JOINED）.<br>
 第一和第三种用的比较多。
+
+60
+--
+讲的是QL查询语言，Query q=session.createQuery("from Category"); 这是面向对象的查询语言，所以这里的Category是类名而不是表名。<br>
+"from Category c where c.id >:min )"此处冒号为占位符，q.setParameter("min",2);链式编程思想是将多个操作（多行代码）通过点号(.)链接在一起成为一句代码,使代码可读性好。如a(1).b(2).c(3)。q.setMaxResults(4)这个语句用于分页，表示每页最多多少条。<br>
+```java
+Query q = session.createQuery("select c.id,  c.name from Category c order by c.name desc");
+		List<Object[]> categories = (List<Object[]>)q.list();
+		for(Object[] o : categories) {
+			System.out.println(o[0] + "-" + o[1]);
+		}
+```
+此时是取出的两个字段，输出的q是一个object的数组。<br>
+Hibernate 1+N问题
