@@ -476,6 +476,59 @@ public class Solution {
     		return target+gap;
 	}
 ```
+17
+--
+下面这个做法真是服！
+```java
+public List<String> letterCombinations(String digits) {
+    LinkedList<String> ans = new LinkedList<String>();
+    String[] mapping = new String[] {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    ans.add("");
+    for(int i =0; i<digits.length();i++){
+        int x = Character.getNumericValue(digits.charAt(i));
+        while(ans.peek().length()==i){
+            String t = ans.remove();
+            for(char s : mapping[x].toCharArray())
+                ans.add(t+s);
+        }
+    }
+    return ans;
+}
+```
+下面是自己的做法
+```java
+public class Solution {
+    public List<String> letterCombinations(String digits) {
+    	Map<Character,String> map=new HashMap<Character,String>();
+    	map.put('2', "abc");
+    	map.put('3', "def");
+    	map.put('4', "ghi");
+    	map.put('5', "jkl");
+    	map.put('6', "mno");
+    	map.put('7', "pqrs");
+    	map.put('8', "tuv");
+    	map.put('9', "wxyz");
+    	List<String> res=new ArrayList<String>();
+    	if(digits.length()==0)
+    		return res;
+    	res.add("");
+    	for(int i=0;i<digits.length();i++){
+    		res=ge(res,digits.charAt(i),map);
+    	}
+    	return res;
+    }
+    public List<String> ge(List<String> ls,char ch,Map<Character,String> map){
+    	List<String> res_ls=new ArrayList<String>();
+    	for(String str:ls){
+    		int l=map.get(ch).length();
+    		for(int j=0;j<l;j++){
+    			res_ls.add(str+map.get(ch).charAt(j));
+    		}
+    	}
+    	return res_ls;
+    }
+}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
