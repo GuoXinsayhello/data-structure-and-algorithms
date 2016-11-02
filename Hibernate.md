@@ -232,4 +232,11 @@ Query q = session.createQuery("select c.id,  c.name from Category c order by c.n
 		}
 ```
 此时是取出的两个字段，输出的q是一个object的数组。<br>
-Hibernate 1+N问题
+Hibernate 1+N问题<br>。
+Query#list - executes the select query and returns back the list of results.<br>
+Query#uniqueResult - executes the select query and returns the single result. If there were more than one result an exception is thrown.
+```java
+Query q = session.createQuery("select count(*) from Msg m");
+long count = (Long)q.uniqueResult();
+```
+返回的是一个long类型
