@@ -565,6 +565,30 @@ public class Solution {
 }
 ```
 这个是基于3 sum的做法，挺靠谱。
+
+19.
+下面这个做法我服，我发现linkedlist套路就是搞速度不一样的指针，或者是出发时间不一样的指针。
+```java
+public ListNode removeNthFromEnd(ListNode head, int n) {
+    
+    ListNode start = new ListNode(0);
+    ListNode slow = start, fast = start;
+    slow.next = head;
+    
+    //Move fast in front so that the gap between slow and fast becomes n
+    for(int i=1; i<=n+1; i++)   {
+        fast = fast.next;
+    }
+    //Move fast to the end, maintaining the gap
+    while(fast != null) {
+        slow = slow.next;
+        fast = fast.next;
+    }
+    //Skip the desired node
+    slow.next = slow.next.next;
+    return start.next;
+}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
