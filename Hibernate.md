@@ -240,3 +240,23 @@ Query q = session.createQuery("select count(*) from Msg m");
 long count = (Long)q.uniqueResult();
 ```
 返回的是一个long类型
+
+62
+--
+is empty是测试集合的属性是否为空。is null是测试某个值是否为空。"where p.name like 'Jo%'", Person.class "其中%表示0个或者多个,\_下划线表示一个。<br>
+QL语句中用in还是exists，马士兵说用exists，因为相对于in，exists执行效率高。
+```java
+@NamedQueries(
+    @NamedQuery(
+        name = "get_person_by_name",
+        query = "select p from Person p where name = :name"
+    )
+)
+```
+表示命名的query，对一个query语句进行命名。<br>
+```java
+List<Object[]> persons = session.createSQLQuery(
+    "SELECT * FROM person" )
+.list();
+```
+表示使用数据库本身的语言，现在person就不是一个类名了，而是表名
