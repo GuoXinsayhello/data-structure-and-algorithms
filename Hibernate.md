@@ -260,3 +260,51 @@ List<Object[]> persons = session.createSQLQuery(
 .list();
 ```
 表示使用数据库本身的语言，现在person就不是一个类名了，而是表名
+
+63.
+--
+讲了QBC（query by criteria）,通过criteria增加限制
+```java
+List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.like("name", "Fritz%") )
+    .add( Restrictions.or(
+        Restrictions.eq( "age", new Integer(0) ),
+        Restrictions.isNull("age")
+    ) )
+    .list();
+```
+讲了QBE（query by example），设计思想就查找出最像example的那个
+```java
+Session session = sf.openSession();
+		session.beginTransaction();
+		Topic tExample = new Topic();
+		tExample.setTitle("T_");
+		
+		Example e = Example.create(tExample)
+					.ignoreCase().enableLike();
+		Criteria c = session.createCriteria(Topic.class)
+					 .add(Restrictions.gt("id", 2))
+					 .add(Restrictions.lt("id", 8))
+					 .add(e)
+					 ;
+					 
+		
+		for(Object o : c.list()) {
+			Topic t = (Topic)o;
+			System.out.println(t.getId() + "-" + t.getTitle());
+		}
+		session.getTransaction().commit();
+		session.close();
+```
+64
+--
+讲了性能优化，session.clear()方法用于清除session，防止对内存的过多占用。<br>
+Java有内存泄露吗？<br>
+语法级别没有，但是在实际运用中可能会出现，比如打开一个连接池，没有f关闭。什么时候会遇到1+N的问题？
+前提：Hibernate默认表与表的关联方法是fetch="select"，不是fetch="join",这都是为了懒加载而准备的。<br>
+1）一对多(<set><list>) ，在1的这方，通过1条sql查找得到了1个对象，由于关联的存在 ，那么又需要将这个对象关联的集合取出，所以合集数量是n还要发出n条sql，于是本来的1条sql查询变成了1 +n条 。<br> 
+2）多对一<many-to-one>  ，在多的这方，通过1条sql查询得到了n个对象，由于关联的存在,也会将这n个对象对应的1 方的对象取出， 于是本来的1条sql查询变成了1 +n条 。<br>
+3）iterator 查询时,一定先去缓存中找（1条sql查集合,只查出ID），在没命中时，会再按ID到库中逐一查找， 产生1+n条SQL<br>
+怎么解决1+N 问题？<br>
+1 ）lazy=true， hibernate3开始已经默认是lazy=true了；lazy=true时不会立刻查询关联对象，只有当需要关联对象（访问其属性，非id字段）时才会发生查询动作。<br>
+2) 当然你也可以设定fetch="join"，一次关联表全查出来，但失去了懒加载的特性。
