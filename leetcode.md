@@ -427,7 +427,11 @@ public List<List<Integer>> threeSum(int[] num) {
 }
 ```
 这个做法就是target从0到length-3,把0-target作为求和目标sum，然后low为该目标的o右边一位，hi为最右，不断验证lo+hi是否等于sum，等于的话就x记录下来，然后lo++，hi--，看是否还有其他的组合，如果大于sum就hi--，否则lo++。
-
+```java
+List<List<Integer>> lls=new LinkedList<List<Integer>>();
+	    lls.add(Arrays.asList(1,2,3));
+```
+这样就不用new一个新的List\<Integer\>
 16 3sum closest
 --
 自己写的
@@ -529,6 +533,38 @@ public class Solution {
     }
 }
 ```
+18 4 sum
+--
+```java
+public class Solution {
+    public List<List<Integer>> fourSum(int[] num, int target) {
+        ArrayList<List<Integer>> ans = new ArrayList<>();
+        if(num.length<4)return ans;
+        Arrays.sort(num);
+        for(int i=0; i<num.length-3; i++){
+            if(i>0&&num[i]==num[i-1])continue;
+            for(int j=i+1; j<num.length-2; j++){
+                if(j>i+1&&num[j]==num[j-1])continue;
+                int low=j+1, high=num.length-1;
+                while(low<high){
+                    int sum=num[i]+num[j]+num[low]+num[high];
+                    if(sum==target){
+                        ans.add(Arrays.asList(num[i], num[j], num[low], num[high]));
+                        while(low<high&&num[low]==num[low+1])low++;
+                        while(low<high&&num[high]==num[high-1])high--;
+                        low++;
+                        high--;
+                    }
+                    else if(sum<target)low++;
+                    else high--;
+                }
+            }
+        }
+        return ans;
+    }
+}
+```
+这个是基于3 sum的做法，挺靠谱。
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
