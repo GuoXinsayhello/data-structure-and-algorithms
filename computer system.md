@@ -51,4 +51,5 @@ http://blog.csdn.net/zq602316498/article/details/38796095 这篇博客介绍了T
 第6章：存储器层次结构
 --
 SRAM比DRAM更快，但是更贵，SRAM用来做高速缓存存储器，高速缓存是作为CPU和主存之间的缓存区域，DRAM用来作为主存以及图形系统的帧缓冲区。SRAM将每一位存储在一个双稳态的存储器单元里面，就是能够无限期地保持在两个不同的电压配置或者状态之一。SRAM只要有电，就会保持不变，DRAM与SRAM在断电后都会丢失信息。<br>
-PROM(PROGRAMMABLE ROM,可编程ROM）只能被编程一次。EPROM（Erasable Programmable ROM）可擦写可编程ROM，EEPROM是电子可擦除PROM。固态硬盘是一种基于闪存的存储技术。
+PROM(PROGRAMMABLE ROM,可编程ROM）只能被编程一次。EPROM（Erasable Programmable ROM）可擦写可编程ROM，EEPROM是电子可擦除PROM。固态硬盘是一种基于闪存的存储技术。<br>
+有良好局部性的程序比局部性差的程序运行得更快。比如在两层循环中，对一个w二维数组求和，因为二维数组在存储中是以行优先的顺序存储的（也就是先存第一行，再存第二行），所以代码如果是行优先的话那么代码就会具有较好的局部性，反之如果以列优先的话，那么代码的局部性就会比较差。
