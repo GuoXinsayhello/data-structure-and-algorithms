@@ -308,3 +308,55 @@ Java有内存泄露吗？<br>
 怎么解决1+N 问题？<br>
 1 ）lazy=true， hibernate3开始已经默认是lazy=true了；lazy=true时不会立刻查询关联对象，只有当需要关联对象（访问其属性，非id字段）时才会发生查询动作。<br>
 2) 当然你也可以设定fetch="join"，一次关联表全查出来，但失去了懒加载的特性。
+
+65
+--
+讲的是list()方法和iterator方法的区别，首先iterator取出的是id，只有当用到对象的内容的时候才会取其中的内容。而list()会把所有内容立刻取出来。session中list第二次发出，仍然会到数据库中查询。iterator第二次会首先找session级的缓存。
+下面是两个方法的代码
+```java
+//join fetch
+	@Test
+	public void testQueryList() {
+		Session session = sf.openSession();
+		session.beginTransaction();
+		//List<Topic> topics = (List<Topic>)session.createCriteria(Topic.class).list();
+		List<Category> categories = (List<Category>)session.createQuery("from Category").list();
+		
+		for(Category c : categories) {
+			System.out.println(c.getName());
+		}
+		
+		List<Category> categories2 = (List<Category>)session.createQuery("from Category").list();
+		for(Category c : categories2) {
+			System.out.println(c.getName());
+		}
+		session.getTransaction().commit();
+		session.close();
+		
+	}
+	
+	//join fetch
+	@Test
+	public void testQueryIterate() {
+		Session session = sf.openSession();
+		session.beginTransaction();
+		//List<Topic> topics = (List<Topic>)session.createCriteria(Topic.class).list();
+		Iterator<Category> categories = (Iterator<Category>)session.createQuery("from Category").iterate();
+		
+		
+		while(categories.hasNext()) {
+			Category c = categories.next();
+			System.out.println(c.getName());
+		}
+		
+		Iterator<Category> categories2 = (Iterator<Category>)session.createQuery("from Category").iterate();
+		
+		while(categories2.hasNext()) {
+			Category c = categories2.next();
+			System.out.println(c.getName());
+		}
+		session.getTransaction().commit();
+		session.close();
+		
+	}
+```
