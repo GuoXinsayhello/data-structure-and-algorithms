@@ -589,6 +589,26 @@ public ListNode removeNthFromEnd(ListNode head, int n) {
     return start.next;
 }
 ```
+22. Generate Parentheses
+--
+这个用的是回溯算法，比较不错。但是回溯算法不是很理解。
+```java
+public List<String> generateParenthesis(int n) {
+        List<String> list = new ArrayList<String>();
+        backtrack(list, "", 0, 0, n);
+        return list;
+    }
+    public void backtrack(List<String> list, String str, int open, int close, int max){
+        if(str.length() == max*2){
+            list.add(str);
+            return;
+        }
+        if(open < max)
+            backtrack(list, str+"(", open+1, close, max);
+        if(close < open)
+            backtrack(list, str+")", open, close+1, max);
+    }
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
