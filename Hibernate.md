@@ -363,4 +363,11 @@ Java有内存泄露吗？<br>
 66
 --
 主要讲的是缓存和隔离，Hibernate有 两级缓存，也有说是三级缓存的，一级，二级以及查询缓存。一级缓存是session级别的缓存，也就是不同的session不能公用该缓存，而二级缓存不同的session可以公用，也就是说二级缓存可以跨session，是sessionfactory级别的缓存。要想用二级缓存，首先要在cfg.xml配置文件里面打开二级缓存.马士兵在此用的是ehcache，然后导入了一个ehcache.xml，也就是ehcache的配置文件，里面详细说明了ehcache的配置.二级缓存适合放经常被访问，数据量不大，改动不大不会经常被访问的对象。要用的话要在类上写上注解@Cache，其中要写上@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.XXX)这个属性，XXX可以为READ_WRITE，READ_ONLY等等。 默认 情况下，load以及iterator会使用二级缓存。list会向二级缓存加数据，但是查询的时候不会首先去二级缓存找。查询缓存就是重复查询会使用的缓存。<br>
-要想使用二级缓存，要在cfg.xml文件中设置cache.use_query_cache为true，然后再调用Cache.setCachable(true) 来调用二级缓存。打开二级缓存后不仅在同一个session里面两次查询只会发送一条SQL语句，跨session的 两次相同查询也会只发一条SQl语句。缓存算法有LRU，LFU，FIFO等
+要想使用二级缓存，要在cfg.xml文件中设置cache.use_query_cache为true，然后再调用Cache.setCachable(true) 来调用二级缓存。打开二级缓存后不仅在同一个session里面两次查询只会发送一条SQL语句，跨session的 两次相同查询也会只发一条SQl语句。缓存算法有LRU，LFU，FIFO等<br>
+
+68
+--
+事务的四个特性：A（Atomic）C（consistency）I(Isolation)D(durability).<br>
+并发事务可能出现的问题：<br>
+1:第一类丢失更新 2.脏读(读到了第二个事务还没有提交的数据）3，不可重复读（就是读取事务 读取了两遍，结果不一样）4第二类丢失更新（不可重复读的特殊 情况）5，幻读（讨论的是插入和删除，与不可重复读类似）
+
