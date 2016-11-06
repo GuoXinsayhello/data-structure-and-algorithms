@@ -678,6 +678,21 @@ public static ListNode merge(ListNode l1,ListNode l2){
 }
 ```
 这个方法用的是优先队列的方法，我按照两两合并的方法总是超时。
+24.swap nodes
+--
+这个用的是recursion的方法，
+```java
+public class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if ((head == null)||(head.next == null))
+            return head;
+        ListNode n = head.next;
+        head.next = swapPairs(head.next.next);
+        n.next = head;
+        return n;
+    }
+}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
