@@ -27,4 +27,8 @@ public class IndexAction3 extends ActionSupport {
         </action>
     </package>
 ```
-即可，返回类型为String类型，有一个execute()方法。找到与返回值对应的jsp。如果不配的话，会使用默认的ActionSupport 这个class，这个class里面有一个execute()方法，默认返回一个字符串"success".自己定义action，一般采用如上的从ActionSupport继承的方式。
+即可，返回类型为String类型，有一个execute()方法。找到与返回值对应的jsp。如果不配的话，会使用默认的ActionSupport 这个class，这个class里面有一个execute()方法，默认返回一个字符串"success".自己定义action，一般采用如上的从ActionSupport继承的方式。<br>
+Struts中的路径是按照action的路径而不是jsp的路径来确定的，所以尽量用绝对路径，不要用相对路径，或者是指定basepath，然后使用相对路径，比如这样：
+```xml
+<base href="<%=basePath%>">
+```
