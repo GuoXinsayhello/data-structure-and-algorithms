@@ -735,6 +735,37 @@ class Solution {
 };
 ```
 相当不错的方法。
+
+30. Substring with Concatenation of All Words  
+--
+下面这个做法的基本思想就是用一个hashmap保存L中的关键词，记录它们出现的次数，然后遍历给的String，不断如果有关键词出现，就从map中删除，如果最后mapw为空，说明删除完了，就是包含，就添加到结果当中。
+```java
+public static List<Integer> findSubstring(String S, String[] L) {
+    List<Integer> res = new ArrayList<Integer>();
+    if (S == null || L == null || L.length == 0) return res;
+    int len = L[0].length(); // length of each word
+    
+    Map<String, Integer> map = new HashMap<String, Integer>(); // map for L
+    for (String w : L) map.put(w, map.containsKey(w) ? map.get(w) + 1 : 1);
+    
+    for (int i = 0; i <= S.length() - len * L.length; i++) {
+        Map<String, Integer> copy = new HashMap<String, Integer>(map);
+        for (int j = 0; j < L.length; j++) { // checkc if match
+            String str = S.substring(i + j*len, i + j*len + len); // next word
+            if (copy.containsKey(str)) { // is in remaining words
+                int count = copy.get(str);
+                if (count == 1) copy.remove(str);
+                else copy.put(str, count - 1);
+                if (copy.isEmpty()) { // matches
+                    res.add(i);
+                    break;
+                }
+            } else break; // not in L
+        }
+    }
+    return res;
+}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
