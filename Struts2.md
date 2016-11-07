@@ -32,3 +32,24 @@ Struts中的路径是按照action的路径而不是jsp的路径来确定的，�
 ```xml
 <base href="<%=basePath%>">
 ```
+13
+--
+可以在配置文件中设定method=XXX来指定执行哪个方法，也可以在url地址中动态指定，动态方法调用DMI，后者比较推荐，前者会产生太多action。<br>
+用action实现跳转：<br>
+首先在总的jsp里面写上
+```javascript
+<a href="<%=basePath %>actions/jumpadd">添加</a>
+    <a href="<%=basePath %>actions/jumpdelete">删除</a>
+```
+然后在strust.xml里面写上
+```xml
+<action name="jumpadd" class="com.hellostruts.IndexAction" >
+<result>/studentadd.jsp</result>
+</action>
+```
+也可以通过通配符配置，但是自己配置的一直没有成功，不知道为什么。
+```xml
+<action name="Student*" class="com.bjsxt.struts2.action.StudentAction" method="{1}">
+<result>/Student{1}_success.jsp</result>
+</action>
+```
