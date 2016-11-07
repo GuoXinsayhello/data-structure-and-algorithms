@@ -693,6 +693,48 @@ public class Solution {
     }
 }
 ```
+25
+--
+下面这个方法用的是递归，挺不错的，其实这个方法也揭示了如何把一个链翻转过来。基本思想就是构造一个temp保存head的next，然后构造一个cur，让head指向cur，然后cur，head，temp不断右移。
+```java
+public ListNode reverseKGroup(ListNode head, int k) {
+    ListNode curr = head;
+    int count = 0;
+    while (curr != null && count != k) { // find the k+1 node
+        curr = curr.next;
+        count++;
+    }
+    if (count == k) { // if k+1 node is found
+        curr = reverseKGroup(curr, k); // reverse list with k+1 node as head
+        // head - head-pointer to direct part, 
+        // curr - head-pointer to reversed part;
+        while (count-- > 0) { // reverse current k-group: 
+            ListNode tmp = head.next; // tmp - next head in direct part
+            head.next = curr; // preappending "direct" head to the reversed list 
+            curr = head; // move head of reversed part to a new node
+            head = tmp; // move "direct" head to the next node in direct part
+        }
+        head = curr;
+    }
+    return head;
+}
+```
+
+26.Remove Duplicates from Sorted Array
+--
+```java
+class Solution {
+    public:
+    int removeDuplicates(int A[], int n) {
+        if(n < 2) return n;
+        int id = 1;
+        for(int i = 1; i < n; ++i) 
+            if(A[i] != A[i-1]) A[id++] = A[i];
+        return id;
+    }
+};
+```
+相当不错的方法。
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
