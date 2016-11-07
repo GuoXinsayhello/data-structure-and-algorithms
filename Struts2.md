@@ -7,3 +7,23 @@ JRE:Java  Runtime  Enviromental(java运行时环境)。也就是我们说的JAVA
 10
 --
 在struts.xml里面，package标签用于区分action可能会出现重名的情况，表明action来自哪一个包，namespace可以不写，表示接收一切action，囊括了其他namespace处理不了的action，如果要写要以/开头，可以是/XXX,当然在浏览器访问的时候就要添加上/XXX。对于action标签，如果没有写name，那么name默认值是"success"。遇到一个问题，如果从前一个项目拷贝一个新项目的时候，马士兵说要修改web project settings的web context root改为和新的工程名一样的名字，但是我改之后还是没有用。weird。之前出现的解决方法是把copy的新的工程从server中remove，然后再debug就可以了。
+
+11
+--
+可以修改jsp源码的编码方式，输入中文，在window-preference-jsp。在action标签里面，可以写class=”xxx“，定义自己的action，这个xxx是一个普通的java类，
+```java
+public class IndexAction1 {
+	public String execute() {
+		return "success";
+	}
+}
+```
+具体的struts.xml如下
+```xml
+  <package name="front" extends="struts-default" namespace="/">
+        <action name="index" class="com.bjsxt.struts2.front.action.IndexAction1">
+            <result name="success">/ActionIntroduction.jsp</result>
+        </action>
+    </package>
+```
+即可，返回类型为String类型，有一个execute()方法。找到与返回值对应的jsp。如果不配的话，会使用默认的ActionSupport 这个class，这个class里面有一个execute()方法，默认返回一个字符串"success"
