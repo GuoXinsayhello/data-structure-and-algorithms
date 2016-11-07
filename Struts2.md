@@ -12,7 +12,8 @@ JRE:Java  Runtime  Enviromental(java运行时环境)。也就是我们说的JAVA
 --
 可以修改jsp源码的编码方式，输入中文，在window-preference-jsp。在action标签里面，可以写class=”xxx“，定义自己的action，这个xxx是一个普通的java类，
 ```java
-public class IndexAction1 {
+public class IndexAction3 extends ActionSupport {
+	@Override
 	public String execute() {
 		return "success";
 	}
@@ -26,4 +27,4 @@ public class IndexAction1 {
         </action>
     </package>
 ```
-即可，返回类型为String类型，有一个execute()方法。找到与返回值对应的jsp。如果不配的话，会使用默认的ActionSupport 这个class，这个class里面有一个execute()方法，默认返回一个字符串"success"
+即可，返回类型为String类型，有一个execute()方法。找到与返回值对应的jsp。如果不配的话，会使用默认的ActionSupport 这个class，这个class里面有一个execute()方法，默认返回一个字符串"success".自己定义action，一般采用如上的从ActionSupport继承的方式。
