@@ -62,3 +62,17 @@ return SUCCESS;
 ```
 使用通配符可以大大简化配置量。
 通过action+感叹号+方法名的跳转方法需要在struts.xml中添加\<constant name="struts.enable.DynamicMethodInvocation" value="true" />这样的一句话。
+
+16
+--
+讲的是域模型（DomainModel），就是在一个类A中包含一个类B，A中有setB和getB，B中包括一系列属性，包括name，age等。如果用modeldriven的方式，类A要实现ModelDriven接口，user需要自己new出来。
+```java
+public class TestPara extends ActionSupport implements ModelDriven<User>{
+	private User user =new User();
+	@Override
+	public User getModel() {
+		// TODO Auto-generated method stub
+		return user;
+	}
+}
+```
