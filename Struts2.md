@@ -47,10 +47,11 @@ Struts中的路径是按照action的路径而不是jsp的路径来确定的，�
 <result>/studentadd.jsp</result>
 </action>
 ```
-也可以通过通配符配置，但是自己配置的一直没有成功，不知道为什么。
+也可以通过通配符配置，但是自己配置的一直没有成功，不知道为什么。遇到了一个非常奇怪的现象，jumpadd的action不可以，而jumpdelete的方法就可以，很奇怪。
 ```xml
 <action name="Student*" class="com.bjsxt.struts2.action.StudentAction" method="{1}">
 <result>/Student{1}_success.jsp</result>
 </action>
 ```
 使用通配符可以大大简化配置量。
+通过action+感叹号+方法名的跳转方法需要在struts.xml中添加\<constant name="struts.enable.DynamicMethodInvocation" value="true" />这样的一句话。
