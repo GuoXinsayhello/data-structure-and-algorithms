@@ -48,6 +48,13 @@ Struts中的路径是按照action的路径而不是jsp的路径来确定的，�
 </action>
 ```
 也可以通过通配符配置，但是自己配置的一直没有成功，不知道为什么。遇到了一个非常奇怪的现象，jumpadd的action不可以，而jumpdelete的方法就可以，很奇怪。
+找到原因了，因为自己写的class是继承于ActionSupport的，如果自己随便写一个方法，比如
+```java
+public String aaa{
+return SUCCESS;
+}
+```
+这个aaa方法在actionsupport中没有，所以就找不到，如果换成execute的话就可以了。
 ```xml
 <action name="Student*" class="com.bjsxt.struts2.action.StudentAction" method="{1}">
 <result>/Student{1}_success.jsp</result>
