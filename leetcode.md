@@ -766,6 +766,26 @@ public static List<Integer> findSubstring(String S, String[] L) {
     return res;
 }
 ```
+31. Next Permutation
+--
+函数调用这个swap函数不能交换两个int的值，因为基本类型按照值传递，不会改变原有的数值。
+```java
+private void swap(int i,int j){
+    	int temp=0;
+    	temp=i;
+    	i=j;
+    	j=temp;
+    }
+```
+但是下面这个函数swap2就可以：
+```java
+private void swap2(int[] nums,int i,int j){
+	    	int temp=0;
+	    	temp=nums[i];
+	    	nums[i]=nums[j];
+	    	nums[j]=temp;
+	    }
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
