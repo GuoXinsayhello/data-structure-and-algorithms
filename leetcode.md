@@ -786,6 +786,27 @@ private void swap2(int[] nums,int i,int j){
 	    	nums[j]=temp;
 	    }
 ```
+32. Longest Valid Parentheses
+--
+下面这个方法比较巧妙
+```java
+public class Solution {
+    public int longestValidParentheses(String s) {
+        LinkedList<Integer> stack = new LinkedList<>();
+        int result = 0;
+        stack.push(-1);
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == ')' && stack.size() > 1 && s.charAt(stack.peek()) == '(') {
+                stack.pop();
+                result = Math.max(result, i - stack.peek());
+            } else {
+                stack.push(i);
+            }
+        }
+        return result;
+    }
+}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
