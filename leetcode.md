@@ -839,6 +839,35 @@ public:
 };
 ```
 注意这个题里面二分搜索与搜索pivot同时出现了，注意两者的区别，二分搜索while的条件是l<=r,而且都是mid+1或者mid-1.而搜索pivot的话while条件是lo\<hi,hi=mid而不是mid-1.
+34. Search for a Range
+--
+具体解释参见https://discuss.leetcode.com/topic/5891/clean-iterative-solution-with-two-binary-searches-with-explanation
+```java
+vector<int> searchRange(int A[], int n, int target) {
+    int i = 0, j = n - 1;
+    vector<int> ret(2, -1);
+    // Search for the left one
+    while (i < j)
+    {
+        int mid = (i + j) /2;
+        if (A[mid] < target) i = mid + 1;
+        else j = mid;
+    }
+    if (A[i]!=target) return ret;
+    else ret[0] = i;
+    
+    // Search for the right one
+    j = n-1;  // We don't have to set i to 0 the second time.
+    while (i < j)
+    {
+        int mid = (i + j) /2 + 1;	// Make mid biased to the right
+        if (A[mid] > target) j = mid - 1;  
+        else i = mid;				// So that this won't make the search range stuck.
+    }
+    ret[1] = j;
+    return ret; 
+}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
