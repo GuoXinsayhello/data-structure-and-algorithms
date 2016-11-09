@@ -65,7 +65,7 @@ return SUCCESS;
 
 16
 --
-讲的是域模型（DomainModel），就是在一个类A中包含一个类B，A中有setB和getB，B中包括一系列属性，包括name，age等。如果用modeldriven的方式，类A要实现ModelDriven接口，user需要自己new出来。
+讲的是域模型（DomainModel），就是在一个类A中包含一个类B，A中有setB和getB，B中包括一系列属性，包括name，age等。这种方式用的比较多，如果用modeldriven的方式，类A要实现ModelDriven接口，user需要自己new出来。
 ```java
 public class TestPara extends ActionSupport implements ModelDriven<User>{
 	private User user =new User();
