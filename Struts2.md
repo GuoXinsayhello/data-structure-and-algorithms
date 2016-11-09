@@ -124,5 +124,5 @@ public class LoginAction1 extends ActionSupport {
 ```
 然后在登陆成功的jsp中写入
 ```javascript
-<s:property value="#request.r1"/> | <%=request.getAttribute("r1") %> <br />
+<s:property value="#request.r1"/> | <%=request.getAttribute("r1") %> <br />//这句话中|是或者的关系，表示用#key还是用getAttribute都可以
 ```
