@@ -99,14 +99,14 @@ if(!name.equals("admin")){
 ```
 20
 --
-这个视频讲的是在后台写入一个数据，能够显示到网页当中，具体做法如下，在action的类里面，
+这个视频讲的是在后台写入一个数据，能够显示到网页当中，第一种方式具体做法如下，在action的类里面，
 ```java
 public class LoginAction1 extends ActionSupport {
 	private Map request;
 	private Map session;
 	private Map application;
 	public LoginAction1() {
-		request = (Map)ActionContext.getContext().get("request");
+		request = (Map)ActionContext.getContext().get("request");//ActionContext是threadlocal的一个对象，这种方式在构造方法中得到的
 		session = ActionContext.getContext().getSession();
 		application = ActionContext.getContext().getApplication();
 	}
@@ -125,4 +125,33 @@ public class LoginAction1 extends ActionSupport {
 然后在登陆成功的jsp中写入
 ```javascript
 <s:property value="#request.r1"/> | <%=request.getAttribute("r1") %> <br />//这句话中|是或者的关系，表示用#key还是用getAttribute都可以
+```
+上面的是第一种方式<br>
+第二种方式是这样的:<br>
+Action实现了SessionAware，ApplicationAware，RequestAware接口，用的是依赖注入的思想，不用在构造方法中自己去get，而是直接用接口的抽象方法去set，从struts2容器中去取，如下：
+```java
+@Override
+	public void setRequest(Map<String, Object> request) {
+		this.request = request;
+	}
+```
+推荐使用这种方法。<br>
+其中request，session，application可以是
+```java
+	private Map<String, Object> request;
+	private Map<String, Object> session;
+	private Map<String, Object> application;
+```
+这些一般e类型
+也可以是
+```java
+private HttpServletRequest request;
+	private HttpSession session;
+	private ServletContext application;
+```
+这种特殊类型。用于这种特殊类型的时候要实现ServletRequestAware这种接口。<br>
+可以在struts.xml文件中用\<include file="xxx.xml">把另外一个xml包含到struts.xml里面<br>
+可以为struts定义一个默认的action，当找不到action的时候就会调用这个action，如下：
+```xml
+<default-action-ref name="XXX"></default-action-ref>
 ```
