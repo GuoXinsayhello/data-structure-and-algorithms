@@ -155,3 +155,10 @@ private HttpServletRequest request;
 ```xml
 <default-action-ref name="XXX"></default-action-ref>
 ```
+
+27
+--
+开始讲result，首先说result的类型，如果不配置，默认类型是dispatcher，dispatcher可以跳转到jsp，html等等，但是不能是action，但是如果类型是chain可以跳转到action，通过chain也可以跳转到其他package的action，e可以使用param标签。下面是服务器端跳转与客户端跳转的区别：<br>
+1.使用服务器端跳转时，客户浏览器的地址栏并不会显示目标地址的URL，而是用客户端跳转时，地址栏当中会显示目标资源的URL；<br>
+2. 服务器端跳转是由客户端发送一个请求，请求一个服务器资源——如JSP和Servlet——，这个资源又将请求转到另一个服务器资源，然后再给客户端发送一个响应，也就是说服务器端跳转是客户端发送一次请求，服务器端给出一次响应；而客户端跳转的流程则不同。客户端同样是发送一个请求给服务器端资源，这个服务器资源会首先给客户端一个响应，客户端再根据这个响应当中所包含的地址，再次向服务器端发送一个请求，也就是说客户端跳转是两次请求，两次响应；<br>
+而redirect方式是客户端跳转。
