@@ -97,3 +97,32 @@ if(!name.equals("admin")){
 <s:fielderror fieldName="name1" theme="simple"/>
 <s:property value="errors.name[0]"/>//取出value stack中的值
 ```
+20
+--
+这个视频讲的是在后台写入一个数据，能够显示到网页当中，具体做法如下，在action的类里面，
+```java
+public class LoginAction1 extends ActionSupport {
+	private Map request;
+	private Map session;
+	private Map application;
+	public LoginAction1() {
+		request = (Map)ActionContext.getContext().get("request");
+		session = ActionContext.getContext().getSession();
+		application = ActionContext.getContext().getApplication();
+	}
+	public String execute() {
+		request.put("r1", "r1");  //下面这几个就是在后台放入数据，用户名和密码分别为r1，r1
+		session.put("s1", "s1");
+		application.put("a1", "a1");
+		return SUCCESS; 
+	}
+}
+```
+然后在index.jsp里面写入
+```javascript
+<input type="button" value="submit1" onclick="javascript:document.f.action='login/login1';document.f.submit();" />
+```
+然后在登陆成功的jsp中写入
+```javascript
+<s:property value="#request.r1"/> | <%=request.getAttribute("r1") %> <br />
+```
