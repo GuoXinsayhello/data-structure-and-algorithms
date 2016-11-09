@@ -808,6 +808,37 @@ public class Solution {
 }
 ```
 注意1处newh之后的LinkedList居然不用写类型。
+33. Search in Rotated Sorted Array
+--
+```java
+class Solution {
+public:
+    int search(int A[], int n, int target) {
+        int lo=0,hi=n-1;
+        // find the index of the smallest value using binary search.
+        // Loop will terminate since mid < hi, and lo or hi will shrink by at least 1.
+        // Proof by contradiction that mid < hi: if mid==hi, then lo==hi and loop would have been terminated.
+        while(lo<hi){
+            int mid=(lo+hi)/2;
+            if(A[mid]>A[hi]) lo=mid+1;
+            else hi=mid;
+        }
+        // lo==hi is the index of the smallest value and also the number of places rotated.
+        int rot=lo;
+        lo=0;hi=n-1;
+        // The usual binary search and accounting for rotation.
+        while(lo<=hi){
+            int mid=(lo+hi)/2;
+            int realmid=(mid+rot)%n;
+            if(A[realmid]==target)return realmid;
+            if(A[realmid]<target)lo=mid+1;
+            else hi=mid-1;
+        }
+        return -1;
+    }
+};
+```
+注意这个题里面二分搜索与搜索pivot同时出现了，注意两者的区别，二分搜索while的条件是l<=r,而且都是mid+1或者mid-1.而搜索pivot的话while条件是lo\<hi,hi=mid而不是mid-1.
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
