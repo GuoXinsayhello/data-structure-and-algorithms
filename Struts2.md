@@ -76,3 +76,24 @@ public class TestPara extends ActionSupport implements ModelDriven<User>{
 	}
 }
 ```
+19
+--
+讲了如果输入错误，如何给出提示的跳转。
+首先在action用到的类中写上：
+```java
+if(!name.equals("admin")){
+  this.addFieldError("name1", "fuck name error");
+  System.out.println("namefukc=" + name);
+  return ERROR;
+		}
+```
+然后在错误跳转的jsp上写上
+```javascript
+<%@taglib uri="/struts-tags" prefix="s" %>
+```
+这里用到了标签，
+然后在该jsp上写上即可
+```
+<s:fielderror fieldName="name1" theme="simple"/>
+<s:property value="errors.name[0]"/>//取出value stack中的值
+```
