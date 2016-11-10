@@ -184,7 +184,7 @@ private HttpServletRequest request;
 <result type="redirect">/user_success.jsp?t=${type}</result>
  </action>  
 ```
-由于服务器的跳转模式是只有一个request，发出的是action，所以会对应有一个值栈。 要想在客户端跳转的页面中取出参数，第一种方式不行，第二种方式可以。因为客户端跳转是两次request，第二次的request指向一个jsp，而jsp没有对应的值栈，只有action有，所以第一种从值栈中取的方式不行。
+由于服务器的跳转模式是只有一个request，发出的是action，所以会对应有一个值栈。 要想在客户端跳转的页面中取出参数，第一种方式不行，第二种方式可以。因为客户端跳转是两次request（redirect方式），第二次的request指向一个jsp，而jsp没有对应的值栈，只有action有，所以第一种从值栈中取的方式不行。
 ```
 <body>
     User Success!
