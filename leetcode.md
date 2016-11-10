@@ -868,6 +868,28 @@ vector<int> searchRange(int A[], int n, int target) {
     return ret; 
 }
 ```
+36.Valid Sudoku
+--
+```java
+public boolean isValidSudoku(char[][] board) {
+    for(int i = 0; i<9; i++){
+        HashSet<Character> rows = new HashSet<Character>();
+        HashSet<Character> columns = new HashSet<Character>();
+        HashSet<Character> cube = new HashSet<Character>();
+        for (int j = 0; j < 9;j++){
+            if(board[i][j]!='.' && !rows.add(board[i][j]))
+                return false;
+            if(board[j][i]!='.' && !columns.add(board[j][i]))
+                return false;
+            int RowIndex = 3*(i/3);
+            int ColIndex = 3*(i%3);
+            if(board[RowIndex + j/3][ColIndex + j%3]!='.' && !cube.add(board[RowIndex + j/3][ColIndex + j%3]))
+                return false;
+        }
+    }
+    return true;
+}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
