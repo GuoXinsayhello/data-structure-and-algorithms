@@ -577,3 +577,22 @@ public static int search(int[] nums, int num) {
         return -1;  
     }  
 ```
+下面这种二分搜索方法好像也可以。
+```java
+private int binsearch(int[] nums,int lo,int hi,int t){
+	    	int mid=0;
+	    	while(lo<hi)
+    		{
+    			mid=(lo+hi)/2;
+    			if(nums[mid]==t)
+    			{
+    				return mid;
+    			}
+    			if(nums[mid]>t)
+    				hi=mid;
+    			else
+    				lo=mid+1;
+    		}
+	    	return lo;
+	    }
+```
