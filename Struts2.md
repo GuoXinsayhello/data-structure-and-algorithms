@@ -201,7 +201,7 @@ private HttpServletRequest request;
 首先讲的是给通过 OGNL给domainmodel传值，user.xxx只有传才会构造，想初始化domainmodel，可以自己new，也可以传参数值， 但是这时需要保持参数为空的构造 方法。<br>
 OGNL是Object-Graph Navigation Language的缩写，它是一种功能强大的表达式语言，通过它简单一致的表达式语法，可以存取对象的任意属性，调用对象的方法，遍历整个对象的结构图，实现字段类型转化等功能<br>
 如果只是调用普通方法，无论是对象中的普通方法还是action中的普通方法，直接调用就可以，如果要调用静态方法，要用"@类名（完整类名）@方法名"来实现，<br>
-如果调用静态方法，马士兵说需要在struts.xml中写入
+如果调用静态方法，或者直接两个@，"@@max(2,3)"这样。马士兵说需要在struts.xml中写入
 ```xml
 <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
 ```
