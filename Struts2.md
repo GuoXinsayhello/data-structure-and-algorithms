@@ -206,4 +206,29 @@ OGNL是Object-Graph Navigation Language的缩写，它是一种功能强大的�
 <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
 ```
 这个在官网上 也查到了在后续的版本中需要添加。
-可以在官网上查到每个类的具体方法以及constantproperties等东西。
+可以在官网上查到每个类的具体方法以及constantproperties等东西。<br>
+如果要访问list中类的属性的集合用users.{age},users中有很多user，这句话的意思是访问users中所有user的age，然后组成一个集合。注意：
+```javascript
+<li>访问Map中某个元素:<s:property value="dogMap.dog101"/> | <s:property value="dogMap['dog101']"/> | <s:property value="dogMap[\"dog101\"]"/></li>
+```
+这个里面用了一个反斜杠和双引号 ，如果不加转义字符，那么该双引号就和前面的双引号成为一对，就不是我们想要的，所以要加转义字符。
+
+41
+--
+这个讲了projection（投影），其实也就是过滤的意思，语法如下：
+```
+<li>投影(过滤)：<s:property value="users.{?#this.age==1}[0]"/></li>
+		<li>投影：<s:property value="users.{^#this.age>1}.{age}"/></li>//^表示开头，表示把满足条件的第一个 拿出来
+		<li>投影：<s:property value="users.{$#this.age>1}.{age}"/></li>//$表示满足条件的结尾的那个
+```
+下面这句话表示访问从栈的顶端一直到栈底的所有集合
+```
+<li>[]:<s:property value="[0]"/></li>
+```
+
+44
+--
+开始讲struts的标签，tags。property也是一个标签，用于从stack中取出值，下面这句表示把html的\<hr/\>不要解析为字符串，而是输出 html的表达（比如此时是一条横线），如果escape为true的话，就会解析为字符串。
+```
+<li>property 设定HTML: <s:property value="'<hr/>'" escape="false"/> </li>
+```
