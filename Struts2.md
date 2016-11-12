@@ -232,3 +232,9 @@ OGNL是Object-Graph Navigation Language的缩写，它是一种功能强大的�
 ```
 <li>property 设定HTML: <s:property value="'<hr/>'" escape="false"/> </li>
 ```
+set 标签将一个值赋给指定范围中的变量。当你想要为一个复杂的表达式分配一个变量，每次只需要简单的引用这个变量而不需要引用这个复杂的表达式时，这个标签是非常有用的。可用的范围是 应用程序 ，会话 ，请求 ，页面 和 操作。用法如下：
+```javascript
+<li>set 设定var，范围为ActionContext: <s:set var="adminPassword" value="password" scope="session"/></li>
+		<li>set 使用#取值: <s:property value="#adminPassword"/> </li>
+```
+2016/11/12 看到46
