@@ -238,3 +238,20 @@ set 标签将一个值赋给指定范围中的变量。当你想要为一个复�
 		<li>set 使用#取值: <s:property value="#adminPassword"/> </li>
 ```
 2016/11/12 看到46
+Struts Bean标签库主要用于：1  创建新的Bean或输出Bean 2  访问已有的Bean及Bean的属性 3  访问HTTP请求的Header信息，参数信息，Cookie，并将这些信息存放在一    个新的Bean中 4  访问HTTP请求信息或者JSP的隐含对象 5  访问Web应用资源 如下：
+```javascript
+<li>bean 定义bean,并使用param来设定新的属性值:
+	<s:bean name="com.bjsxt.struts2.tags.Dog" >
+	<s:param name="name" value="'pp'"></s:param>
+	<s:property value="name"/>
+	</s:bean>
+</li>
+```
+$#%的区别：$用于i18n和struts配置文件。#用于取得ActionContext的值，%将原本的文本属性解析为ognl，对于本身就是ognl的不起作用。
+```
+<li>include _include1.html 包含静态英文文件，说明%用法
+<s:set var="incPage" value="%{'/_include1.html'}" />
+<s:include value="%{#incPage}"></s:include>
+</li>
+```
+if elseif else标签目的好像就是在jsp文件中用标签的形式搞出条件
