@@ -255,3 +255,14 @@ $#%的区别：$用于i18n和struts配置文件。#用于取得ActionContext的�
 </li>
 ```
 if elseif else标签目的好像就是在jsp文件中用标签的形式搞出条件
+在ognl语句中{}会转成一个集合<br>
+iterator标签的用法如下：
+```
+<s:iterator value="{1, 2, 3}" >
+			<s:property/> |
+		</s:iterator>
+```
+
+52.
+--
+这节讲的主要是theme的问题，主要解决的是fielderror显示出的文本前面有一个圆圈，也就是自动应用了主题，想要把这个圆圈去掉，感觉做法很麻烦，第一种方法是覆盖原来的css代码。第二种方法马士兵是在工程里面覆盖了软件的fielderror.ftl文件，也就是新建了目录，然后复制原来的fielderror.ftl文件，把里面的\<li>标签的内容去掉，感觉很没必要，很麻烦。另外一种方法就是作者把struts自带的主题复制过来然后修改成自己的主题。而且貌似只有fielderror会有这样的问题，其他只要把主题设置为simple，就不会有任何修饰。
