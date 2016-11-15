@@ -269,4 +269,9 @@ iterator标签的用法如下：
 2016/11/13 看到56视频<br>
 
 66
+--
 这节讲的是struts2声明式的异常处理，就是在action的java文件中对应的方法后面throws Exception，然后在struts.xml里面写入\<exception-mapping标签，声明式的异常处理使用拦截器来实现。在action里面可以进行异常映射，在package中可以进行全局异常映射，可以使用继承公用异常映射。
+
+69
+--
+这节讲的是Java国际化，用到了ResourceBundle这个类，用于获取不同的资源文件。要想实现不同的国际版本，写多个资源文件。用哪个就在代码里面设定特定的locale
