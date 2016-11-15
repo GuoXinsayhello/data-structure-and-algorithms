@@ -283,5 +283,14 @@ iterator标签的用法如下：
   	<input type="submit" value="<s:property value="getText('login.login')"/>" /> 
   </form>
 ```
-并且说如果是包级别的资源文件，.properties文件要以package起始命名（比如package_zh_CN.properties)，若果是全局级别的，放在src文件夹下面，名字可以随便取。在struts.xml文件中\<constant name="struts.custom.i18n.resources" value="globalMessages" />h这句话表示全局的资源文件名字以什么开头
-  
+并且说如果是包级别的资源文件，.properties文件要以package起始命名（比如package_zh_CN.properties)，若果是全局级别的，放在src文件夹下面，名字可以随便取。在struts.xml文件中\<constant name="struts.custom.i18n.resources" value="globalMessages" />h这句话表示全局的资源文件名字以什么开头。<br>
+在properties文件里面，可以用{0}来表示占位符，比如写入welcome.msg=welcome:{0},然后在jsp中写入  
+```
+<body>
+	<s:text name="welcome.msg">
+		<s:param value="username"></s:param>
+	</s:text> 	 
+  </body>
+```
+即可。<br>
+如何切换语系，在地址栏中地址后面加上request_locale=en_US即可
