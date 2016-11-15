@@ -275,3 +275,13 @@ iterator标签的用法如下：
 69
 --
 这节讲的是Java国际化，用到了ResourceBundle这个类，用于获取不同的资源文件。要想实现不同的国际版本，写多个资源文件。用哪个就在代码里面设定特定的locale
+接下来又讲了struts的国际化方法，仍然是写资源文件.properties文件，然后在显现的jsp文件中写入如下的东西。
+```
+  <form action="admin/Login-login" method="post">
+  	<s:property value="getText('login.username')"/> <input name="username" />
+  	<s:property value="getText('login.password')"/><input name="password" type="password" />
+  	<input type="submit" value="<s:property value="getText('login.login')"/>" /> 
+  </form>
+```
+并且说如果是包级别的资源文件，.properties文件要以package起始命名（比如package_zh_CN.properties)，若果是全局级别的，放在src文件夹下面，名字可以随便取。在struts.xml文件中\<constant name="struts.custom.i18n.resources" value="globalMessages" />h这句话表示全局的资源文件名字以什么开头
+  
