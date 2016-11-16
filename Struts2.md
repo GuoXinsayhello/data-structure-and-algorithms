@@ -298,4 +298,4 @@ iterator标签的用法如下：
 76
 --
 主要模拟了一下interceptor，ActionInvocation会调用intercept方法找到拦截器，然后该拦截器调用invoke回到ActionInvocation，然后ActionInvocation又调用intercept方法，去找第二个拦截器，然后直到所有的拦截器都调用完毕才会调用action。token interceptor用于拦截重复提交。类型转化也是由拦截器做的。如果自己传的是一个特殊类型，就需要自己写转换器。写完自己的转换器之后要把自己的转换器注册到struts里面。
-在.properties文件里面写上p=com.bgjs.MyConvertor,前面的p表示想要h转化的变量，后面的是自己写的转化器。局部action的转换器properties文件名叫XXXAction-conversion.properties,全局的转化器名字叫xwork-conversion.properties,全局的意思是放在src文件夹下。
+在.properties文件里面写上p=com.bgjs.MyConvertor,前面的表示想要转化的属性，后面的是自己写的转化器。局部action的转换器properties文件名叫XXXAction-conversion.properties,全局的转化器名字叫xwork-conversion.properties,全局的意思是放在src文件夹下，马士兵说全局的话要写成这样Java.awt.Point=com.bgjs.MyConvertor。
