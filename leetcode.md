@@ -1042,6 +1042,42 @@ boolean comparison(String str, String pattern) {
         return p == pattern.length();
 }
 ```
+
+45
+--
+```java
+public int jump(int[] A) {
+int step_count = 0;
+int last_jump_max = 0;
+int current_jump_max = 0;
+for(int i=0; i<A.length-1; i++) {
+    current_jump_max = Math.max(current_jump_max, i+A[i]);
+    if( i == last_jump_max ) {
+        step_count++;
+        last_jump_max = current_jump_max;
+    } 
+}
+return step_count;
+}
+```
+这个做法的想法就是看1步，2步，3步。。。最多能走多远。
+下面这个做法是BFS
+```java
+ int jump(int A[], int n) {
+	 if(n<2)return 0;
+	 int level=0,currentMax=0,i=0,nextMax=0;
+
+	 while(currentMax-i+1>0){		//nodes count of current level>0
+		 level++;
+		 for(;i<=currentMax;i++){	//traverse current level , and update the max reach of next level
+			nextMax=max(nextMax,A[i]+i);
+			if(nextMax>=n-1)return level;   // if last element is in level+1,  then the min jump=level 
+		 }
+		 currentMax=nextMax;
+	 }
+	 return 0;
+ }
+ ```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
