@@ -1078,6 +1078,7 @@ return step_count;
 	 return 0;
  }
  ```
+ 也就是把具有相同步数能够达到的node看做同一个level。
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
