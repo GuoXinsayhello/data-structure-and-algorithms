@@ -294,3 +294,7 @@ iterator标签的用法如下：
 ```
 即可。<br>
 如何切换语系，在地址栏中地址后面加上request_locale=en_US即可
+
+76
+--
+主要模拟了一下interceptor，ActionInvocation会调用intercept方法找到拦截器，然后该拦截器调用invoke回到ActionInvocation，然后ActionInvocation又调用intercept方法，去找第二个拦截器，然后直到所有的拦截器都调用完毕才会调用action。
