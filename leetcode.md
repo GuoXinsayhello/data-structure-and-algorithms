@@ -1078,6 +1078,7 @@ return step_count;
 	 return 0;
  }
  ```
+  也就是把具有相同步数能够达到的node看做同一个level。
  47
  --
  这个方法效率应该比较高，但是理解不了
@@ -1145,7 +1146,25 @@ void anti_rotate(vector<vector<int> > &matrix) {
     }
 }
 ```
- 也就是把具有相同步数能够达到的node看做同一个level。
+49. Group Anagrams
+--
+ ```
+ public class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null || strs.length == 0) return new ArrayList<List<String>>();
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        Arrays.sort(strs);
+        for (String s : strs) {
+            char[] ca = s.toCharArray();
+            Arrays.sort(ca);
+            String keyStr = String.valueOf(ca);
+            if (!map.containsKey(keyStr)) map.put(keyStr, new ArrayList<String>());
+            map.get(keyStr).add(s);
+        }
+        return new ArrayList<List<String>>(map.values());
+    }
+}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
