@@ -1179,7 +1179,7 @@ double myPow(double x, int n) {
 ```
 主要用的是递归的想法
 
-51.
+51.N-queens
 --
 这个方法用的是DFS以及 backtracking算法，比较厉害！
 ```java
