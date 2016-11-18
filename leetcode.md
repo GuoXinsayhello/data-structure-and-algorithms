@@ -1165,6 +1165,72 @@ void anti_rotate(vector<vector<int> > &matrix) {
     }
 }
 ```
+
+50.Pow(x,n)
+https://discuss.leetcode.com/topic/21837/5-different-choices-when-talk-with-interviewers 这个网址集结了多种实现的方法，现列出其中一种
+```java
+double myPow(double x, int n) {
+    if(n<0) return 1/x * myPow(1/x, -(n+1));
+    if(n==0) return 1;
+    if(n==2) return x*x;
+    if(n%2==0) return myPow( myPow(x, n/2), 2);
+    else return x*myPow( myPow(x, n/2), 2);
+}
+```
+主要用的是递归的想法
+
+51.
+--
+这个方法用的是DFS以及 backtracking算法，比较厉害！
+```java
+public class Solution {
+    public List<List<String>> solveNQueens(int n) {
+        char[][] board = new char[n][n];
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                board[i][j] = '.';
+        List<List<String>> res = new ArrayList<List<String>>();
+        dfs(board, 0, res);
+        return res;
+    }
+    
+    private void dfs(char[][] board, int colIndex, List<List<String>> res) {
+        if(colIndex == board.length) {
+            res.add(construct(board));
+            return;
+        }
+        
+        for(int i = 0; i < board.length; i++) {
+            if(validate(board, i, colIndex)) {
+                board[i][colIndex] = 'Q';
+                dfs(board, colIndex + 1, res);
+                board[i][colIndex] = '.';
+            }
+        }
+    }
+    
+    private boolean validate(char[][] board, int x, int y) {
+        for(int i = 0; i < board.length; i++) {
+            for(int j = 0; j < y; j++) {
+                if(board[i][j] == 'Q' && (x + j == y + i || x + y == i + j || x == i))
+                    return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    private List<String> construct(char[][] board) {
+        List<String> res = new LinkedList<String>();
+        for(int i = 0; i < board.length; i++) {
+            String s = new String(board[i]);
+            res.add(s);
+        }
+        return res;
+    }
+}
+```
+
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
