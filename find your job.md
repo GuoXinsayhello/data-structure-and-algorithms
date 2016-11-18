@@ -206,3 +206,22 @@ http://blog.csdn.net/chenhanzhun/article/category/2734921/1
 http://blog.csdn.net/lanshanwanghao/article/details/17714895
 解题笔记（2）——部分面试题解题思路：
 http://blog.csdn.net/wuzhekai1985/article/details/6597351
+
+剑指offer
+==
+面试题5：从尾到头打印一个链表
+--
+ 1.采用栈的方式，让结点后进先出。2，采用递归的方式。先输出后面的结点，再 输出前面的结点。
+ 递归的方法java语言如下：
+ ```java
+  public void shuchu(ListNode head){
+    	if(head==null)
+    		return ;
+    	else{
+    		if(head.next!=null){
+    			shuchu(head.next);
+    		}
+    		System.out.println(head.val);
+    	}
+    }
+ ```
