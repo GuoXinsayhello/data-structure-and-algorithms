@@ -7,3 +7,4 @@ Integer i2=1;
 System.out.println(v1.equals(v2));
 System.out.println(i1.equals(i2));
 ```	
+2016-11-18 看到3.1.6<br>
