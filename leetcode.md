@@ -1181,7 +1181,13 @@ double myPow(double x, int n) {
 
 51.N-queens
 --
-这个方法用的是DFS以及 backtracking算法，比较厉害！
+这个方法用的是DFS以及 backtracking算法，比较厉害！ 这道题的借鉴意义就是首先判断过某个点的两条对角线上是否有其他的Q，只需要 i+j==x+y || i+y==j+x即可。此外，backtracking算法在写的时候要在末尾把之前的操作去掉，比如此题就体现在下面这句。
+```java
+ board[i][colIndex] = 'Q';
+                dfs(board, colIndex + 1, res);
+                board[i][colIndex] = '.';
+```
+
 ```java
 public class Solution {
     public List<List<String>> solveNQueens(int n) {
