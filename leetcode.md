@@ -838,7 +838,7 @@ public:
     }
 };
 ```
-注意这个题里面二分搜索与搜索pivot同时出现了，注意两者的区别，二分搜索while的条件是l<=r,而且都是mid+1或者mid-1.而搜索pivot的话while条件是lo\<hi,hi=mid而不是mid-1.
+注意这个题里面二分搜索与搜索pivot同时出现了，注意两者的区别，二分搜索while的条件是l<=r,而且都是mid+1或者mid-1.而搜索pivot的话while条件是lo\<hi,hi=mid而不是mid-1.。而且注意这种搜索pivot的方法不能处理重复的数据，比如数据如果是1,1,1,0,1这样的例子就不行了。
 34. Search for a Range
 --
 具体解释参见https://discuss.leetcode.com/topic/5891/clean-iterative-solution-with-two-binary-searches-with-explanation
