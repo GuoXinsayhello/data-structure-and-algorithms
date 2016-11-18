@@ -225,3 +225,4 @@ http://blog.csdn.net/wuzhekai1985/article/details/6597351
     	}
     }
  ```
+递归在本质上是一个栈结构。
