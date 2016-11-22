@@ -55,3 +55,4 @@ mysql> SELECT a.tutorial_id, a.tutorial_author, b.tutorial_count
     -> FROM tutorials_tbl a LEFT JOIN tcount_tbl b
     -> ON a.tutorial_author = b.tutorial_author;
 ```
+2016-11-22看到using join
