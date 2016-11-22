@@ -38,4 +38,20 @@ DELETE FROM table_name [WHERE Clause]这句话用于删除表中的数据；<br>
 ```sql
 SELECT * from tutorials_tbl  WHERE tutorial_author LIKE '%jay%';
  ```
- 表示选择那些中间有jay的，如果不加%表示精确搜索。
+ 表示选择那些中间有jay的，如果不加%表示精确搜索。<br>
+ ```sql
+ SELECT * from tutorials_tbl ORDER BY tutorial_author ASC
+ ```
+ 这句话表示按照升序排序，如果是DESC表示按照降序排序<br>
+ 下面是表的联结（join）行为，从两个或者多个表里面搜索，
+ ```sql
+ mysql> SELECT a.tutorial_id, a.tutorial_author, b.tutorial_count
+    -> FROM tutorials_tbl a, tcount_tbl b
+    -> WHERE a.tutorial_author = b.tutorial_author;
+```
+下面的是左联结（left join），左联结会把不符合条件的但是出现在左表中的也输出。
+```sql
+mysql> SELECT a.tutorial_id, a.tutorial_author, b.tutorial_count
+    -> FROM tutorials_tbl a LEFT JOIN tcount_tbl b
+    -> ON a.tutorial_author = b.tutorial_author;
+```
