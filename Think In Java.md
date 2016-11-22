@@ -13,5 +13,6 @@ System.out.println(i1.equals(i2));
 <li>System.gc()是强制执行垃圾收集器
 <br>
 2016-11-21看到205页<br>
+2016-11-22看到255页<br>
 
 
