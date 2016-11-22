@@ -27,3 +27,15 @@ mysql> INSERT INTO tutorials_tbl
      ->VALUES
      ->("Learn PHP", "John Poul", NOW());
 ```
+使用搜索的时候试了一下，发现SELECT * from tutorials_tbl WHERE tutorial_author='Sanjay';使用单引号还是双引号都可以。<br>
+更新语句的语法：
+```java
+UPDATE table_name SET field1=new-value1, field2=new-value2
+[WHERE Clause]
+```
+DELETE FROM table_name [WHERE Clause]这句话用于删除表中的数据；<br>
+对于like子句，如果是这样
+```sql
+SELECT * from tutorials_tbl  WHERE tutorial_author LIKE '%jay%';
+ ```
+ 表示选择那些中间有jay的，如果不加%表示精确搜索。
