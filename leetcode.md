@@ -1318,6 +1318,51 @@ public class Solution {
     }
 }
 ```
+55. Jump Game
+--
+下面这个方法是自己写的，自己用了几个例子测试还可以，用的可以说是DFS算法吧，然而stackoverflow了。
+```java
+public class Solution {
+    public boolean canJump(int[] nums) {
+    	int l=nums.length;
+    	List<Integer> trace =new LinkedList<Integer>();
+    	if(l<=1)
+    		return true;
+    	ge(nums,l-2,l-1,trace);
+    	
+    	if(trace.size()==0 || trace.get(trace.size()-1)!=0)
+    		return false;
+    	else
+    		return true;
+    }
+    private void ge(int[] a ,int start,int end ,List<Integer> trace){
+    	if(start<0)
+    		return ;
+    	if(start+a[start]>=end){
+    		trace.add(start);
+    		end=start;
+    		if(start==0)
+    			return ;
+    		ge(a,start-1,end,trace);
+    		
+    	}
+    	else{
+    		ge(a,start-1,end,trace);
+    	}	
+    }
+}
+```
+下面这个做法简洁优美真的很不错，大致意思就是如果某一点是可达的，那么该点之前的所有点都是可达的
+```java
+public boolean canJump(int[] nums) {
+    int reachable = 0;
+    for (int i=0; i<nums.length; ++i) {
+        if (i > reachable) return false;
+        reachable = Math.max(reachable, i + nums[i]);
+    }
+    return true;
+}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
