@@ -14,4 +14,16 @@ tutorials_tbl(
    PRIMARY KEY ( tutorial_id )
 );
 ```
-
+向一个表中插入数据的语法如下：<br>
+```sql
+INSERT INTO table_name ( field1, field2,...fieldN )
+                       VALUES
+                       ( value1, value2,...valueN );
+```
+比如：<br>
+```sql
+mysql> INSERT INTO tutorials_tbl 
+     ->(tutorial_title, tutorial_author, submission_date)
+     ->VALUES
+     ->("Learn PHP", "John Poul", NOW());
+```
