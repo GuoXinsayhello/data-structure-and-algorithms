@@ -68,3 +68,19 @@ mysql> create table tcount_tbl
     -> tutorial_count  INT
     -> ) TYPE=InnoDB;
 ```
+删除、添加列或对其重新定位:<br>
+```sql
+ ALTER TABLE testalter_tbl DROP i;
+ ALTER TABLE testalter_tbl ADD i INT;
+ ```
+ 这两句是删除表中名字叫i的列以及添加一个名字叫i的列，
+ ```sql
+ ALTER TABLE testalter_tbl ADD i INT AFTER c;
+ ```
+ 这句是添加一个列令其位于c列之后，这样就可以使列重新定位；<br>
+ 要想改变列的定义，需要使用 MODIFY 或 CHANGE 子句,CHANGE 的语法稍有不同。必须把所要改变的列名放到 CHANGE 关键字的后面，然后指定新的列定义。<br>
+ ```sql
+ mysql> ALTER TABLE testalter_tbl MODIFY c CHAR(10);
+ mysql> ALTER TABLE testalter_tbl CHANGE i j BIGINT;
+ ```
+ MyISAM 和 InnoDB 讲解 InnoDB和MyISAM是许多人在使用MySQL时最常用的两个表类型，这两个表类型各有优劣，视具体应用而定。基本的差别为：MyISAM类型不支持事务处理等高级处理，而InnoDB类型支持。MyISAM类型的表强调的是性能，其执行数度比InnoDB类型更快.
