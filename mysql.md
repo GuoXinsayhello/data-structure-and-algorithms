@@ -55,4 +55,16 @@ mysql> SELECT a.tutorial_id, a.tutorial_author, b.tutorial_count
     -> FROM tutorials_tbl a LEFT JOIN tcount_tbl b
     -> ON a.tutorial_author = b.tutorial_author;
 ```
-2016-11-22看到using join
+2016-11-22看到using join<br>
+正则表达式：寻找以元音字母开始并以 'ok' 结尾的名称，查询如下：
+```sql
+mysql> SELECT name FROM person_tbl WHERE name REGEXP '^[aeiou]|ok$';
+```
+有很多种支持事务表可供选择，但其中最常见的是 InnoDB。可以用如下的语句构建支持事务的表：<br>
+```sql
+mysql> create table tcount_tbl
+    -> (
+    -> tutorial_author varchar(40) NOT NULL,
+    -> tutorial_count  INT
+    -> ) TYPE=InnoDB;
+```
