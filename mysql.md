@@ -98,3 +98,8 @@ mysql> SELECT last_name, first_name
     -> FROM person_tbl
     -> GROUP BY last_name;
 ```
+可以通过下面的语句把数据库中的表导出
+```sql
+mysql> SELECT * FROM tutorials_tbl 
+    -> INTO OUTFILE '/tmp/tutorials.txt';
+```
