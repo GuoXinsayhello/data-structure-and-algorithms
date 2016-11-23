@@ -83,4 +83,12 @@ mysql> create table tcount_tbl
  mysql> ALTER TABLE testalter_tbl MODIFY c CHAR(10);
  mysql> ALTER TABLE testalter_tbl CHANGE i j BIGINT;
  ```
- MyISAM 和 InnoDB 讲解 InnoDB和MyISAM是许多人在使用MySQL时最常用的两个表类型，这两个表类型各有优劣，视具体应用而定。基本的差别为：MyISAM类型不支持事务处理等高级处理，而InnoDB类型支持。MyISAM类型的表强调的是性能，其执行数度比InnoDB类型更快.
+ MyISAM 和 InnoDB 讲解 InnoDB和MyISAM是许多人在使用MySQL时最常用的两个表类型，这两个表类型各有优劣，视具体应用而定。基本的差别为：MyISAM类型不支持事务处理等高级处理，而InnoDB类型支持。MyISAM类型的表强调的是性能，其执行速度比InnoDB类型更快.<br>
+ ```sql
+ CREATE UNIQUE INDEX AUTHOR_INDEX
+ON tutorials_tbl (tutorial_author DESC)
+```
+上面的语句是创建唯一索引，索引能够提高查询速度，mysql> SHOW INDEX FROM table_name\G 后面的\G表示以垂直方式输出。在当前用户会话终止时，临时表会被清除。<br>
+如何克隆一个表<br>
+使用 SHOW CREATE TABLE 或 CREATE TABLE 语句显示源表的结构、索引以及所有的内容。调整语句，将表名改为克隆表的名称，执行语句。这样就对表进行了克隆。
+另外，如果想要克隆表的全部内容，也可以使用 INSERT INTO ... SELECT 语句。不要使用 INSERT ，使用 INSERT IGNORE。如果一个记录没有复制一个已存在的记录，MySQL 就会将它照常插入。如果该记录与现存的某个记录重复，IGNORE 关键字就会让 MySQL 默默地将其摒弃，不会产生任何错误。
