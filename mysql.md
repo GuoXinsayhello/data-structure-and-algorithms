@@ -91,4 +91,10 @@ ON tutorials_tbl (tutorial_author DESC)
 上面的语句是创建唯一索引，索引能够提高查询速度，mysql> SHOW INDEX FROM table_name\G 后面的\G表示以垂直方式输出。在当前用户会话终止时，临时表会被清除。<br>
 如何克隆一个表<br>
 使用 SHOW CREATE TABLE 或 CREATE TABLE 语句显示源表的结构、索引以及所有的内容。调整语句，将表名改为克隆表的名称，执行语句。这样就对表进行了克隆。
-另外，如果想要克隆表的全部内容，也可以使用 INSERT INTO ... SELECT 语句。不要使用 INSERT ，使用 INSERT IGNORE。如果一个记录没有复制一个已存在的记录，MySQL 就会将它照常插入。如果该记录与现存的某个记录重复，IGNORE 关键字就会让 MySQL 默默地将其摒弃，不会产生任何错误。
+另外，如果想要克隆表的全部内容，也可以使用 INSERT INTO ... SELECT 语句。不要使用 INSERT ，使用 INSERT IGNORE。如果一个记录没有复制一个已存在的记录，MySQL 就会将它照常插入。如果该记录与现存的某个记录重复，IGNORE 关键字就会让 MySQL 默默地将其摒弃，不会产生任何错误。使用 REPLACE 而不是 INSERT。如果记录是一个新记录，使用 INSERT 就可以了。如果是一个重复记录，新的记录将会替换旧有记录。强制唯一性的另一种办法是为表添加 UNIQUE 索引而不是主键。<br>
+group by子句的含义是分类，by后面是条件，据极客学院的wiki说这样也可以消除重复的数据。因为相同的数据都被分为一类了，但是这样的话只会把重复的数据的第一个拿出来，后面重复的数据都不会出现,比如：<br>
+```sql
+mysql> SELECT last_name, first_name
+    -> FROM person_tbl
+    -> GROUP BY last_name;
+```
