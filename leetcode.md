@@ -1402,6 +1402,7 @@ public String getPermutation(int n, int k) {
 }
 }
 ```
+下面这个做法也挺好的
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
