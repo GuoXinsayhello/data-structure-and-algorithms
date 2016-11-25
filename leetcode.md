@@ -1403,6 +1403,43 @@ public String getPermutation(int n, int k) {
 }
 ```
 下面这个做法也挺好的
+61. Rotate List
+--
+下面这个做法是自己写的，击败了80%+的人 ，不过仍然 需要计算链表的长度。
+```java
+public class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+    	ListNode pivot=head;
+    	ListNode dummy=head;
+    	ListNode oldpre=new ListNode(0);
+    	ListNode pre=new ListNode(0);
+    	oldpre.next=head;
+    	pre.next=head;
+    	int count=0,num=0;
+    	if(head==null || head.next==null || k==0)
+    		return head;
+    	while(head!=null){
+    		count++;
+    		head=head.next;
+    		oldpre=oldpre.next;
+    	}
+    	k=k%count;
+    	if(k==0)
+    		return dummy;
+    	while(num<count-k){
+    		pivot=pivot.next;
+    		pre=pre.next;
+    		num++;
+    	}
+    	oldpre.next=dummy;
+    	pre.next=null;
+    	return pivot;
+        
+    }  
+}
+```
+下面这个 做法应该比较好，不用计算链表的长度，只是用了两个指针，一个先出发，一个后出发，这个想法还是挺不错的
+具体可以看一下http://www.tuicool.com/articles/BVnqQn 这个网站
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
