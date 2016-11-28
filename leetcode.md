@@ -1440,6 +1440,28 @@ public class Solution {
 ```
 下面这个 做法应该比较好，不用计算链表的长度，只是用了两个指针，一个先出发，一个后出发，这个想法还是挺不错的
 具体可以看一下http://www.tuicool.com/articles/BVnqQn 这个网站
+
+66.Plus One
+--
+```java
+public int[] plusOne(int[] digits) {
+        
+    int n = digits.length;
+    for(int i=n-1; i>=0; i--) {
+        if(digits[i] < 9) {
+            digits[i]++;
+            return digits;
+        }
+        
+        digits[i] = 0;
+    }
+    
+    int[] newNumber = new int [n+1];
+    newNumber[0] = 1;
+    
+    return newNumber;
+}
+```
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
