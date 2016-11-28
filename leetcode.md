@@ -1462,6 +1462,9 @@ public int[] plusOne(int[] digits) {
     return newNumber;
 }
 ```
+67
+--
+注意一点，字符0对应的数字是48，一个字符和一个数字相加得到的是其对应的数，比如a='0',则a+1会等于49
 94. Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
