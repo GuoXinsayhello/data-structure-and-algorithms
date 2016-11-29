@@ -1465,7 +1465,35 @@ public int[] plusOne(int[] digits) {
 67
 --
 注意一点，字符0对应的数字是48，一个字符和一个数字相加得到的是其对应的数，比如a='0',则a+1会等于49
-94. Binary Tree Inorder Traversal  
+
+69.Sqrt（x）
+--下面这种方法用的是二分搜索
+```java
+public int sqrt(int x) {
+    if (x == 0)
+        return 0;
+    int left = 1, right = Integer.MAX_VALUE;
+    while (true) {
+        int mid = left + (right - left)/2;
+        if (mid > x/mid) {
+            right = mid - 1;
+        } else {
+            if (mid + 1 > x/(mid + 1))
+                return mid;
+            left = mid + 1;
+        }
+    }
+}
+```
+下面这种方法使用牛顿法做的
+```java
+    long r = x;
+    while (r*r > x)
+        r = (r + x/r) / 2;
+    return (int) r;
+```
+94. Binary Tree Inorder Traversal  
+
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
 ```java
