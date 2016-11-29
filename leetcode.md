@@ -1492,6 +1492,23 @@ public int sqrt(int x) {
         r = (r + x/r) / 2;
     return (int) r;
 ```
+
+71,simple path
+--
+感觉自己第一次做的时候没有搞清楚题目的意思，/..表示回到上一级目录，/.表示当前目录，
+```java
+public String simplifyPath(String path) {
+    Deque<String> stack = new LinkedList<>();
+    Set<String> skip = new HashSet<>(Arrays.asList("..",".",""));
+    for (String dir : path.split("/")) {
+        if (dir.equals("..") && !stack.isEmpty()) stack.pop();
+        else if (!skip.contains(dir)) stack.push(dir);
+    }
+    String res = "";
+    for (String dir : stack) res = "/" + dir + res;
+    return res.isEmpty() ? "/" : res;
+}
+```
 94. Binary Tree Inorder Traversal  
 
 --
