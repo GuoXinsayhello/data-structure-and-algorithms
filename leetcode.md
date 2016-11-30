@@ -1512,7 +1512,7 @@ public String simplifyPath(String path) {
 
 72.Edit Distance
 --
-Levenshtein 距离，又称编辑距离，指的是两个字符串之间，由一个转换成另一个所需的最少编辑操作次数。许可的编辑操作包括将一个字符替换成另一个字符，插入一个字符，删除一个字符。http://www.stanford.edu/class/cs124/lec/med.pdf 这个PDF讲的非常详细，解决这种问题一般采用动态规划算法，但是这个pdf里面有点问题，当x[i]!=y[j]的时候，为啥d(i,j)=d(i-1,j-1)+2？。下面是动态规划算法的表达。
+Levenshtein 距离，又称编辑距离，指的是两个字符串之间，由一个转换成另一个所需的最少编辑操作次数。许可的编辑操作包括将一个字符替换成另一个字符，插入一个字符，删除一个字符。http://www.stanford.edu/class/cs124/lec/med.pdf 这个PDF讲的非常详细，解决这种问题一般采用动态规划算法，但是这个pdf里面有点问题，当x[i]!=y[j]的时候，为啥d(i,j)=d(i-1,j-1)+2？网友评论说是认为替换的cost更大一点，2是cost，而不是步数，如果要求步数的话要加1。下面是动态规划算法的表达。
 ```java
 public class Solution {
     public int minDistance(String word1, String word2) {
