@@ -1543,6 +1543,28 @@ public class Solution {
 }
 ```
 
+73.
+--
+下面这种想法的思想就是每当遇到0的就把0置在这个0位置的行开头和列开头，然后第二次遍历的时候凡是遇到0开头的就把该行或者该列置为0.
+```java
+void setZeroes(vector<vector<int> > &matrix) {
+    int col0 = 1, rows = matrix.size(), cols = matrix[0].size();
+
+    for (int i = 0; i < rows; i++) {
+        if (matrix[i][0] == 0) col0 = 0;
+        for (int j = 1; j < cols; j++)
+            if (matrix[i][j] == 0)
+                matrix[i][0] = matrix[0][j] = 0;
+    }
+
+    for (int i = rows - 1; i >= 0; i--) {
+        for (int j = cols - 1; j >= 1; j--)
+            if (matrix[i][0] == 0 || matrix[0][j] == 0)
+                matrix[i][j] = 0;
+        if (col0 == 0) matrix[i][0] = 0;
+    }
+}
+```
 94. Binary Tree Inorder Traversal  
 
 --
