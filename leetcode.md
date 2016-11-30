@@ -1509,6 +1509,40 @@ public String simplifyPath(String path) {
     return res.isEmpty() ? "/" : res;
 }
 ```
+
+72.Edit Distance
+--
+Levenshtein 距离，又称编辑距离，指的是两个字符串之间，由一个转换成另一个所需的最少编辑操作次数。许可的编辑操作包括将一个字符替换成另一个字符，插入一个字符，删除一个字符。http://www.stanford.edu/class/cs124/lec/med.pdf 这个PDF讲的非常详细，解决这种问题一般采用动态规划算法，但是这个pdf里面有点问题，当x[i]!=y[j]的时候，为啥d(i,j)=d(i-1,j-1)+2？。下面是动态规划算法的表达。
+```java
+public class Solution {
+    public int minDistance(String word1, String word2) {
+        int m = word1.length();
+        int n = word2.length();
+        
+        int[][] cost = new int[m + 1][n + 1];
+        for(int i = 0; i <= m; i++)
+            cost[i][0] = i;
+        for(int i = 1; i <= n; i++)
+            cost[0][i] = i;
+        
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(word1.charAt(i) == word2.charAt(j))
+                    cost[i + 1][j + 1] = cost[i][j];
+                else {
+                    int a = cost[i][j];
+                    int b = cost[i][j + 1];
+                    int c = cost[i + 1][j];
+                    cost[i + 1][j + 1] = a < b ? (a < c ? a : c) : (b < c ? b : c);
+                    cost[i + 1][j + 1]++;
+                }
+            }
+        }
+        return cost[m][n];
+    }
+}
+```
+
 94. Binary Tree Inorder Traversal  
 
 --
