@@ -1632,6 +1632,22 @@ public class Solution {
     }
 }
 ```
+
+75.sort colors
+--
+这个做法就是把0交换到左边，把2交换到右边
+```java
+    class Solution {
+    public:
+        void sortColors(int A[], int n) {
+            int second=n-1, zero=0;
+            for (int i=0; i<=second; i++) {
+                while (A[i]==2 && i<second) swap(A[i], A[second--]);
+                while (A[i]==0 && i>zero) swap(A[i], A[zero++]);
+            }
+        }
+    };
+```
 94. Binary Tree Inorder Traversal  
 
 --
@@ -1708,21 +1724,7 @@ public class Solution {
 ```
 
 
-75.sort colors
---
-这个做法就是把0交换到左边，把2交换到右边
-```java
-    class Solution {
-    public:
-        void sortColors(int A[], int n) {
-            int second=n-1, zero=0;
-            for (int i=0; i<=second; i++) {
-                while (A[i]==2 && i<second) swap(A[i], A[second--]);
-                while (A[i]==0 && i>zero) swap(A[i], A[zero++]);
-            }
-        }
-    };
-```
+
 96.Unique Binary Search Trees
 --
 https://discuss.leetcode.com/topic/8398/dp-solution-in-6-lines-with-explanation-f-i-n-g-i-1-g-n-i/2
