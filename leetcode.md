@@ -1565,6 +1565,73 @@ void setZeroes(vector<vector<int> > &matrix) {
     }
 }
 ```
+
+74
+---
+下面这个做法是把一个矩阵当做一个向量来对待。
+```java
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int> > &matrix, int target) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+        int l = 0, r = m * n - 1;
+        while (l != r){
+            int mid = (l + r - 1) >> 1;
+            if (matrix[mid / m][mid % m] < target)
+                l = mid + 1;
+            else 
+                r = mid;
+        }
+        return matrix[r / m][r % m] == target;
+    }
+};
+```
+下面这个做法是自己写的，就是用了两次的二分法
+```java
+public class Solution {
+    public boolean searchMatrix(int[][] ma, int ta) {
+    	int lx=0,rx=ma.length-1,index1=0,index2=0,lx2=0,rx2=ma[0].length-1;
+    	boolean flag=false;
+    	while(lx<=rx)
+    	{
+    		 index1=(rx+lx)/2;
+    			if(ta>ma[index1][0])
+    			{
+    				lx=index1+1;
+    			}
+    			else if(ta<ma[index1][0])
+    			{
+    				rx=index1-1;
+    			}
+    			else
+    			{
+    				flag=true;
+    				break;
+    			}
+    		
+    	}
+    	index1=(lx+rx)/2;
+    	if(flag==false)
+    	{
+    		while(lx2<=rx2)
+    		{
+    			index2=(lx2+rx2)/2;
+    				if(ta>ma[index1][index2])
+    					lx2=index2+1;
+    				else if(ta<ma[index1][index2])
+    					rx2=index2-1;
+    				else
+    				{
+    					flag=true;
+    					break;
+    				}
+    		}
+    	}
+    	return flag; 
+    }
+}
+```
 94. Binary Tree Inorder Traversal  
 
 --
