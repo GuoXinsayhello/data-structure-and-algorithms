@@ -577,6 +577,7 @@ public static int search(int[] nums, int num) {
         return -1;  
     }  
 ```
+如果搜索不到返回下标的话只需要return （low+high)/2即可
 下面这种二分搜索方法不可以，比如{1,3}，搜索3。
 ```java
 private int binsearch(int[] nums,int lo,int hi,int t){
