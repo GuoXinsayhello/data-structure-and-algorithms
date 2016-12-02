@@ -1648,6 +1648,53 @@ public class Solution {
         }
     };
 ```
+
+76
+--
+这道题目的想法就是用start，end两个指针来决定一个窗口，首先移动end使该窗口满足能够覆盖所有的字符串，然后移动start使窗口最小。https://discuss.leetcode.com/topic/30941/here-is-a-10-line-template-that-can-solve-most-substring-problems 这个网址总结了这种题目的一般做法。
+```java
+public String minWindow(String s, String t) {
+    HashMap<Character,Integer> map = new HashMap();
+    for(char c : s.toCharArray())
+        map.put(c,0);
+    for(char c : t.toCharArray())
+    {
+        if(map.containsKey(c))
+            map.put(c,map.get(c)+1);
+        else
+            return "";
+    }
+    
+    int start =0, end=0, minStart=0,minLen = Integer.MAX_VALUE, counter = t.length();
+    while(end < s.length())
+    {
+        char c1 = s.charAt(end);
+        if(map.get(c1) > 0)
+            counter--;
+        map.put(c1,map.get(c1)-1);
+        
+        end++;
+        
+        while(counter == 0)
+        {
+            if(minLen > end-start)
+            {
+                minLen = end-start;
+                minStart = start;
+            }
+            
+            char c2 = s.charAt(start);
+            map.put(c2, map.get(c2)+1);
+            
+            if(map.get(c2) > 0)
+                counter++;
+            
+            start++;
+        }
+    }
+    return minLen == Integer.MAX_VALUE ? "" : s.substring(minStart,minStart+minLen);
+}
+```
 94. Binary Tree Inorder Traversal  
 
 --
