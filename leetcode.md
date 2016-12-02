@@ -1695,6 +1695,47 @@ public String minWindow(String s, String t) {
     return minLen == Integer.MAX_VALUE ? "" : s.substring(minStart,minStart+minLen);
 }
 ```
+
+77
+--
+主要用到C(n,k)=C(n-1,k)+C(n-1,k-1);
+```java
+public class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        if (k == n || k == 0) {
+            List<Integer> row = new LinkedList<>();
+            for (int i = 1; i <= k; ++i) {
+                row.add(i);
+            }
+            return new LinkedList<>(Arrays.asList(row));
+        }
+        List<List<Integer>> result = this.combine(n - 1, k - 1);
+        result.forEach(e -> e.add(n));
+        result.addAll(this.combine(n - 1, k));
+        return result;
+    }
+}
+```
+下面这个是backtracking算法，
+
+```java
+  public static List<List<Integer>> combine(int n, int k) {
+		List<List<Integer>> combs = new ArrayList<List<Integer>>();
+		combine(combs, new ArrayList<Integer>(), 1, n, k);
+		return combs;
+	}
+	public static void combine(List<List<Integer>> combs, List<Integer> comb, int start, int n, int k) {
+		if(k==0) {
+			combs.add(new ArrayList<Integer>(comb));
+			return;
+		}
+		for(int i=start;i<=n;i++) {
+			comb.add(i);
+			combine(combs, comb, i+1, n, k-1);
+			comb.remove(comb.size()-1);
+		}
+	}
+```
 94. Binary Tree Inorder Traversal  
 
 --
