@@ -1795,6 +1795,34 @@ public int removeDuplicates(int[] nums) {
     return i;
 }
 ```
+
+81.
+--
+```c++
+class Solution {
+public:
+  bool search(int A[], int n, int target) {
+    int lo =0, hi = n-1;
+    int mid = 0;
+    while(lo<hi){
+          mid=(lo+hi)/2;
+          if(A[mid]==target) return true;
+          if(A[mid]>A[hi]){
+              if(A[mid]>target && A[lo] <= target) hi = mid;
+              else lo = mid + 1;
+          }else if(A[mid] < A[hi]){
+              if(A[mid]<target && A[hi] >= target) lo = mid + 1;
+              else hi = mid;
+          }else{
+              hi--;
+          }
+          
+    }
+    return A[lo] == target ? true : false;
+  }
+};
+```
+因为数组当中存在着重复的元素，所以可能出现A[mid]==A[hi]的情况
 94. Binary Tree Inorder Traversal  
 
 --
