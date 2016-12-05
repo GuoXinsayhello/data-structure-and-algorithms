@@ -1765,6 +1765,36 @@ private boolean exist(char[][] board, int y, int x, char[] word, int i) {
 }
 ```
 
+80
+--
+```java
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+    	int index=2;
+    	int n=nums.length;
+    	if(n<=2)
+    		return n;
+    	for(int i=2;i<n;i++){
+    		if((nums[i]>nums[index-2])){  //1处
+    			nums[index++]=nums[i];
+    		}
+    	}
+    	return index;
+        
+    }
+}
+```
+注意1处的index不能写成i，因为下面的一句把nums改变了，所以写成i比较的是变化后的nums，会出现nums[i]==nums[i-2]的结果
+上面这种方法是根据下面这种别人的方法写出来的
+```java
+public int removeDuplicates(int[] nums) {
+    int i = 0;
+    for (int n : nums)
+        if (i < 2 || n > nums[i-2])
+            nums[i++] = n;
+    return i;
+}
+```
 94. Binary Tree Inorder Traversal  
 
 --
