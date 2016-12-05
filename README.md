@@ -597,3 +597,4 @@ private int binsearch(int[] nums,int lo,int hi,int t){
 	    	return lo;
 	    }
 ```
+http://www.jianshu.com/p/7c17cc56e21e 这个网址说了二分法的多种变体
