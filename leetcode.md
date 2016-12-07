@@ -1851,7 +1851,7 @@ public ListNode deleteDuplicates(ListNode head) {
 
 84
 --
-下面这个算法来自http://www.geeksforgeeks.org/largest-rectangle-under-histogram/
+下面这个算法来自http://www.geeksforgeeks.org/largest-rectangle-under-histogram/ 基本想法就是对于每个bar，向左延伸找到第一个比它小的，向右延伸找到第一个比它小的，然后计算长方形大小。用了栈来存储信息，感觉比较高效。
 ```java
 public class Solution {
     public int largestRectangleArea(int[] height) {
