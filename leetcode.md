@@ -2006,9 +2006,28 @@ public class Solution {
     }
 }
 ```
-
-
-
+88
+--
+下面这个做法还是挺好的
+```c++
+class Solution {
+public:
+    void merge(int A[], int m, int B[], int n) {
+        int i=m-1;
+		int j=n-1;
+		int k = m+n-1;
+		while(i >=0 && j>=0)
+		{
+			if(A[i] > B[j])
+				A[k--] = A[i--];
+			else
+				A[k--] = B[j--];
+		}
+		while(j>=0)
+			A[k--] = B[j--];
+    }
+};
+```
 96.Unique Binary Search Trees
 --
 https://discuss.leetcode.com/topic/8398/dp-solution-in-6-lines-with-explanation-f-i-n-g-i-1-g-n-i/2
