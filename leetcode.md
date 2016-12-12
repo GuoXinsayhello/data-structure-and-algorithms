@@ -2028,6 +2028,57 @@ public:
     }
 };
 ```
+
+89.Gray Code
+--
+下面这种做法是自己写的，用的就是递归的策略，求n的graycode，就在n-1的格雷码前加0或者1，不过这个做法超时了（TLE）！
+```java
+public class Solution {
+    public List<Integer> grayCode(int n) {
+    	List<Integer> res=new LinkedList<>();
+    	if(n==0){
+    	    res.add(0);
+    	    return res;
+    	}
+    		
+    	List<String> strres=ge(n);
+    	for(String str:strres)
+    		res.add(Integer.parseInt(str,2));
+    	return res;
+    }
+    private List<String> ge(int n){
+    	List<String> temp=new LinkedList<>();
+    	if(n==1){
+    		temp.add("0");
+    		temp.add("1");
+    		return temp;
+    	}
+    	else{
+    		for(String str:ge(n-1)){
+    			StringBuffer sb0=new StringBuffer(str);
+    			sb0.insert(0, "0");
+    			temp.add(sb0.toString());
+    		}
+    		int l=ge(n-1).size();
+    		for(int i=l-1;i>=0;i--){
+    			StringBuffer sb1=new StringBuffer(ge(n-1).get(i));
+    			sb1.insert(0, "1");
+    			temp.add(sb1.toString());
+    		}
+    		return temp;
+    	}
+    }
+}
+```
+下面这个做法是别人写的，太简洁了
+```java
+public List<Integer> grayCode(int n) {
+    List<Integer> result = new LinkedList<>();
+    for (int i = 0; i < 1<<n; i++) result.add(i ^ i>>1);
+    return result;
+}
+```
+The idea is simple. G(i) = i^ (i/2).
 96.Unique Binary Search Trees
 --
 https://discuss.leetcode.com/topic/8398/dp-solution-in-6-lines-with-explanation-f-i-n-g-i-1-g-n-i/2
