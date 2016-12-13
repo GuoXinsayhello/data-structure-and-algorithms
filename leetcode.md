@@ -1957,6 +1957,48 @@ public class Solution {
     }
 }
 ```
+
+91.Decode ways
+--
+下面的做法是自己写的，居然超时了，感觉逻辑并没有错误，可能效率太低，用的是递归。
+```java
+public class Solution {
+    public int numDecodings(String s) {
+    	if(s.length()==0)
+    		return 0;
+    	else if(s.startsWith("0"))
+    		return 0;
+    	else if(s.length()==1){
+    		if(!s.equals("0"))
+    			return 1;
+    		else
+    			return 0;
+    	}
+    		
+        else if(s.length()==2){
+    		int temps=Integer.parseInt(s);
+    		if(temps<=26 && temps!=10 && temps!=20)
+    			return 2;
+    		else if(temps%10==0 && temps!=10 && temps!=20)
+    			return 0;
+    		else
+    			return 1;
+    			 
+    	}
+    	else{
+    		int temp=Integer.parseInt(s.substring(0,2));
+    		if(temp<=26 && temp!=20 && temp !=10)
+    			return numDecodings(s.substring(2))+numDecodings(s.substring(1));
+    		else if(temp==20 || temp==10)
+    			return numDecodings(s.substring(2));
+    		else
+    			return numDecodings(s.substring(1));
+    			
+    	}
+        
+    }
+}
+```
 95.Unique Binary Search Trees II
 --
 ```java
