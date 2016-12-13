@@ -1907,31 +1907,6 @@ int maximalRectangle(vector<vector<char> > &matrix) {
     return maxA;
 }
 ```
-94. Binary Tree Inorder Traversal  
-
---
-也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
-```java
-public List<Integer> inorderTraversal(TreeNode root) {
-    List<Integer> list = new ArrayList<Integer>();
-
-    Stack<TreeNode> stack = new Stack<TreeNode>();
-    TreeNode cur = root;
-
-    while(cur!=null || !stack.empty()){
-        while(cur!=null){
-            stack.add(cur);
-            cur = cur.left;
-        }
-        cur = stack.pop();
-        list.add(cur.val);
-        cur = cur.right;
-    }
-
-    return list;
-}
-```
-
 87.scramble String
 --
 下面的做法真是简洁优美，而且1处的代码也给出了如何判断两个单词是由相同的字母构成的
@@ -1958,96 +1933,6 @@ public class Solution {
 }
 ```
 
-91.Decode ways
---
-下面的做法是自己写的，居然超时了，感觉逻辑并没有错误，可能效率太低，用的是递归。
-```java
-public class Solution {
-    public int numDecodings(String s) {
-    	if(s.length()==0)
-    		return 0;
-    	else if(s.startsWith("0"))
-    		return 0;
-    	else if(s.length()==1){
-    		if(!s.equals("0"))
-    			return 1;
-    		else
-    			return 0;
-    	}
-    		
-        else if(s.length()==2){
-    		int temps=Integer.parseInt(s);
-    		if(temps<=26 && temps!=10 && temps!=20)
-    			return 2;
-    		else if(temps%10==0 && temps!=10 && temps!=20)
-    			return 0;
-    		else
-    			return 1;
-    			 
-    	}
-    	else{
-    		int temp=Integer.parseInt(s.substring(0,2));
-    		if(temp<=26 && temp!=20 && temp !=10)
-    			return numDecodings(s.substring(2))+numDecodings(s.substring(1));
-    		else if(temp==20 || temp==10)
-    			return numDecodings(s.substring(2));
-    		else
-    			return numDecodings(s.substring(1));
-    			
-    	}
-        
-    }
-}
-```
-95.Unique Binary Search Trees II
---
-```java
-public class Solution {
-    public List<TreeNode> generateTrees(int n) {
-        
-        return genTrees(1,n);
-    }
-        
-    public List<TreeNode> genTrees (int start, int end)
-    {
-
-        List<TreeNode> list = new ArrayList<TreeNode>();
-
-        if(start>end)
-        {
-            list.add(null);
-            return list;
-        }
-        
-        if(start == end){
-            list.add(new TreeNode(start));
-            return list;
-        }
-        
-        List<TreeNode> left,right;
-        for(int i=start;i<=end;i++)
-        {
-            
-            left = genTrees(start, i-1);
-            right = genTrees(i+1,end);
-            
-            for(TreeNode lnode: left)
-            {
-                for(TreeNode rnode: right)
-                {
-                    TreeNode root = new TreeNode(i);
-                    root.left = lnode;
-                    root.right = rnode;
-                    list.add(root);
-                }
-            }
-                
-        }
-        
-        return list;
-    }
-}
-```
 88
 --
 下面这个做法还是挺好的
@@ -2121,6 +2006,127 @@ public List<Integer> grayCode(int n) {
 }
 ```
 The idea is simple. G(i) = i^ (i/2).
+
+
+
+91.Decode ways
+--
+下面的做法是自己写的，居然超时了，感觉逻辑并没有错误，可能效率太低，用的是递归。
+```java
+public class Solution {
+    public int numDecodings(String s) {
+    	if(s.length()==0)
+    		return 0;
+    	else if(s.startsWith("0"))
+    		return 0;
+    	else if(s.length()==1){
+    		if(!s.equals("0"))
+    			return 1;
+    		else
+    			return 0;
+    	}
+    		
+        else if(s.length()==2){
+    		int temps=Integer.parseInt(s);
+    		if(temps<=26 && temps!=10 && temps!=20)
+    			return 2;
+    		else if(temps%10==0 && temps!=10 && temps!=20)
+    			return 0;
+    		else
+    			return 1;
+    			 
+    	}
+    	else{
+    		int temp=Integer.parseInt(s.substring(0,2));
+    		if(temp<=26 && temp!=20 && temp !=10)
+    			return numDecodings(s.substring(2))+numDecodings(s.substring(1));
+    		else if(temp==20 || temp==10)
+    			return numDecodings(s.substring(2));
+    		else
+    			return numDecodings(s.substring(1));
+    			
+    	}
+        
+    }
+}
+```
+94. Binary Tree Inorder Traversal  
+
+--
+也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
+```java
+public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> list = new ArrayList<Integer>();
+
+    Stack<TreeNode> stack = new Stack<TreeNode>();
+    TreeNode cur = root;
+
+    while(cur!=null || !stack.empty()){
+        while(cur!=null){
+            stack.add(cur);
+            cur = cur.left;
+        }
+        cur = stack.pop();
+        list.add(cur.val);
+        cur = cur.right;
+    }
+
+    return list;
+}
+```
+95.Unique Binary Search Trees II
+--
+```java
+public class Solution {
+    public List<TreeNode> generateTrees(int n) {
+        
+        return genTrees(1,n);
+    }
+        
+    public List<TreeNode> genTrees (int start, int end)
+    {
+
+        List<TreeNode> list = new ArrayList<TreeNode>();
+
+        if(start>end)
+        {
+            list.add(null);
+            return list;
+        }
+        
+        if(start == end){
+            list.add(new TreeNode(start));
+            return list;
+        }
+        
+        List<TreeNode> left,right;
+        for(int i=start;i<=end;i++)
+        {
+            
+            left = genTrees(start, i-1);
+            right = genTrees(i+1,end);
+            
+            for(TreeNode lnode: left)
+            {
+                for(TreeNode rnode: right)
+                {
+                    TreeNode root = new TreeNode(i);
+                    root.left = lnode;
+                    root.right = rnode;
+                    list.add(root);
+                }
+            }
+                
+        }
+        
+        return list;
+    }
+}
+```
+
+
+
+
 96.Unique Binary Search Trees
 --
 https://discuss.leetcode.com/topic/8398/dp-solution-in-6-lines-with-explanation-f-i-n-g-i-1-g-n-i/2
