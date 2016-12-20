@@ -2191,7 +2191,8 @@ if(path[h][k-1]+path[h-1][k]!=0 && (s1.substring(k,k+1).equals(s3.substring(k+h-
     						      || s2.substring(h,h+1).equals(s3.substring(k+h-1,k+h))))
     						path[h][k]=1;
 ```
-这个写法的错误在与会对字符串重复使用，也就是用过的字符会再用一次。下面的做法是自己在12月20日又写的，自己测试一下都通过了，但是超时了
+这个写法的错误在与会对字符串重复使用，也就是用过的字符会再用一次。<br>
+下面的做法是自己在12月20日又写的，自己测试一下都通过了，但是超时了
 ```java
 public class Solution {
     public boolean isInterleave(String s1, String s2, String s3) {
@@ -2209,6 +2210,25 @@ public class Solution {
     	return valid;
         
     }
+```
+下面的做法是别人的DFS算法
+```java
+public boolean isInterleave(String s1, String s2, String s3) {
+    char[] c1 = s1.toCharArray(), c2 = s2.toCharArray(), c3 = s3.toCharArray();
+	int m = s1.length(), n = s2.length();
+	if(m + n != s3.length()) return false;
+	return dfs(c1, c2, c3, 0, 0, 0, new boolean[m + 1][n + 1]);
+}
+
+public boolean dfs(char[] c1, char[] c2, char[] c3, int i, int j, int k, boolean[][] invalid) {
+	if(invalid[i][j]) return false;
+	if(k == c3.length) return true;
+	boolean valid = 
+	    i < c1.length && c1[i] == c3[k] && dfs(c1, c2, c3, i + 1, j, k + 1, invalid) || 
+        j < c2.length && c2[j] == c3[k] && dfs(c1, c2, c3, i, j + 1, k + 1, invalid);
+	if(!valid) invalid[i][j] = true;
+    return valid;
+}
 ```
 98. Validate Binary Search Tree  
 --
