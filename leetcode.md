@@ -2191,8 +2191,26 @@ if(path[h][k-1]+path[h-1][k]!=0 && (s1.substring(k,k+1).equals(s3.substring(k+h-
     						      || s2.substring(h,h+1).equals(s3.substring(k+h-1,k+h))))
     						path[h][k]=1;
 ```
-这个写法的错误在与会对字符串重复使用，也就是用过的字符会再用一次。
-98. Validate Binary Search Tree  
+这个写法的错误在与会对字符串重复使用，也就是用过的字符会再用一次。下面的做法是自己在12月20日又写的，自己测试一下都通过了，但是超时了
+```java
+public class Solution {
+    public boolean isInterleave(String s1, String s2, String s3) {
+    	int l1=s1.length();
+    	int l2=s2.length();
+    	int l3=s3.length();
+    	if(l1+l2!=l3)
+    		return false;
+    	if(l3==0)
+    		return true;
+    	boolean valid=(   (l1>0 && s1.substring(0,1).equals(  s3.substring(0,1)  ) && 
+    			  isInterleave(s1.substring(1),s2,s3.substring(1) )    ) || 
+    			(l2>0 && s2.substring(0,1).equals(  s3.substring(0,1)  ) && 
+    	    		isInterleave(s1,s2.substring(1),s3.substring(1))  ) );
+    	return valid;
+        
+    }
+```
+98. Validate Binary Search Tree  
 --
 这道题注意二叉搜索树与二叉树的区别，二叉搜索树要求树左边所有点的值都要小于根的值，右边所有点的值都要大于根的值。
 ```java
