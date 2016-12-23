@@ -2093,6 +2093,22 @@ public List<Integer> inorderTraversal(TreeNode root) {
     return list;
 }
 ```
+
+其实上面的做法麻烦了，下面这个非常简单，而且能够实现预期的效果。
+```java
+public class Append 
+{
+	List<TreeNode> tree=new LinkedList<>();
+	public List ge(TreeNode root){
+		if(root==null)
+			return tree;
+		ge(root.left);
+		    tree.add(root);
+		ge(root.right);
+		return tree;	
+ }
+ }
+```
 95.Unique Binary Search Trees II
 --
 ```java
