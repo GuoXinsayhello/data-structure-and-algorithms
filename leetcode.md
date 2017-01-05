@@ -2468,6 +2468,7 @@ public class Solution {
     }
 }
 ```
+这道题如果要变为从底向上进行遍历，只需要把wraplist.add(sublist)变为wraplist.add(0,sublist),这样新的就会不断被放置在最前面。
 103.Binary Tree Zigzag Level Order Traversal
 ```java
 public class Solution {
