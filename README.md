@@ -334,7 +334,43 @@ public class ThreeWayQuickSort {
     }  
 } 
 ```
+冒泡排序<br>
+```java
+ public static void bubbleSort(int[] data) {  
+        for (int i = 0; i < data.length - 1; i++) {// 控制趟数  
+            for (int j = 0; j < data.length - i - 1; j++) {  
+                if (data[j] > data[j + 1]) {  
+                    int tmp = data[j];  
+                    data[j] = data[j + 1];  
+                    data[j + 1] = tmp;  
+                }  
+            }  
+        }  
+    } 
+```
+冒泡排序就是依次比较相邻的数字，如果前一个数要大于后一个数就交换两者的位置<br>
 
+选择排序<br>
+```java
+    public static void selectSort(int[] data) {  
+        if (data == null || data.length == 0) {  
+            return;  
+        }  
+        for (int i = 0; i < data.length - 1; i++) {  
+            int min = i;// 将当前下标定为最小值下标  
+            for (int j = i + 1; j < data.length; j++) {  
+                if (data[j] < data[min]) {  
+                    min = j;  
+                }  
+            }  
+            if (i != min) {  
+                int tmp = data[i];  
+                data[i] = data[min];  
+                data[min] = tmp;  
+            }  
+        }  
+    }  
+```
 ##第八章 线性时间排序
 在最坏情况下，任何`比较`排序算法都要做Ω（nlgn）次比较<br>
 
