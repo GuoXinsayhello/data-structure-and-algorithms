@@ -2588,6 +2588,30 @@ public TreeNode sortedListToBST(ListNode head) {
             return root;
         }
 ```
+下面的这种做法似乎更加精炼一点
+
+```java
+public class Solution {
+public TreeNode sortedListToBST(ListNode head) {
+    if(head==null) return null;
+    return toBST(head,null);
+}
+public TreeNode toBST(ListNode head, ListNode tail){
+    ListNode slow = head;
+    ListNode fast = head;
+    if(head==tail) return null;
+    
+    while(fast!=tail&&fast.next!=tail){
+        fast = fast.next.next;
+        slow = slow.next;
+    }
+    TreeNode thead = new TreeNode(slow.val);
+    thead.left = toBST(head,slow);
+    thead.right = toBST(slow.next,tail);
+    return thead;
+}
+}
+```
 112.Path Sum
 --
 下面这种做法是递归方法
