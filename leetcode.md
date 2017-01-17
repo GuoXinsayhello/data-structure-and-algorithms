@@ -2612,6 +2612,51 @@ public TreeNode toBST(ListNode head, ListNode tail){
 }
 }
 ```
+
+110.Balanced Binary Tree
+--
+
+这道题有两种做法，下面这种时间复杂度O(N),就是记录每个结点的高度，如果该节点左右高度相差超过1，则标记为-1
+```java
+public boolean isBalanced(TreeNode root) {
+    if (root == null) return true;
+    return dfsHeight(root) != -1;
+}
+
+public int dfsHeight(TreeNode root) {
+    if (root == null)
+        return 0;
+    int leftHeight = dfsHeight(root.left);
+    if (leftHeight == -1) return -1;
+    int rightHeight = dfsHeight(root.right);
+    if (rightHeight == -1) return -1;
+    if (Math.abs(leftHeight - rightHeight) > 1)
+        return -1;
+    return Math.max(dfsHeight(root.left), dfsHeight(root.right)) + 1;
+}
+```
+下面这种做法就是不断判断左右子树是否是平衡二叉树，很多结点重复了计算，所以不如上面的做法
+
+```java
+public class Solution {
+    public boolean isBalanced(TreeNode root) {
+    	if(root==null)
+    		return true;
+    	if(Math.abs(maDep(root.left)-maDep(root.right))<2)
+    			return isBalanced(root.left) && isBalanced(root.right);
+    	else
+    		return false;
+        
+    }
+    private int maDep(TreeNode root)
+    {
+    	if(root==null)
+    		return 0;
+    	else
+    		return 1+Math.max(maDep(root.left), maDep(root.right));
+    }
+}
+```
 112.Path Sum
 --
 下面这种做法是递归方法
