@@ -2909,7 +2909,24 @@ public int maxProfit(int[] prices) {
     return total;
 }
 ```
-
+123.Best Time to Buy and Sell Stock III
+--
+下面这种做法虽然是最多进行两次交易，但是可以适用于三次，四次，等等，只需要多设置几个变量就可以了，分别求出卖出第3个，买了第3个，卖出第2个，买了第二个的收益，多设置了几个变量，因此这种做法也同样适用于121题，只要把hold2和release2去掉就可以了。注意顺序不能是1到多，只能是多到1,如果是1到多的话就不满足一天只能进行一次交易的限制，表示当天可以买第一只，卖出，然后再买第二支，再卖出。
+```java
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int hold1 = Integer.MIN_VALUE, hold2 = Integer.MIN_VALUE;
+        int release1 = 0, release2 = 0;
+        for(int i:prices){                              // Assume we only have 0 money at first
+            release2 = Math.max(release2, hold2+i);     // The maximum if we've just sold 2nd stock so far.
+            hold2    = Math.max(hold2,    release1-i);  // The maximum if we've just buy  2nd stock so far.
+            release1 = Math.max(release1, hold1+i);     // The maximum if we've just sold 1nd stock so far.
+            hold1    = Math.max(hold1,    -i);          // The maximum if we've just buy  1st stock so far. 
+        }
+        return release2; ///Since release1 is initiated as 0, so release2 will always higher than release1.
+    }
+}
+```
 124.Binary Tree Maximum Path Sum
 --
 这道题
