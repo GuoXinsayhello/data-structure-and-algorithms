@@ -3246,6 +3246,20 @@ public int minCut(String s) {
 }
 ```
 这道题用的动态规划，挺好的，可以看看
+```java
+  public int minCut(String s) {
+        if(s.length()==0)return 0;
+        int[]c=new int[s.length()+1];
+        for(int i=0;i<s.length();i++)c[i]=Integer.MAX_VALUE;
+        c[s.length()]=-1;
+        for(int i=s.length()-1;i>=0;i--){
+            for(int a=i,b=i;a>=0 && b<s.length() && s.charAt(a)==s.charAt(b);a--,b++) c[a]=Math.min(c[a],1+c[b+1]);
+            for(int a=i,b=i+1;a>=0 && b<s.length() && s.charAt(a)==s.charAt(b);a--,b++) c[a]=Math.min(c[a],1+c[b+1]);
+        }
+        return c[0];
+    }
+```
+这种做法的意思就是建立一个字符串长度的数组，记录的是改位置以后的字符串要分为几部分，从右往左，分别建立两个指针，一个向左，一个向右，然后判断两个指针指的字符是否一样，如果一样就说明是回文字符，然后开始更新数组，第一个位置记录的就是字符串最少需要割开的部分。
 133.clone graph
 --
 ```java
