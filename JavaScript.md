@@ -16,3 +16,11 @@ var cars=new Array("Audi","BMW","Volvo");
 ```
 var cars=["Audi","BMW","Volvo"];
 ```
+而且js两个不同类型的变量之间可以赋值。<br>
+js定义函数需要用到function关键字，而java并没有这个关键字。<br>
+
+JavaScript 变量的生存期
+--
+JavaScript 变量的生命期从它们被声明的时间开始。
+局部变量会在函数运行以后被删除。
+全局变量会在页面关闭后被删除。
