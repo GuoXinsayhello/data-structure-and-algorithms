@@ -31,4 +31,15 @@ var y = new String("John");
 ```
 js里面有一个===运算符表示绝对等于，也就是值和类型都相等才会输出true。<br>
 js里面有`for in`语句，类似于java里面的for each语句。<br>
-js里面的typeof操作符类似于java里面的getClass()方法
+js里面的typeof操作符类似于java里面的getClass()方法，在JavaScript中，数组是一种特殊的对象类型。 因此 typeof [1,2,3,4] 返回 object。任何变量都可以通过设置值为 undefined 来清空。 类型为 undefined.
+```
+null === undefined          // false
+null == undefined            // true
+```
+Operator + 可用于将变量转换为数字：
+```
+var y = "5";      // y 是一个字符串
+var x = + y;      // x 是一个数字
+```
+变量提升：函数声明和变量声明总是会被解释器悄悄地被"提升"到方法体的最顶部
+```
