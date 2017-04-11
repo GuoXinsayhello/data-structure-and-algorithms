@@ -24,4 +24,11 @@ JavaScript 变量的生存期
 JavaScript 变量的生命期从它们被声明的时间开始。
 局部变量会在函数运行以后被删除。
 全局变量会在页面关闭后被删除。<br>
-
+```
+var x = "John";              
+var y = new String("John");
+(x === y) // 结果为 false，因为 x 是字符串，y 是对象
+```
+js里面有一个===运算符表示绝对等于，也就是值和类型都相等才会输出true。<br>
+js里面有`for in`语句，类似于java里面的for each语句。<br>
+js里面的typeof操作符类似于java里面的getClass()方法
