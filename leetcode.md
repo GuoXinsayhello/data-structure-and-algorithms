@@ -2534,6 +2534,73 @@ public TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int
     return root;
 }
 ```
+
+```java
+class Solution {
+    private int preIndex = 0;
+    private int inIndex = 0;
+    
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        return dfs(preorder, inorder, null);
+    }
+    
+    public TreeNode dfs(int[] preorder, int[] inorder, TreeNode end){
+        if(inIndex > inorder.length - 1 || (end != null && end.val == inorder[inIndex])){
+            return null;
+        }
+        
+        TreeNode root = new TreeNode(preorder[preIndex++]);
+        root.left = dfs(preorder, inorder, root);
+        
+        inIndex++;
+        root.right = dfs(preorder, inorder, end);
+        
+        return root;
+    }
+}
+
+```
+Construct Binary Tree from Postorder and Inorder Traversal
+--
+```java
+class Solution {
+    
+    private int idx;
+    
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if (inorder.length != postorder.length) return null;
+        if (inorder.length == 0) return null;
+        idx = postorder.length-1;
+        TreeNode root = build(inorder, postorder, 0, idx);
+        return root;
+    }
+    
+    private TreeNode build(int[] inorder, int[] postorder, int start, int end) {
+        if (start>end) return null;
+        TreeNode node = new TreeNode(postorder[idx--]);
+        if (start==end) return node;
+        
+        int index = findIdx(inorder, node.val, end);
+        node.right = build(inorder, postorder, index+1, end);
+        node.left = build(inorder, postorder, start, index-1);
+        return node;
+    }
+    
+    private int findIdx(int[] inorder, int val, int end) {
+        for (int i=end; i>=0; i--) {
+            if (inorder[i]==val) return i;
+        }
+        return 0;
+    }
+}
+// TC: O(N^2)
+// AS: O(N)
+// The worst case falls into the case when tree is a skew tree
+
+
+```
+
+
 108.Convert Sorted Array to Binary Search Tree
 --
 ```java
