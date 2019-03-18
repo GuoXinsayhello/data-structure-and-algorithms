@@ -696,3 +696,29 @@ private int binsearch(int[] nums,int lo,int hi,int t){
 	    }
 ```
 http://www.jianshu.com/p/7c17cc56e21e 这个网址说了二分法的多种变体
+
+```java
+//结果集
+public static T ans = new T();
+//中间结果集
+public static T path = new T();
+//问题
+public static T problem(){
+  ans.clear();//leetcode的一个特殊点，每次要清空结果集，避免重复
+  robot(idx ,...);//DFS部分，常用idx作为结果递归的标志
+  return ans;
+}
+//DFS
+public static void robot(int idx, ...){
+  if(xxx){//边界条件，递归出口条件
+    //用当前path内容生成一部分结果集
+    //handle path 
+    ans.add(tmp);
+    return;
+  }
+  //递归处理
+  path[idx] = true;//递归前假设
+  robot(++idx, ...);//根据不同情况进行处理
+  path[idx] = false;//递归后还原
+```
+这个是DFS的一般框架
