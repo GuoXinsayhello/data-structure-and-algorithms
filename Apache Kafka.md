@@ -25,5 +25,7 @@ consumer有consumer group以及standalone consumer两种，前者是一个group�
 也就是说如果发生一次generation就加1，类似gc。
 目前，kafka只会维护单个分区内消息的有序性，而不会维护全局的消息有序。位移提交的概念是说消费者要定期向kafka集群汇报自己的消费进度，这叫（offset commit），__consumer_offsets文件存储的是消费的位移。consumer获取消息采用的是类似linux的轮询的方式，在poll方法中进行轮询，使用一个线程同时管理多个socket连接。新版本的consumer是一个多线程的，一个是创建consumer的主线程，一个是后台心跳线程，两个线程，但是个人感觉是一个线程起着主要的作用。并且新版本的consumer不是线程安全的。对于语义交付是在consumer控制的，最多消费一次（at most once)，至少消费一次（at least once）以及精确一次(exactly once).如果consumer在消费之前就提交位移，那么可以实现at most once，如果消费之后 那么就是at least once。集群会在所有broker当中选择一个broker当做coordinator，用于组成员管理，消费分配方案的制订以及提交位移等等，提交位移有自动提交以及手动提交两种方式。同样，consumer也有全局单consumer多线程以及每个线程都有一个consumer两种方式。
 
+kafka实现精确一次交付的机制是幂等producer以及事务，幂等性producer能够保证broker端只会将同一个日志写入一次。
+
 
 
