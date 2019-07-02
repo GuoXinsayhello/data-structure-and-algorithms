@@ -12,3 +12,9 @@ dubbo简介
 dubbo配置
 --
 + dubbo既可以使用xml配置又可以使用api方式进行配置
++ 配置中心不仅可以使用zookeeper，还可以使用Apollo。
++ 配置来源从高到低可以有jvm参数设置；外部化配置（比如zookeeper，Apollo），相当于把本地配置文件集中化管理；config编程接口采集的配置；以及本地配置文件
++ 集群容错，也就是说如果出现调用失败会怎么处理，默认failover也就是重试其他服务器，一般用于读操作，如果是写操作一般用failfast，比如新增，还有其他的一些处理。
++ 负载均衡策略有random，roundrobin，leastActive（慢的调用者会接收更少请求），ConsistentHash（也就是相同参数的请求总发到同一个调用者）
++ 线程模型。如果处理的事件不耗时，可以在线程上直接处理，dispatcher选择direct，如果比较耗时，则需要派发到线程池当中，否则会产生阻塞。dispatcher=all，表示全部进入线程池。
+
