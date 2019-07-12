@@ -4,4 +4,6 @@ HSF
 + HSF是使用diamond来实现规则的存储和通知,对于注册中心使用的是ConfigServer,阿里自己的一个产品，堪比zookeeper.
 + hsf使用ServiceLoader来实现隐藏实现细节，完成服务实例加载。
 + hsf通过export进行服务的发布，unexport进行取消发布，refer进行服务订阅，unrefer取消订阅。发布时启动HSFServer，生成ServiceURL，订阅服务时返回能进行远程调用的InvocationHandler。
++ 可以通过interceptor来拦截发布以及订阅事件，可以通过扩展的方式将功能集成到发布和订阅当中。发布服务时会依次调用这些扩展点进行功能的扩展
++ nginx与haproxy都有负载均衡功能，就负载均衡来说，haproxy相比nginx负载均衡能力更强大，负载均衡策略更多。此外nginx重点是一个web服务器，但是haproxy更偏重一个负载均衡器。同时nginx支持http，而haproxy支持http与tcp
 
