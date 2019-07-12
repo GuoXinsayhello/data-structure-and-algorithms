@@ -6,4 +6,6 @@ HSF
 + hsf通过export进行服务的发布，unexport进行取消发布，refer进行服务订阅，unrefer取消订阅。发布时启动HSFServer，生成ServiceURL，订阅服务时返回能进行远程调用的InvocationHandler。
 + 可以通过interceptor来拦截发布以及订阅事件，可以通过扩展的方式将功能集成到发布和订阅当中。发布服务时会依次调用这些扩展点进行功能的扩展
 + nginx与haproxy都有负载均衡功能，就负载均衡来说，haproxy相比nginx负载均衡能力更强大，负载均衡策略更多。此外nginx重点是一个web服务器，但是haproxy更偏重一个负载均衡器。同时nginx支持http，而haproxy支持http与tcp
-
++ 客户端从注册中心拿到服务地址列表之后，会推送到后续的路由节点，后续的路由节点会对地址进行切分，同时路由节点也会在调用时期进行路由选择
++ HSF自身具有负载均衡功能，也就是客户端从服务器地址当中选出一个地址进行调用用到了负载均衡，HSF默认的负载均衡策略是随机策略。
++ HSF使用Netty作为内部通信组件
