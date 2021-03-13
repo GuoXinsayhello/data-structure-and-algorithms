@@ -57,6 +57,7 @@ public class Solution {
 ```
 发现其实和服务器的性能有关，这个代码后来提交只能击败82%的用户。<br>
 看到得分比较多的是用一个HashMap来做，感觉想法一般。
+
 2.add two numbers
 --
 发现另外一个问题
@@ -97,7 +98,7 @@ public class Solution {
 }
 ```
 这个方法还是比较简洁明了。
-。
+
 3.Longest Substring Without Repeating Characters
 --
 List有一个subList(int fromindex，int endindex)方法,可以截取一个list。<br>
@@ -179,6 +180,7 @@ private void extendPalindrome(String s, int j, int k) {
 }}
 ```
 这个方法的思想就是从开始不断向周围扩展，直到不是回文字符，然后求出最大值。
+
 6.Zig Zag Conversion
 --
 ```java
@@ -201,6 +203,7 @@ public String convert(String s, int nRows) {
 }
 ```
 这个想法就是每一行都建立一个StringBuffer，然后按照ZIGZAG顺序依次写入每个StringBuffer。
+
 7.reverse Integer
 --
 下面这个方法是自己写的，用的是try catch去捕捉overflow。
@@ -260,7 +263,8 @@ public int reverse(int x)
 }
 ```
 这个方法就是再算一遍，如果overflow，那么结果y和之前的就会不同。
-8.
+
+8.String to Integer (atoi)
 --
 ```java
 public static int myAtoi(String str) {
@@ -280,6 +284,7 @@ public static int myAtoi(String str) {
 }
 ```
 下面这个做法还是挺靠谱的。
+
 9. Palindrome Number
 --
 ```java
@@ -361,8 +366,9 @@ public boolean isMatch(String s, String p) {
 ```
 
 11. Container With Most Water
-这道题第一遍的时候没有写出来，第二遍的时候自己写的用的是投票最高的方法，s提交之后居然超时。下面是自己写的方法。
 --
+
+这道题第一遍的时候没有写出来，第二遍的时候自己写的用的是投票最高的方法，s提交之后居然超时。下面是自己写的方法。
 ```java
 
     public int maxArea(int[] h) {
@@ -381,6 +387,7 @@ public boolean isMatch(String s, String p) {
         return max;
     }
 ```
+
 12. Integer to Roman
 --
 ```java
@@ -432,6 +439,7 @@ List<List<Integer>> lls=new LinkedList<List<Integer>>();
 	    lls.add(Arrays.asList(1,2,3));
 ```
 这样就不用new一个新的List\<Integer\>
+
 16 3sum closest
 --
 自己写的
