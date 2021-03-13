@@ -285,7 +285,7 @@ public static int myAtoi(String str) {
 ```
 下面这个做法还是挺靠谱的。
 
-9. Palindrome Number
+9.Palindrome Number
 --
 ```java
 public boolean isPalindrome(int x) {
@@ -365,7 +365,7 @@ public boolean isMatch(String s, String p) {
 }
 ```
 
-11. Container With Most Water
+11.Container With Most Water
 --
 
 这道题第一遍的时候没有写出来，第二遍的时候自己写的用的是投票最高的方法，s提交之后居然超时。下面是自己写的方法。
@@ -388,7 +388,7 @@ public boolean isMatch(String s, String p) {
     }
 ```
 
-12. Integer to Roman
+12.Integer to Roman
 --
 ```java
 public class Solution {
@@ -410,7 +410,7 @@ public String intToRoman(int num) {
 ```
 这个做法就是每次都要遍历一遍values。
 
-15. 3Sum
+15.3Sum
 --
 ```java
 public List<List<Integer>> threeSum(int[] num) {
@@ -440,7 +440,7 @@ List<List<Integer>> lls=new LinkedList<List<Integer>>();
 ```
 这样就不用new一个新的List\<Integer\>
 
-16 3sum closest
+16.3sum closest
 --
 自己写的
 ```java
@@ -488,7 +488,8 @@ public class Solution {
     		return target+gap;
 	}
 ```
-17
+
+17.Letter Combinations of a Phone Number 
 --
 下面这个做法真是服！
 ```java
@@ -541,6 +542,7 @@ public class Solution {
     }
 }
 ```
+
 18 4 sum
 --
 ```java
@@ -574,7 +576,9 @@ public class Solution {
 ```
 这个是基于3 sum的做法，挺靠谱。
 
-19.
+19.Remove Nth Node From End of List  
+--
+
 下面这个做法我服，我发现linkedlist套路就是搞速度不一样的指针，或者是出发时间不一样的指针。
 ```java
 public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -597,7 +601,8 @@ public ListNode removeNthFromEnd(ListNode head, int n) {
     return start.next;
 }
 ```
-22. Generate Parentheses
+
+22.Generate Parentheses
 --
 这个用的是回溯算法，比较不错。但是回溯算法不是很理解。
 ```java
@@ -686,6 +691,7 @@ public static ListNode merge(ListNode l1,ListNode l2){
 }
 ```
 这个方法用的是优先队列的方法，我按照两两合并的方法总是超时。
+
 24.swap nodes
 --
 这个用的是recursion的方法，
@@ -701,7 +707,8 @@ public class Solution {
     }
 }
 ```
-25
+
+25.Reverse Nodes in k-Group 
 --
 下面这个方法用的是递归，挺不错的，其实这个方法也揭示了如何把一个链翻转过来。基本思想就是构造一个temp保存head的next，然后构造一个cur，让head指向cur，然后cur，head，temp不断右移。
 ```java
@@ -744,7 +751,7 @@ class Solution {
 ```
 相当不错的方法。
 
-30. Substring with Concatenation of All Words  
+30.Substring with Concatenation of All Words  
 --
 下面这个做法的基本思想就是用一个hashmap保存L中的关键词，记录它们出现的次数，然后遍历给的String，不断如果有关键词出现，就从map中删除，如果最后mapw为空，说明删除完了，就是包含，就添加到结果当中。
 ```java
@@ -774,7 +781,8 @@ public static List<Integer> findSubstring(String S, String[] L) {
     return res;
 }
 ```
-31. Next Permutation
+
+31.Next Permutation
 --
 函数调用这个swap函数不能交换两个int的值，因为基本类型按照值传递，不会改变原有的数值。
 ```java
@@ -794,7 +802,8 @@ private void swap2(int[] nums,int i,int j){
 	    	nums[j]=temp;
 	    }
 ```
-32. Longest Valid Parentheses
+
+32.Longest Valid Parentheses
 --
 下面这个方法比较巧妙
 ```java
@@ -816,7 +825,8 @@ public class Solution {
 }
 ```
 注意1处newh之后的LinkedList居然不用写类型。
-33. Search in Rotated Sorted Array
+
+33.Search in Rotated Sorted Array
 --
 ```java
 class Solution {
@@ -847,7 +857,8 @@ public:
 };
 ```
 注意这个题里面二分搜索与搜索pivot同时出现了，注意两者的区别，二分搜索while的条件是l<=r,而且都是mid+1或者mid-1.而搜索pivot的话while条件是lo\<hi,hi=mid而不是mid-1.。而且注意这种搜索pivot的方法不能处理重复的数据，比如数据如果是1,1,1,0,1这样的例子就不行了。
-34. Search for a Range
+
+34.Search for a Range
 --
 具体解释参见https://discuss.leetcode.com/topic/5891/clean-iterative-solution-with-two-binary-searches-with-explanation
 ```java
@@ -876,6 +887,7 @@ vector<int> searchRange(int A[], int n, int target) {
     return ret; 
 }
 ```
+
 36.Valid Sudoku
 --
 ```java
@@ -898,7 +910,7 @@ public boolean isValidSudoku(char[][] board) {
     return true;
 }
 ```
-37
+37.Sudoku Solver  
 --
 这道题目用的是backtracking算法，其实感觉就是暴力破解一种方法不行就倒回去再试另一种方法。
 ```java
@@ -940,7 +952,7 @@ board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c) return false; //check 
     }
 }
 ```
-38.
+38.Count and Say  
 --
 下面这种方法用的是recursive算法
 ```java
@@ -967,7 +979,8 @@ public class Solution {
     }
 }
 ```
-41
+
+41.First Missing Positive  
 --
 下面这个做法还是挺好的，就是把正确的数放在正确的位置。
 ```java
@@ -991,6 +1004,7 @@ public class Solution {
     }
 }
 ```
+
 43.Multiply Strings 
 --
 ```java
@@ -1014,7 +1028,8 @@ public String multiply(String num1, String num2) {
     return sb.length() == 0 ? "0" : sb.toString();
 }
 ```
-44.
+
+44.Wildcard Matching
 --
 比较清晰易懂。
 ```java
@@ -1051,7 +1066,7 @@ boolean comparison(String str, String pattern) {
 }
 ```
 
-45
+45.Jump Game II    
 --
 ```java
 public int jump(int[] A) {
@@ -1087,7 +1102,8 @@ return step_count;
  }
  ```
   也就是把具有相同步数能够达到的node看做同一个level。
- 47
+  
+ 47.Permutations II    
  --
  这个方法效率应该比较高，但是理解不了
  ```java
@@ -1120,7 +1136,7 @@ return step_count;
 }
 ```
 
-48
+48.Rotate Image  
 --
 https://discuss.leetcode.com/topic/6796/a-common-method-to-rotate-the-image 这个方法讲的是对于旋转的一个一般的办法，感觉和rotate string的思想非常像，比如1234567——》3217654——》4567123
 ```c++
@@ -1154,7 +1170,8 @@ void anti_rotate(vector<vector<int> > &matrix) {
     }
 }
 ```
-49. Group Anagrams
+
+49.Group Anagrams
 --
  ```
  public class Solution {
@@ -1175,6 +1192,8 @@ void anti_rotate(vector<vector<int> > &matrix) {
 ```
 
 50.Pow(x,n)
+--
+
 https://discuss.leetcode.com/topic/21837/5-different-choices-when-talk-with-interviewers 这个网址集结了多种实现的方法，现列出其中一种
 ```java
 double myPow(double x, int n) {
@@ -1244,6 +1263,7 @@ public class Solution {
     }
 }
 ```
+
 52.N-queens II
 --
 这个解法用的仍然是DFS，不过并没有真正放置queen，而是用了三个set共同判断放置的queen是否有效。
@@ -1283,7 +1303,8 @@ private int totalNQueensHelper(int row, int count, int n) {
     return count;
 }
 ```
-54. Spiral Matrix
+
+54.Spiral Matrix
 --
 ```java
 public class Solution {
@@ -1326,7 +1347,8 @@ public class Solution {
     }
 }
 ```
-55. Jump Game
+
+55.Jump Game
 --
 下面这个方法是自己写的，自己用了几个例子测试还可以，用的可以说是DFS算法吧，然而stackoverflow了。
 ```java
@@ -1371,7 +1393,7 @@ public boolean canJump(int[] nums) {
     return true;
 }
 ```
-60
+60.Permutation Sequence 
 --
 https://discuss.leetcode.com/topic/17348/explain-like-i-m-five-java-solution-in-o-n 这个做法挺不错，就是要分析挺多。
 ```java
@@ -1411,7 +1433,8 @@ public String getPermutation(int n, int k) {
 }
 ```
 下面这个做法也挺好的
-61. Rotate List
+
+61.Rotate List
 --
 下面这个做法是自己写的，击败了80%+的人 ，不过仍然 需要计算链表的长度。
 ```java
@@ -1470,12 +1493,14 @@ public int[] plusOne(int[] digits) {
     return newNumber;
 }
 ```
-67
+
+67.Add Binary
 --
 注意一点，字符0对应的数字是48，一个字符和一个数字相加得到的是其对应的数，比如a='0',则a+1会等于49
 
 69.Sqrt（x）
---下面这种方法用的是二分搜索
+--
+下面这种方法用的是二分搜索
 ```java
 public int sqrt(int x) {
     if (x == 0)
@@ -1501,7 +1526,7 @@ public int sqrt(int x) {
     return (int) r;
 ```
 
-71,simple path
+71.simple path
 --
 感觉自己第一次做的时候没有搞清楚题目的意思，/..表示回到上一级目录，/.表示当前目录，
 ```java
@@ -1551,7 +1576,7 @@ public class Solution {
 }
 ```
 
-73.
+73.Set Matrix Zeroes 
 --
 下面这种想法的思想就是每当遇到0的就把0置在这个0位置的行开头和列开头，然后第二次遍历的时候凡是遇到0开头的就把该行或者该列置为0.
 ```java
@@ -1574,8 +1599,8 @@ void setZeroes(vector<vector<int> > &matrix) {
 }
 ```
 
-74
----
+74.Search a 2D Matrix  
+--
 下面这个做法是把一个矩阵当做一个向量来对待。
 ```java
 class Solution {
@@ -1657,7 +1682,7 @@ public class Solution {
     };
 ```
 
-76
+76.Minimum Window Substring 
 --
 这道题目的想法就是用start，end两个指针来决定一个窗口，首先移动end使该窗口满足能够覆盖所有的字符串，然后移动start使窗口最小。https://discuss.leetcode.com/topic/30941/here-is-a-10-line-template-that-can-solve-most-substring-problems 这个网址总结了这种题目的一般做法。
 ```java
@@ -1704,7 +1729,7 @@ public String minWindow(String s, String t) {
 }
 ```
 
-77
+77.Combinations
 --
 主要用到C(n,k)=C(n-1,k)+C(n-1,k-1);
 ```java
@@ -1804,7 +1829,7 @@ public int removeDuplicates(int[] nums) {
 }
 ```
 
-81.
+81.Search in Rotated Sorted Array II  
 --
 ```c++
 class Solution {
@@ -1857,7 +1882,7 @@ public ListNode deleteDuplicates(ListNode head) {
     }
 ```
 
-84
+84.Largest Rectangle in Histogram   
 --
 下面这个算法来自http://www.geeksforgeeks.org/largest-rectangle-under-histogram/ 基本想法就是对于每个bar，向左延伸找到第一个比它小的，向右延伸找到第一个比它小的，然后计算长方形大小。用了栈来存储信息，感觉比较高效。
 ```java
@@ -1941,7 +1966,7 @@ public class Solution {
 }
 ```
 
-88
+88.Merge Sorted Array   
 --
 下面这个做法还是挺好的
 ```c++
@@ -2078,7 +2103,8 @@ public class Solution {
     }
 }
 ```
-94. Binary Tree Inorder Traversal  
+
+94.Binary Tree Inorder Traversal  
 --
 也就是二叉树的中序遍历，作者用了一个stack来记录，还是比较厉害的
 ```java
@@ -2117,6 +2143,7 @@ public class Append
  }
  }
 ```
+
 95.Unique Binary Search Trees II
 --
 ```java
@@ -2167,9 +2194,6 @@ public class Solution {
 }
 ```
 
-
-
-
 96.Unique Binary Search Trees
 --
 https://discuss.leetcode.com/topic/8398/dp-solution-in-6-lines-with-explanation-f-i-n-g-i-1-g-n-i/2
@@ -2187,7 +2211,8 @@ public int numTrees(int n) {
     return G[n];
 }
 ```
-97. Interleaving String
+
+97.Interleaving String
 --
 ```java
 public boolean isInterleave(String s1, String s2, String s3) {
@@ -2254,7 +2279,8 @@ public boolean dfs(char[] c1, char[] c2, char[] c3, int i, int j, int k, boolean
     return valid;
 }
 ```
-98. Validate Binary Search Tree  
+
+98.Validate Binary Search Tree  
 --
 这道题注意二叉搜索树与二叉树的区别，二叉搜索树要求树左边所有点的值都要小于根的值，右边所有点的值都要大于根的值。
 ```java
@@ -2289,11 +2315,13 @@ public boolean isValidBST(TreeNode root) {
    return true;
 }
 ```
-99. Recover Binary Search Tree 
+
+99.Recover Binary Search Tree 
 --
 作者仅仅用了简单的中序遍历，简洁优雅
 https://discuss.leetcode.com/topic/3988/no-fancy-algorithm-just-simple-and-powerful-in-order-traversal
 高效。
+
 100.same tree
 --
 自己写的方法，用的是递归的思想，
@@ -2378,6 +2406,7 @@ public class Solution {
 	    }
 }
 ```
+
 101.Symmetric Tree
 --
 下面这个做法是得分比较高的做法，作者用了递归方法，非常简洁
@@ -2451,7 +2480,10 @@ public class Solution {
     }
     }
 ```
+
 102.Binary Tree Level Order Traversal
+--
+
 下面这个方法用了一个队列
 ```java
 public class Solution {
@@ -2477,7 +2509,10 @@ public class Solution {
 }
 ```
 这道题如果要变为从底向上进行遍历，只需要把wraplist.add(sublist)变为wraplist.add(0,sublist),这样新的就会不断被放置在最前面。
+
 103.Binary Tree Zigzag Level Order Traversal
+--
+
 ```java
 public class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) 
@@ -2506,7 +2541,8 @@ public class Solution {
     }
 }
 ```
-104. Maximum Depth of Binary Tree
+
+104.Maximum Depth of Binary Tree
 --
 下面这种做法真的被惊艳到了！
 ```java
@@ -2517,6 +2553,7 @@ public int maxDepth(TreeNode root) {
         return 1+Math.max(maxDepth(root.left),maxDepth(root.right));
     }
 ```
+
 105.Construct Binary Tree from Preorder and Inorder Traversal
 --
 这道题的解法就是根据先序遍历找到根，然后再中序遍历中根左边就是左子树，右边就是右子树，然后递归。
@@ -2568,7 +2605,7 @@ class Solution {
 }
 
 ```
-Construct Binary Tree from Postorder and Inorder Traversal
+106.Construct Binary Tree from Postorder and Inorder Traversal
 --
 ```java
 class Solution {
@@ -2631,7 +2668,8 @@ public TreeNode helper(int[] num, int low, int high) {
     return node;
 }
 ```
-109. Convert Sorted List to Binary Search Tree  
+
+109.Convert Sorted List to Binary Search Tree  
 --
 下面这种解法的思想就是找到链表的中间位置（具体做法就是设置一个fast和low的ListNode，让fast以两倍的速度，而slow以一倍的速度遍历，这样slow最终停止的位置就是中间位置）
 ```java
@@ -2732,6 +2770,7 @@ public class Solution {
     }
 }
 ```
+
 112.Path Sum
 --
 下面这种做法是递归方法
@@ -2746,7 +2785,9 @@ public class Solution {
     }
 }
 ```
-113. Path Sum II
+113.Path Sum II
+--
+
 ```java
 public List<List<Integer>> pathSum(TreeNode root, int sum) {
     List<List<Integer>>ret = new ArrayList<List<Integer>>(); 
@@ -2844,7 +2885,8 @@ public int numDistinct(String S, String T) {
     return mem[T.length()][S.length()];
 }
 ```
-116. Populating Next Right Pointers in Each Node
+
+116.Populating Next Right Pointers in Each Node
 --
 ```java
 public void connect(TreeLinkNode root) {
@@ -2859,6 +2901,7 @@ public void connect(TreeLinkNode root) {
    }
 }
 ```
+
 117.Populating Next Right Pointers in Each Node II
 --
 基本思想就是一层一层地迭代，然后每一次层从左到右。
@@ -2907,7 +2950,7 @@ public class Solution {
 }
 ```
 
-118.
+118.Pascal's Triangle 
 --
 ```java
 ls.add(1);
@@ -2940,7 +2983,8 @@ public List<List<Integer>> generate(int numRows)
 }
 ```
 基本思想就是在首先在第0位插入1，然后该位的值是原来该位的数加上后面一位的数。
-120. Triangle
+
+120.Triangle
 --
 ```java
 public int minimumTotal(List<List<Integer>> triangle) {
@@ -2955,6 +2999,7 @@ public int minimumTotal(List<List<Integer>> triangle) {
 ```
 感觉这个想法很厉害啊，自己刚开始是想能否用动态规划去做，这个类似于倒序的动态规划。<br>
 其实现在想想，正序的也可以，只不过写程序的时候每行开头和末尾填入的值没有选择性，写起来比较麻烦。
+
 121.Best Time to Buy and Sell Stock I
 --
 https://discuss.leetcode.com/topic/19853/kadane-s-algorithm-since-no-one-has-mentioned-about-this-so-far-in-case-if-interviewer-twists-the-input
@@ -2970,6 +3015,7 @@ public int maxProfit(int[] prices) {
     }
 ```
 这个做法的含义就是找到在每一天提交的最大收益，然后再比较一共prices.length个收益的最大值。
+
 122.Best Time to Buy and Sell Stock II
 --
 这道题改变之后，解法比上一题简单了。
@@ -2984,6 +3030,7 @@ public int maxProfit(int[] prices) {
     return total;
 }
 ```
+
 123.Best Time to Buy and Sell Stock III
 --
 下面这种做法虽然是最多进行两次交易，但是可以适用于三次，四次，等等，只需要多设置几个变量就可以了，分别求出卖出第3个，买了第3个，卖出第2个，买了第二个的收益，多设置了几个变量，因此这种做法也同样适用于121题，只要把hold2和release2去掉就可以了。注意顺序不能是1到多，只能是多到1,如果是1到多的话就不满足一天只能进行一次交易的限制，表示当天可以买第一只，卖出，然后再买第二支，再卖出。
@@ -3002,6 +3049,7 @@ public class Solution {
     }
 }
 ```
+
 124.Binary Tree Maximum Path Sum
 --
 这道题
@@ -3040,7 +3088,7 @@ public class Solution {
 ```
 这个错误写法把maxValue去掉了，但是这种方法无法通过【2，-1】这个输入。就是说输入为负值的时候得到的是错误的结果。
 
-125
+125.Valid Palindrome 
 --
 有时候a=a+b不能等同于a+=b。比如:<br>
 ```java
@@ -3054,7 +3102,7 @@ a=a+32;
 ```
 这就不允许了。
 
-126.
+126.Word Ladder II    
 --
 ```java
 public int ladderLength(String beginWord, String endWord, Set<String> wordDict) {
@@ -3100,10 +3148,11 @@ Set<String> set=new HashSet<String>();
 		   }  
 	   }
 ```
-127
+127.Word Ladder  
 --
 java中Arrays.sort的实现原理，对于基本的（primitive）类型采用的是快速排序，而对于Object类型，有两种，一种是归并排序，另外一种采用的是插入与归并结合的排序TimSort。http://www.jianshu.com/p/d083332c3c29 这个网址说的比较好。
-128
+
+128.Longest Consecutive Sequence
 --
 下面这个做法太厉害了，具体参见https://discuss.leetcode.com/topic/6148/my-really-simple-java-o-n-solution-accepted
 ```java
@@ -3135,6 +3184,7 @@ public int longestConsecutive(int[] num) {
     return res;
 }
 ```
+
 129.Sum Root to Leaf Numbers
 --
 下面是递归的方法做的
@@ -3149,7 +3199,8 @@ public int sum(TreeNode n, int s){
 	return sum(n.left, s*10 + n.val) + sum(n.right, s*10 + n.val);
 }
 ```
-130.
+
+130.Surrounded Regions 
 --
 https://discuss.leetcode.com/topic/17224/a-really-simple-and-readable-c-solution-only-cost-12ms
 这个是用C++写的一个DFS算法。
@@ -3264,7 +3315,7 @@ public class Solution {
 ```
 BFS算法需要一个queue，也就是队列，需要入队和出队。而DFS需要递归。
 
-131. Palindrome Partitioning
+131.Palindrome Partitioning
 --
 ```java
 public class Solution {
@@ -3298,7 +3349,8 @@ public class Solution {
 }
 ```
 就是很迷惑1处的代码是什么意思。为什么要去掉。
-132
+
+132.Palindrome Partitioning II 
 --
 ```java
 public int minCut(String s) {
@@ -3335,6 +3387,7 @@ public int minCut(String s) {
     }
 ```
 这种做法的意思就是建立一个字符串长度的数组，记录的是改位置以后的字符串要分为几部分，从右往左，分别建立两个指针，一个向左，一个向右，然后判断两个指针指的字符是否一样，如果一样就说明是回文字符，然后开始更新数组，第一个位置记录的就是字符串最少需要割开的部分。
+
 133.clone graph
 --
 ```java
@@ -3359,6 +3412,7 @@ public class Solution {
     }
 }
 ```
+
 134.gas station
 --
 ```java
@@ -3383,6 +3437,7 @@ public:
     }
 };
 ```
+
 135.candy
 --
 ```c++
@@ -3412,8 +3467,9 @@ int candy(vector<int> &ratings)
  }
 ```
 
-138
---下面这种做法用了一个hashmap来做，比较可以，key和value都是node，如果用label来当做key的话遇到值相同的node就不好办了。
+138.Copy List with Random Pointer 
+--
+下面这种做法用了一个hashmap来做，比较可以，key和value都是node，如果用label来当做key的话遇到值相同的node就不好办了。
 ```java
 public RandomListNode copyRandomList(RandomListNode head) {
   if (head == null) return null;
@@ -3438,6 +3494,7 @@ public RandomListNode copyRandomList(RandomListNode head) {
   return map.get(head);
 }
 ```
+
 139.word break
 --
 用的是动态规划的算法
@@ -3491,6 +3548,7 @@ List<String> DFS(String s, Set<String> wordDict, HashMap<String, LinkedList<Stri
     return res;
 }
 ```
+
 142.Linked List Cycle II
 --
 ```java
@@ -3515,6 +3573,7 @@ public class Solution {
         }
 ```
 佩服地五体投地！！详细解释见https://discuss.leetcode.com/topic/19367/java-o-1-space-solution-with-detailed-explanation
+
 143.reorder list
 --
 ```java
@@ -3551,6 +3610,7 @@ public void reorderList(ListNode head) {
             }
         }
 ```
+
 145.Binary Tree Postorder Traversal
 --
 `PRE ORDER TRAVERSE`
@@ -3641,6 +3701,7 @@ public ListNode insertionSortList(ListNode head) {
 		return helper.next;
 	}
 ```
+
 148 sort list
 --
 ```java
@@ -3699,7 +3760,8 @@ public class Solution {
 }
 ```
 作者用的类似于merge算法来解决，比较好懂。
-150
+
+150.valuate Reverse Polish Notation 
 --
 这道题用的是stack，记得之前见过这样的题目，为什么就想不到呢
 ```java
@@ -3732,6 +3794,7 @@ public class Solution {
 	}
 }
 ```
+
 152.Maximum Product Subarray
 --
 ```java
@@ -3758,7 +3821,7 @@ int maxProduct(int A[], int n) {
     return r;
 }
 ```
-153.
+153.Find Minimum in Rotated Sorted Array  
 --
 下面用的是二分搜索法，参见https://discuss.leetcode.com/topic/6468/my-pretty-simple-code-to-solve-it/2
 虽然下面这个方法用于重复的元素，不重复的也可以。
@@ -3785,14 +3848,15 @@ public class Solution {
         return num[lo];
     }
 ```
-154.
+
+154.Find Minimum in Rotated Sorted Array II  
 --
 有人问了这样一个问题
 a simple question: why mid = lo + (hi - lo) / 2 rather than mid = (hi + lo) / 2 ?
 而有人回答是这样的：This is a famous bug in binary search. if the size of array are too large, equal or larger than the upper bound of int type, hi + lo may cause an overflow and become a negative number. It's ok to write (hi + lo) / 2 here, leetcode will not give you a very large array to test. But we'd better know this. For a detailed information or history of this bug, you could search "binary search bug" on google.<br>
 具体代码见上题
 
-160.
+160.Intersection of Two Linked Lists 
 --
 我自己的想法和下面这个差不多，为什么通过只通过了38/42个例子
 自己写的
@@ -3876,6 +3940,7 @@ private int length(ListNode node) {
     return length;
 }
 ```
+
 162.Find Peak Element 
 --
 ```java
@@ -3900,7 +3965,8 @@ public:
 };
 ```
 我自己就是很普通的从左到右遍历，上述方法用的是二分法搜索。
-165. Compare Version Numbers
+
+165.Compare Version Numbers
 --
 1、如果用“.”作为分隔的话,必须是如下写法,String.split("\\."),这样才能正确的分隔开,不能用String.split(".");
 
@@ -3925,7 +3991,8 @@ public int compareVersion(String version1, String version2) {
     return 0;
 }
 ```
-169. Majority Element
+
+169.Majority Element
 --
 ```java
 public class Solution {
@@ -3955,7 +4022,8 @@ public class Solution {
         return major;
     }
 }
-```这个做法的问题就是有局限性，如果当大多数的数目小于n/2时就会随便输出一个结果。
+```
+这个做法的问题就是有局限性，如果当大多数的数目小于n/2时就会随便输出一个结果。
 
 172.Factorial Trailing Zeroes
 --
@@ -3963,6 +4031,7 @@ public class Solution {
     return n == 0 ? 0 : n / 5 + trailingZeroes(n / 5);
 ```
 这个做法就是输出n到1中5的因子个数，不错！
+
 173.Binary Search Tree Iterator
 --
 这个方法好精妙
@@ -3991,9 +4060,10 @@ public class BSTIterator {
     }
 }
 ```
+
 179.Largest Number
-用了比较器
 --
+用了比较器
 ```java
 public class Solution {
      public String largestNumber(int[] num) {
@@ -4029,7 +4099,8 @@ public class Solution {
 	}
 }
 ```
-187. Repeated DNA Sequences
+
+187.Repeated DNA Sequences
 --
 ```java
 public List<String> findRepeatedDnaSequences(String s) {
@@ -4042,6 +4113,7 @@ public List<String> findRepeatedDnaSequences(String s) {
     return new ArrayList(repeated);
 }
 ```
+
 189.Rotate Array
 --
 ```java
@@ -4088,7 +4160,8 @@ public void reverse(int[] nums, int start, int end) {
     }
 }
 ```
-190
+
+190.Reverse Bits  
 --
 ```java
 public int reverseBits(int n) {
@@ -4102,7 +4175,7 @@ public int reverseBits(int n) {
     return result;
 }
 ```
-192.
+192.Word Frequency 
 --
 这道题和上题的思想类似都是用的按位运算，比起用现成的把数转换成二进制字符串要好多了
 ```java
@@ -4141,7 +4214,8 @@ public static int rob(int[] nums)
 	    return Math.max(ifRobbedPrevious, ifDidntRobPrevious);
 	}
 ```
-199. Binary Tree Right Side View  
+
+199.Binary Tree Right Side View  
 --
 ```java
 public class Solution {
@@ -4165,6 +4239,7 @@ public class Solution {
     }
 }
 ```
+
 200.number of islands
 --
 深度优先算法，很不错啊；
@@ -4199,7 +4274,10 @@ private void DFSMarking(char[][] grid, int i, int j) {
 }
 }
 ```
+
 201.Bitwise AND of Numbers Range
+--
+
 ```java
 public class Solution {
     public int rangeBitwiseAnd(int m, int n) {
@@ -4216,7 +4294,8 @@ public class Solution {
     }
 }
 ```
-202.
+
+202.Happy Number
 --
 `Floyd判圈算法(Floyd Cycle Detection Algorithm)`，又称`龟兔赛跑算法(Tortoise and Hare Algorithm)`。该算法由美国科学家罗伯特·弗洛伊德发明，是一个可以在有限状态机、迭代函数或者链表上判断是否存在环，求出该环的起点与长度的算法。[1]
 如果有限状态机、迭代函数或者链表上存在环，那么在某个环上以不同速度前进的2个指针必定会在某个时刻相遇。同时显然地，如果从同一个起点(即使这个起点不在某个环上)同时开始以不同速度前进的2个指针最终相遇，那么可以判定存在一个环，且可以求出2者相遇处所在的环的起点与长度。
@@ -4264,7 +4343,8 @@ public boolean isHappy(int n) {
 }
 ```
 下面这种方法用的是hash set方法。
-203
+
+203.Remove Linked List Elements
 --
 ```java
 public class Solution {
@@ -4285,7 +4365,8 @@ public class Solution {
 }
 ```
 这个做法相当于利用y以前的结果，把n以内某数倍数的设为不是质数，不用再算了。
-205. Isomorphic Strings
+
+205.Isomorphic Strings
 --
 插入一个map需要用到put方法，得到对应的key的value要用到map.get(key)方法，判断是否包括某key要用到map.containsKey(key),判断是否包括某value要用到map.containsValue(value);
 ```java
@@ -4308,6 +4389,7 @@ public class Solution {
 }
 ```
 这个方法就是建立一个长度为512的数组，因为ASCII码的长度为256，然后前边部分是s1的映射，后半部分是s2的映射，然后看两个映射是否相同。
+
 206.reverse linked list
 --
 ```java
@@ -4323,7 +4405,8 @@ public ListNode reverseList(ListNode head) {
     return newHead;
 }
 ```
-207.
+
+207.Course Schedule 
 --
 queue的方法：offer ，添加一个元素并返回true，如果队列已满，则返回false
 ```java
